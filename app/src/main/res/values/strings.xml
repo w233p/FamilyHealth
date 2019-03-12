@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">FamilyHealth</string>
+    <string name="user_name">用户名</string>
+    <string name="family_member">成员</string>
+    <string name="confirm">确认</string>
+    <string name="back">返回</string>
+    <string name="login">登&#160;陆</string>
+    <string name="register">注&#160;&#160;&#160;&#160;册</string>
+    <string name="password">密&#160;&#160;&#160;&#160;码</string>
+    <string name="change_password">更改密码</string>
+    <string name="forget">忘记密码</string>
+    <string name="phone">手机号</string>
+    <string name="check_data">查询数据</string>
+    <integer name="title_icon">0</integer>
+    <integer name="title_text">1</integer>
+    <integer name="title_none">2</integer>
+</resources>

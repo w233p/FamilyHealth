@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleView">
+        <attr name="background_color" format="color"/>
+        <attr name="title" format="string" />
+        <attr name="title_size" format="integer" />
+        <attr name="left_icon" format="reference" />
+        <attr name="right_icon" format="reference" />
+        <attr name="icon_width" format="integer"/>
+        <attr name="icon_height" format="integer"/>
+        <attr name="left_text" format="string" />
+        <attr name="right_text" format="string" />
+        <attr name="text_size" format="integer" />
+        <attr name="title_type" format="integer" />
+
+    </declare-styleable>
+</resources>
