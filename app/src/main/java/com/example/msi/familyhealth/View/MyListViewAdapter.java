@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * 列表适配器
+ * 泛型增加其灵活性
  */
 public abstract class MyListViewAdapter<T> extends BaseAdapter {
 

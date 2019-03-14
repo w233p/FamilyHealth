@@ -27,11 +27,10 @@ public class MyDataActivity extends AppCompatActivity {
     private List<Fragment> fragmentList;
     private RadioButton commenBt;
     private RadioButton autoBt;
-//    private ListView listView;
-//    private List<String> list;
 
     /**
-     * @param savedInstanceState
+     * 数据上传界面
+     * 使用viewpager嵌套fragment
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,16 +43,7 @@ public class MyDataActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.data_vp);
         commenBt = (RadioButton) findViewById(R.id.up_common_rb);
         autoBt = (RadioButton) findViewById(R.id.up_auto_rb);
-//        listView = (ListView) findViewById(R.id.up_data_list);
-//
-//        initList();
-//
-//        listView.setAdapter(new MyListViewAdapter<String>(list,R.layout.list_item_text) {
-//            @Override
-//            public void convert(ViewHolder viewHolder, String item) {
-//                viewHolder.setText(R.id.list_text,"test");
-//            }
-//        });
+
 
         //配置适配器
         viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), setFragment()));
@@ -99,15 +89,6 @@ public class MyDataActivity extends AppCompatActivity {
         });
 
     }
-
-//    private void initList() {
-//        list = new ArrayList<>();
-//        for (int i =0 ;i<5;i++){
-//            list.add("测试"+i);
-//        }
-//    }
-
-
     /**
      * 向表中添加Fragment
      */

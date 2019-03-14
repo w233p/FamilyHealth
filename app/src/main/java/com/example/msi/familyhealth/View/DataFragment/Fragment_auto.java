@@ -10,6 +10,10 @@ import android.view.ViewGroup;
 import com.example.msi.familyhealth.R;
 
 public class Fragment_auto extends Fragment {
+    /**
+     * 仪器上传界面的Fragment
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

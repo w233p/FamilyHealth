@@ -18,8 +18,11 @@
     <string name="up_hint">提示信息</string>
     <string name="up_choose">选择设备</string>
     <string name="up_link">连接设备</string>
+    <string name="clock">吃药提醒</string>
+    <string name="clock_add">添加闹钟</string>
     <integer name="title_icon">0</integer>
     <integer name="title_text">1</integer>
     <integer name="title_none">2</integer>
     <integer name="title_back_text">3</integer>
+    <string name="add">+</string>
 </resources>

@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.example.msi.familyhealth.R;
 
+/**
+ * 登陆注册界面
+ * 控制控件的显隐实现功能转化
+ */
 public class LoginActivity extends AppCompatActivity {
 
     private ImageButton backBt;

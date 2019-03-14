@@ -19,6 +19,11 @@ public class Fragment_commen extends Fragment {
     private ListView listView;
     private List<String> list;
 
+    /**
+     * 手动上传界面的Fragment
+     * list适配器在此配置
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +39,6 @@ public class Fragment_commen extends Fragment {
                 viewHolder.setText(R.id.list_text,item);
             }
         });
-
         return view;
     }
 

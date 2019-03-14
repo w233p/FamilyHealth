@@ -29,7 +29,6 @@ public class TitleView extends ConstraintLayout {
         initView(context,attrs);
     }
 
-
     /**
      * @param context
      * @param attributeSet 初始化视图信息
@@ -107,10 +106,6 @@ public class TitleView extends ConstraintLayout {
         titleTv.setTextSize(titleSize);
         backBt.setBackgroundResource(leftIcon);
         confirmBt.setBackgroundResource(rightIcon);
-//        backBt.setWidth(iconWidth);
-//        backBt.setHeight(iconHeight);
-//        confirmBt.setWidth(iconWidth);
-//        confirmBt.setHeight(iconHeight);
         leftTv.setText(leftText);
         rightTv.setText(rightText);
         leftTv.setTextSize(textSize);
