@@ -11,7 +11,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/login"
+        app:title="@string/id"
         app:title_type="@integer/title_none" />
 
     <TextView

@@ -8,4 +8,7 @@
     <color name="loginLightGreen">#7bcab1</color>
     
     <color name="mainGray">#eeeeee</color>
+
+    <color name="radioBox">#0cb2cc</color>
+    <color name="dataBlue">#00a9ec</color>
 </resources>

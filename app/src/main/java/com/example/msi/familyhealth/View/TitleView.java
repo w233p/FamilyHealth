@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.msi.familyhealth.R;
@@ -15,8 +16,8 @@ import com.example.msi.familyhealth.R;
  * 自定义标题栏，改变标题和两侧图标显示
  */
 public class TitleView extends ConstraintLayout {
-    private Button backBt;
-    private Button confirmBt;
+    private ImageButton backBt;
+    private ImageButton confirmBt;
     private TextView titleTv;
     private TextView leftTv;
     private TextView rightTv;
@@ -93,6 +94,11 @@ public class TitleView extends ConstraintLayout {
             confirmBt.setVisibility(View.GONE);
             leftTv.setVisibility(View.GONE);
             rightTv.setVisibility(View.GONE);
+        }else if (titleType == 3){
+            backBt.setVisibility(View.VISIBLE);
+            confirmBt.setVisibility(View.GONE);
+            leftTv.setVisibility(View.GONE);
+            rightTv.setVisibility(View.VISIBLE);
         }
 
         //设置属性
@@ -101,10 +107,10 @@ public class TitleView extends ConstraintLayout {
         titleTv.setTextSize(titleSize);
         backBt.setBackgroundResource(leftIcon);
         confirmBt.setBackgroundResource(rightIcon);
-        backBt.setWidth(iconWidth);
-        backBt.setHeight(iconHeight);
-        confirmBt.setWidth(iconWidth);
-        confirmBt.setHeight(iconHeight);
+//        backBt.setWidth(iconWidth);
+//        backBt.setHeight(iconHeight);
+//        confirmBt.setWidth(iconWidth);
+//        confirmBt.setHeight(iconHeight);
         leftTv.setText(leftText);
         rightTv.setText(rightText);
         leftTv.setTextSize(textSize);

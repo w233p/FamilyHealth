@@ -6,14 +6,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.msi.familyhealth.R;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private Button backBt;
-    private Button confirmBt;
+    private ImageButton backBt;
+    private ImageButton confirmBt;
     private TextView titleTv;
     private TextView leftTv;
     private TextView rightTv;
@@ -32,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
 
-        backBt = (Button)findViewById(R.id.back_bt);
-        confirmBt = (Button)findViewById(R.id.confirm_bt);
+        backBt = (ImageButton)findViewById(R.id.back_bt);
+        confirmBt = (ImageButton)findViewById(R.id.confirm_bt);
         titleTv = (TextView)findViewById(R.id.title_tv);
         leftTv = (TextView)findViewById(R.id.left_tv);
         rightTv = (TextView)findViewById(R.id.right_tv);
