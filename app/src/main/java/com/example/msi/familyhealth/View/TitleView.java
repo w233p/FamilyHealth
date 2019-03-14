@@ -98,6 +98,11 @@ public class TitleView extends ConstraintLayout {
             confirmBt.setVisibility(View.GONE);
             leftTv.setVisibility(View.GONE);
             rightTv.setVisibility(View.VISIBLE);
+        }else if (titleType == 4){
+            backBt.setVisibility(View.VISIBLE);
+            confirmBt.setVisibility(View.GONE);
+            leftTv.setVisibility(View.GONE);
+            rightTv.setVisibility(View.GONE);
         }
 
         //设置属性

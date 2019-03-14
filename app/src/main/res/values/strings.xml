@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">FamilyHealth</string>
+    <string name="author">wyp</string>
     <string name="id">账号</string>
     <string name="user_name">用户名</string>
     <string name="family_member">成员</string>
@@ -20,9 +21,13 @@
     <string name="up_link">连接设备</string>
     <string name="clock">吃药提醒</string>
     <string name="clock_add">添加闹钟</string>
+    <string name="health_tip">健康知识</string>
+    <string name="positon">位置信息</string>
+    <string name="set">设置</string>
     <integer name="title_icon">0</integer>
     <integer name="title_text">1</integer>
     <integer name="title_none">2</integer>
     <integer name="title_back_text">3</integer>
+    <integer name="title_back">4</integer>
     <string name="add">+</string>
 </resources>

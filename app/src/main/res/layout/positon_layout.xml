@@ -5,20 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.example.msi.familyhealth.View.TitleView
-        android:id="@+id/health_titleView"
+        android:id="@+id/position_titleView"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        app:background_color="@color/healthBule"
+        app:background_color="@color/loginGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/health_tip"
+        app:title="@string/positon"
         app:title_type="@integer/title_back" />
 
-    <ListView
-        android:id="@+id/health_tip_listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/health_titleView"></ListView>
 
 </android.support.constraint.ConstraintLayout>

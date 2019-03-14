@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
     <color name="loginYellow">#f6dc73</color>
     <color name="loginGreen">#27b269</color>
     <color name="loginLightGreen">#7bcab1</color>
@@ -11,4 +12,9 @@
 
     <color name="radioBox">#0cb2cc</color>
     <color name="dataBlue">#00a9ec</color>
+
+    <color name="healthBule">#0083cd</color>
+
+    <color name="setGreen">#7bcab1</color>
+
 </resources>

@@ -25,4 +25,22 @@
         <item name="colorPrimaryDark">@color/dataBlue</item>
         <item name="colorAccent">@color/dataBlue</item>
     </style>
+
+    <style name="HealthTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/healthBule</item>
+        <item name="colorPrimaryDark">@color/healthBule</item>
+        <item name="colorAccent">@color/healthBule</item>
+    </style>
+
+    <style name="PositionTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/loginGreen</item>
+        <item name="colorPrimaryDark">@color/loginGreen</item>
+        <item name="colorAccent">@color/loginGreen</item>
+    </style>
+
+    <style name="SetTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/setGreen</item>
+        <item name="colorPrimaryDark">@color/setGreen</item>
+        <item name="colorAccent">@color/setGreen</item>
+    </style>
 </resources>

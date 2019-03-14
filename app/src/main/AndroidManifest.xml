@@ -27,6 +27,20 @@
         </activity>
         <activity android:name=".Clock.ClockActivity"
             android:theme="@style/LoginTheme">
+
+        </activity>
+
+        <activity android:name=".HealthTips.HealthTipsActivity"
+            android:theme="@style/HealthTheme">
+
+        </activity>
+
+        <activity android:name=".Position.PositonActivity"
+            android:theme="@style/PositionTheme">
+
+        </activity>
+        <activity android:name=".Set.SetActivity"
+            android:theme="@style/SetTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
