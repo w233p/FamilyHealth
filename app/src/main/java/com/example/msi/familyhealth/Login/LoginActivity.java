@@ -20,7 +20,7 @@ import com.example.msi.familyhealth.View.TitleView;
  * 登陆注册界面
  * 控制控件的显隐实现功能转化
  */
-public class LoginActivity extends BaseActivity<LoginContacts.LoginPresenter> implements LoginContacts.ILoginView {
+public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> implements LoginContacts.ILoginView {
 
     private ImageButton backBt;
     private ImageButton confirmBt;
@@ -117,7 +117,7 @@ public class LoginActivity extends BaseActivity<LoginContacts.LoginPresenter> im
     }
 
     @Override
-    public LoginContacts.LoginPresenter onBindPresenter() {
+    public LoginContacts.ILoginPresenter onBindPresenter() {
         return new LoginPresenter(this);
     }
 
@@ -174,6 +174,10 @@ public class LoginActivity extends BaseActivity<LoginContacts.LoginPresenter> im
         registerTv.startAnimation(aout_animation());
         bottomBt.setText(getResources().getString(R.string.change_password));
         backBt.setVisibility(View.VISIBLE);
+    }
+
+    public String getState(){
+        return bottomBt.getText().toString();
     }
 
     @Override

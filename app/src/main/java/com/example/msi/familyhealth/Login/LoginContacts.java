@@ -26,6 +26,8 @@ public class LoginContacts {
 
         void setChangePasswordView();
 
+        String getState();
+
         /**
          * 注册、登陆、修改密码（成功/失败）
          */
@@ -43,7 +45,7 @@ public class LoginContacts {
 
     }
 
-    public interface LoginPresenter extends IBasePresenter {
+    public interface ILoginPresenter extends IBasePresenter {
         void login(String username, String password);
 
         void register(String username, String password, String phone);
@@ -51,7 +53,7 @@ public class LoginContacts {
         void changePassword(String username, String phone, String newPassword);
     }
 
-    public interface LoginModel {
+    public interface ILoginModel {
 
     }
 }
