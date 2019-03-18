@@ -19,10 +19,10 @@ public abstract class MyListViewAdapter<T> extends BaseAdapter {
     private LayoutInflater inflater;
     private int itemLayoutId;
 
-    public MyListViewAdapter(Context context,List<String> list, int itemLayoutId) {
+    public MyListViewAdapter(Context context,List<String> list) {
         this.context = context;
         this.list = list;
-        this.itemLayoutId = itemLayoutId;
+//        this.itemLayoutId = itemLayoutId;
         inflater = LayoutInflater.from(context);
     }
 
@@ -43,7 +43,7 @@ public abstract class MyListViewAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = getViewHolder(position, convertView, parent);
+        ViewHolder holder = getViewHolder(position, convertView, parent,itemLayoutId);
 
         convert(holder, getItem(position));
         return holder.getConvertView();
@@ -51,7 +51,7 @@ public abstract class MyListViewAdapter<T> extends BaseAdapter {
 
     public abstract void convert(ViewHolder viewHolder, String item);
 
-    private ViewHolder getViewHolder(int position, View convertView, ViewGroup parent) {
+    public ViewHolder getViewHolder(int position, View convertView, ViewGroup parent,int itemLayoutId) {
         return ViewHolder.get(context, convertView, parent, itemLayoutId, position);
     }
 }

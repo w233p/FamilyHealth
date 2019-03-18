@@ -17,4 +17,6 @@
 
     <color name="setGreen">#7bcab1</color>
 
+    <color name="listDivider">#AFAEAD</color>
+
 </resources>

@@ -23,7 +23,6 @@ public class ViewHolder {
         convertView.setTag(this);
     }
 
-
     /**
      * 获取ViewHolder对象
      */
