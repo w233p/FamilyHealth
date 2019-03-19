@@ -22,8 +22,11 @@
     <string name="up_hint">提示信息</string>
     <string name="up_choose">选择设备</string>
     <string name="up_link">连接设备</string>
-    <string name="clock">吃药提醒</string>
+    <string name="clock">事件提醒</string>
     <string name="clock_add">添加闹钟</string>
+    <string name="time">时间&#160;&#160;|</string>
+    <string name="med">药名</string>
+    <string name="event">事件</string>
     <string name="health_tip">健康知识</string>
     <string name="positon">位置信息</string>
     <string name="call">紧急呼叫</string>
