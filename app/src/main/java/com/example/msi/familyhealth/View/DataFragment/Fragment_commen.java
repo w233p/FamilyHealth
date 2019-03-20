@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.msi.familyhealth.Data.UpDataItem;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.MainListAdapter;
-import com.example.msi.familyhealth.View.MyListViewAdapter;
 import com.example.msi.familyhealth.View.ViewHolder;
 
 import java.util.ArrayList;
@@ -19,6 +19,10 @@ import java.util.List;
 public class Fragment_commen extends Fragment {
     private ListView listView;
     private List<String> list;
+    private int project;//监听项目栏，选择下面的常量，从而改变list布局等
+    private static final int BASE = 0;
+    private static final int DALIY = 1;
+    private static final int BLOOD = 2;
 
     /**
      * 手动上传界面的Fragment
@@ -40,11 +44,11 @@ public class Fragment_commen extends Fragment {
             public void convert(ViewHolder viewHolder, String item) {
                 switch (getTpye()) {
                     case 0:
-                        viewHolder.setText(R.id.list_text, item);
+                        viewHolder.setText(R.id.list_sp_text, item);
                         break;
                     case 1:
-                        viewHolder.setText(R.id.list_text2_1, item);
-                        viewHolder.setText(R.id.list_text2_2, item);
+                        viewHolder.setText(R.id.list_ed_text, item);
+                        break;
                 }
 
             }
@@ -54,12 +58,15 @@ public class Fragment_commen extends Fragment {
 
     private void initList() {
         list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            list.add("测试" + i);
+        for (int i = 0; i < 2; i++) {
+            list.add(UpDataItem.ITEM[i]);
+        }
+        for (int i = 0;i<4;i++){
+            list.add(UpDataItem.BASEITEM[i]);
         }
     }
 
-    public List<String> getList(){
+    public List<String> getList() {
         return list;
     }
 }

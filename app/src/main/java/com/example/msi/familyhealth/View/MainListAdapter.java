@@ -15,23 +15,20 @@ import java.util.List;
  */
 public abstract class MainListAdapter<T> extends MyListViewAdapter {
 
-    private static final int TYPE_ONE = 0;
-    private static final int TYPE_TWO = 1;
+    private static final int TYPE_ONE = 0;//spinner
+    private static final int TYPE_TWO = 1;//edit
     private List<String> list;
     private int type;
+    private Context context;
+    private LayoutInflater inflater;
+    private int itemLayoutId;
 
-    /**
-     * 测试数据
-     */
-    private void initList() {
-        list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            list.add("测试" + i);
-        }
-    }
 
     public MainListAdapter(Context context, List list) {
         super(context, list);
+        this.context = context;
+        this.list = list;
+        inflater = LayoutInflater.from(context);
     }
 
     /**
@@ -40,11 +37,13 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
      */
     @Override
     public int getItemViewType(int position) {
-        initList();
-        if (list.get(position).equals("测试3")) {
+//        initList();
+
+        if (list.get(position).equals("成员") || list.get(position).equals("项目") || list.get(position).equals("性别")) {
             return TYPE_ONE;
+        } else {
+            return TYPE_TWO;
         }
-        return TYPE_TWO;
     }
 
     /**
@@ -70,10 +69,10 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
         itemLayoutId = R.layout.list_item_text;
         switch (type) {
             case TYPE_ONE:
-                itemLayoutId = R.layout.list_item_text;
+                itemLayoutId = R.layout.list_item_spinner;
                 break;
             case TYPE_TWO:
-                itemLayoutId = R.layout.list_item_text2;
+                itemLayoutId = R.layout.list_item_edit;
                 break;
         }
 

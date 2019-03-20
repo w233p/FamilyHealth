@@ -18,6 +18,8 @@
     <string name="check_data">查询数据</string>
     <string name="up_data">上传数据</string>
     <string name="up_common">手动上传</string>
+    <string name="number">数值</string>
+    <string name="input">点击输入</string>
     <string name="up_auto">仪器上传</string>
     <string name="up_hint">提示信息</string>
     <string name="up_choose">选择设备</string>
