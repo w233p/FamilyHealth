@@ -59,10 +59,10 @@ public class Fragment_commen extends Fragment {
     private void initList() {
         list = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
-            list.add(UpDataItem.ITEM[i]);
+            list.add(UpDataItem.MEMBER_ITEM[i]);
         }
         for (int i = 0;i<4;i++){
-            list.add(UpDataItem.BASEITEM[i]);
+            list.add(UpDataItem.BASE_ITEM[i]);
         }
     }
 
