@@ -1,4 +1,4 @@
-package com.example.msi.familyhealth.View.DataFragment;
+package com.example.msi.familyhealth.MyData.DataFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

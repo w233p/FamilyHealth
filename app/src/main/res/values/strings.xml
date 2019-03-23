@@ -33,6 +33,7 @@
     <string name="positon">位置信息</string>
     <string name="call">紧急呼叫</string>
     <string name="set">用户设置</string>
+    <string name="save_tip">切换项目记得打勾保存哦</string>
     <integer name="title_icon">0</integer>
     <integer name="title_text">1</integer>
     <integer name="title_none">2</integer>

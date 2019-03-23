@@ -1,6 +1,8 @@
 package com.example.msi.familyhealth.View;
 
 import android.content.Context;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,6 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
     private Context context;
     private LayoutInflater inflater;
     private int itemLayoutId;
-
 
     public MainListAdapter(Context context, List list) {
         super(context, list);
@@ -77,6 +78,10 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
         }
 
         ViewHolder viewHolder = getViewHolder(position, convertView, parent, itemLayoutId);
+        //布局若有EditText，则添加EditText监听
+        if (itemLayoutId == R.layout.list_item_edit) {
+            viewHolder.setEditText();
+        }
 
         convert(viewHolder, getItem(position));
         return viewHolder.getConvertView();
@@ -88,4 +93,6 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
     public int getTpye() {
         return type;
     }
+
+
 }

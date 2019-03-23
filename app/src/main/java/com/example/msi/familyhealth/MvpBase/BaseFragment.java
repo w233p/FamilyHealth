@@ -1,8 +1,12 @@
 package com.example.msi.familyhealth.MvpBase;
 
+import android.app.Activity;
+import android.content.Context;
 import android.widget.Toast;
 
 public abstract class BaseFragment<P extends IBasePresenter> extends BaseXFragment<P> implements IBaseFrag {
+
+
     /**
      * findId
      */
@@ -18,4 +22,5 @@ public abstract class BaseFragment<P extends IBasePresenter> extends BaseXFragme
     public void addListener() {
 
     }
+
 }

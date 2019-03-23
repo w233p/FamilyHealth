@@ -14,31 +14,36 @@ public class BaseItemBean {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public BaseItemBean setSex(boolean sex) {
         this.sex = sex;
+        return this;
     }
 
     public int getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public BaseItemBean setAge(int age) {
         this.age = age;
+        return this;
     }
 
     public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public BaseItemBean setHeight(int height) {
         this.height = height;
+        return this;
     }
 
     public float getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public BaseItemBean setWeight(float weight) {
         this.weight = weight;
+        return this;
     }
+
 }

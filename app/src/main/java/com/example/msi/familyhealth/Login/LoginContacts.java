@@ -28,7 +28,7 @@ public class LoginContacts {
 
         String getState();
 
-        /**
+         /**
          * 注册、登陆、修改密码（成功/失败）
          */
         void loginSuccess();
