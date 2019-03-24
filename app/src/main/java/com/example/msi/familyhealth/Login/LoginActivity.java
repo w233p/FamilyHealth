@@ -16,6 +16,8 @@ import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.TitleView;
 
+import org.litepal.tablemanager.Connector;
+
 /**
  * 登陆注册界面
  * 控制控件的显隐实现功能转化
@@ -184,6 +186,7 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
     public void loginSuccess() {
         showToast("login success");
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Connector.getDatabase();
         startActivity(intent);
         this.finish();
     }

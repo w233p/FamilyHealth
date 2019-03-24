@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="FHdb"></dbname>
+    <version value="1"></version>
+
+    <list>
+        <mapping class="com.example.msi.familyhealth.Data.DbAccountBean"></mapping>
+        <mapping class="com.example.msi.familyhealth.Data.DbClockBean"></mapping>
+        <mapping class="com.example.msi.familyhealth.Data.DbDailyDataBean"></mapping>
+        <mapping class="com.example.msi.familyhealth.Data.DbHealthDataBean"></mapping>
+        <mapping class="com.example.msi.familyhealth.Data.DbHealthHistoryBean"></mapping>
+        <mapping class="com.example.msi.familyhealth.Data.DbItemBean"></mapping>
+        <mapping class="com.example.msi.familyhealth.Data.DbMemberBean"></mapping>
+        <mapping class="com.example.msi.familyhealth.Data.DbMemberMessageBean"></mapping>
+        <mapping class="com.example.msi.familyhealth.Data.DbPositonBean"></mapping>
+        <mapping class="com.example.msi.familyhealth.Data.DbProjectBean"></mapping>
+
+    </list>
+</litepal>
