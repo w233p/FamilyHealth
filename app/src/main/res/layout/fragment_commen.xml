@@ -1,15 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_commen"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+<!--如果include指定了id的话，就不能直接把它里面的控件当成主xml中的控件来直接获得了，必须先获得这个xml布局文件，再通过布局文件findViewById来获得其子控件。
+代码如下
+View layout = getLayoutInflater().inflate(R.layout.head, null);
+RelativeLayout head= (RelativeLayout)layout.findViewById(R.id.index_linear_foot);
+//设置背景图片
+head.setBackgroundResource(R.drawable.head);-->
+    <include
+        android:id="@+id/list_sp_text1"
+        layout="@layout/list_item_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/list_sp_text2"
+        layout="@layout/list_item_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/list_sp_text1" />
+
+    <include
+        android:id="@+id/divider"
+        layout="@layout/list_big_divider"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/list_sp_text2" />
 
     <ListView
         android:id="@+id/up_data_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:divider="@drawable/list_divider"
-        android:dividerHeight="2dp">
+        android:dividerHeight="2dp"
+        app:layout_constraintTop_toBottomOf="@+id/divider">
 
     </ListView>
 </android.support.constraint.ConstraintLayout>

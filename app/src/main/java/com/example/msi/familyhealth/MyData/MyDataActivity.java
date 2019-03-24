@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.msi.familyhealth.Data.BaseItemBean;
@@ -23,6 +25,7 @@ import com.example.msi.familyhealth.View.TitleView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter> implements MyDataContacts.IMyDataView {
 
@@ -32,6 +35,7 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
     private RadioButton commenBt;
     private RadioButton autoBt;
     private String[] temporaryData;
+    private TextView projectTv;
 
 
     /**
@@ -50,6 +54,11 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
         commenBt = (RadioButton) findViewById(R.id.up_common_rb);
         autoBt = (RadioButton) findViewById(R.id.up_auto_rb);
         temporaryData = new String[10];
+
+
+        View view = getLayoutInflater().inflate(R.layout.fragment_commen,null);
+        View view1 = (View)view.findViewById(R.id.list_sp_text1);
+        projectTv = (TextView) view1.findViewById(R.id.list_sp_text);
 
         initTemporaryData();
 
@@ -105,8 +114,6 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
         });
     }
 
-
-
     /**
      * 向表中添加Fragment
      */
@@ -129,11 +136,16 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
     }
 
     private void saveData(int position, String str) {
-        switch (FragmentComModel.getList().get(1)) {
-            case "项目":
-                saveBaseData(position, str);
-                break;
+        Log.e("project",projectTv.getText()+"");
+//        switch (projectTv.getText().toString()) {
+//            case "项目":
+//                Log.e("2","2");
+        if (true){
+            saveBaseData(position, str);
         }
+
+//                break;
+//        }
     }
 
     private void saveBaseData(int position, String str) {
@@ -141,16 +153,16 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
         //存入临时数组中
         temporaryData[position] = str;
         for (int i = 0; i < 10; i++) {
-//            Log.e("data", position + "::" + temporaryData[i]);
+            Log.e("data", position + "::" + temporaryData[i]);
         }
         buildBaseBean();
     }
 
     private void buildBaseBean() {
-//        BaseItemBean baseItemBean = new BaseItemBean().setAge(0).setHeight(0).setWeight(0);
-        if (temporaryData[3] != null && temporaryData[4] != null && temporaryData[5] != null) {
-            BaseItemBean baseItemBean = new BaseItemBean().setAge(getInt(3)).setHeight(getInt(4)).setWeight(getFloat(5));
-            test(baseItemBean);
+        BaseItemBean baseItemBean = new BaseItemBean().setAge(0).setHeight(0).setWeight(0);
+        if (temporaryData[0] != null && temporaryData[1] != null && temporaryData[2] != null) {
+        baseItemBean = new BaseItemBean().setAge(getInt(3)).setHeight(getInt(4)).setWeight(getFloat(5));
+        test(baseItemBean);
         }
 
     }

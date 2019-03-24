@@ -15,10 +15,10 @@ public class FragmentComModel implements FragmentComContacts.IFragmentModel {
     @Override
     public void initList() {
         list = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            list.add(UpDataItem.MEMBER_ITEM[i]);
-        }
-        for (int i = 0; i < 4; i++) {
+//        for (int i = 0; i < 2; i++) {
+//            list.add(UpDataItem.MEMBER_ITEM[i]);
+//        }
+        for (int i = 0; i < 3; i++) {
             list.add(UpDataItem.BASE_ITEM[i]);
         }
     }

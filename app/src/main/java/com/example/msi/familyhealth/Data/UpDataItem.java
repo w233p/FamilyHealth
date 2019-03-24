@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class UpDataItem {
     public static final String MEMBER_ITEM[] = {"成员", "项目"};//text
-    public static final String BASE_ITEM[] = {"性别", "年龄/岁", "身高/cm", "体重/kg"};//spinner，ed*3
+    public static final String BASE_ITEM[] = {"年龄/岁", "身高/cm", "体重/kg"};//spinner，ed*3
     /**
      * 日常项目
      */

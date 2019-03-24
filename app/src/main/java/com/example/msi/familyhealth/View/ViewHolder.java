@@ -1,6 +1,7 @@
 package com.example.msi.familyhealth.View;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -8,8 +9,11 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.msi.familyhealth.Login.LoginActivity;
@@ -87,6 +91,10 @@ public class ViewHolder {
         return this;
     }
 
+
+    /**
+     * 设置EditText的文字变化监听器
+     */
     public void setEditText() {
         editText = getView(R.id.list_edit);
         editText.setTag(positon);
@@ -94,11 +102,17 @@ public class ViewHolder {
         });
     }
 
+    /**
+     * 获取EditText
+     */
     public EditText getEditText() {
         return this.editText;
     }
 
 
+    /**
+     * 文字变化监听
+     */
     class TextSwitcher implements TextWatcher {
         private ViewHolder viewHolder;
 
@@ -116,11 +130,14 @@ public class ViewHolder {
 
         }
 
+        /**
+         * 文字变化之后调用方法，获取到变化的文字
+         */
         @Override
         public void afterTextChanged(Editable s) {
             int position = (int) viewHolder.getEditText().getTag();
 
-            ((MyDataActivity)context).getEditText(position, s.toString());
+            ((MyDataActivity) context).getEditText(position, s.toString());
             Log.e("after", "run");
         }
     }
