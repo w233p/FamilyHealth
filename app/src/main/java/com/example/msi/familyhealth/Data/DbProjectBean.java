@@ -1,5 +1,7 @@
 package com.example.msi.familyhealth.Data;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  * 项目表
  * 项目的大类名字
  */
-public class DbProjectBean {
+public class DbProjectBean extends DataSupport {
     private int id;
     private String project;
     /**

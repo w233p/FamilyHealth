@@ -1,19 +1,24 @@
 package com.example.msi.familyhealth.Data;
 
+import org.litepal.annotation.Column;
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 亲友成员表
  */
-public class DbMemberBean {
+public class DbMemberBean extends DataSupport {
     private int id;
     private String memberTelephone;
+    @Column(unique = true)
     private String memberName;
     /**
      * 一个亲友对应一个亲友的信息
      * 亲友信息中会多一个亲友的键
      */
+    @Column(unique = true)
     private DbMemberMessageBean dbMemberMessageBean;
 
     /**
@@ -35,32 +40,36 @@ public class DbMemberBean {
         return dbPositonBeanList;
     }
 
-    public void setDbPositonBeanList(List<DbPositonBean> dbPositonBeanList) {
+    public DbMemberBean setDbPositonBeanList(List<DbPositonBean> dbPositonBeanList) {
         this.dbPositonBeanList = dbPositonBeanList;
+        return this;
     }
 
     public List<DbHealthHistoryBean> getDbHealthHistoryBeanList() {
         return dbHealthHistoryBeanList;
     }
 
-    public void setDbHealthHistoryBeanList(List<DbHealthHistoryBean> dbHealthHistoryBeanList) {
+    public DbMemberBean setDbHealthHistoryBeanList(List<DbHealthHistoryBean> dbHealthHistoryBeanList) {
         this.dbHealthHistoryBeanList = dbHealthHistoryBeanList;
+        return this;
     }
 
     public DbMemberMessageBean getDbMemberMessageBean() {
         return dbMemberMessageBean;
     }
 
-    public void setDbMemberMessageBean(DbMemberMessageBean dbMemberMessageBean) {
+    public DbMemberBean setDbMemberMessageBean(DbMemberMessageBean dbMemberMessageBean) {
         this.dbMemberMessageBean = dbMemberMessageBean;
+        return this;
     }
 
     public List<DbDailyDataBean> getDbDailyDataBeanList() {
         return dbDailyDataBeanList;
     }
 
-    public void setDbDailyDataBeanList(List<DbDailyDataBean> dbDailyDataBeanList) {
+    public DbMemberBean setDbDailyDataBeanList(List<DbDailyDataBean> dbDailyDataBeanList) {
         this.dbDailyDataBeanList = dbDailyDataBeanList;
+        return this;
     }
 
     public int getId() {
@@ -75,17 +84,17 @@ public class DbMemberBean {
         return memberTelephone;
     }
 
-    public void setMemberTelephone(String memberTelephone) {
+    public DbMemberBean setMemberTelephone(String memberTelephone) {
         this.memberTelephone = memberTelephone;
+        return this;
     }
 
     public String getMemberName() {
         return memberName;
     }
 
-    public void setMemberName(String memberName) {
+    public DbMemberBean setMemberName(String memberName) {
         this.memberName = memberName;
+        return this;
     }
-
-
 }

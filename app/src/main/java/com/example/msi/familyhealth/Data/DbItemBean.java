@@ -1,12 +1,14 @@
 package com.example.msi.familyhealth.Data;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 具体数据项目表
  */
-public class DbItemBean {
+public class DbItemBean extends DataSupport {
     private int id;
     private String item;
     /**

@@ -1,6 +1,8 @@
 package com.example.msi.familyhealth.Data;
 
-public class DbHealthHistoryBean {
+import org.litepal.crud.DataSupport;
+
+public class DbHealthHistoryBean extends DataSupport {
     private int id;
     private String histroy;
 

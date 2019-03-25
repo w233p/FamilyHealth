@@ -1,11 +1,13 @@
 package com.example.msi.familyhealth.Data;
 
+import org.litepal.crud.DataSupport;
+
 import java.sql.Time;
 
 /**
  * 定位表
  */
-public class DbPositonBean {
+public class DbPositonBean extends DataSupport {
     private int id;
     private Time positonTime;
     private String LocalX;//经度

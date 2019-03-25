@@ -1,9 +1,11 @@
 package com.example.msi.familyhealth.Data;
 
+import org.litepal.crud.DataSupport;
+
 import java.sql.Time;
 
 
-public class DbDailyDataBean {
+public class DbDailyDataBean extends DataSupport {
     private int id;
     private float data;
     private Time time;

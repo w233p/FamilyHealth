@@ -1,10 +1,12 @@
 package com.example.msi.familyhealth.Data;
 
+import org.litepal.crud.DataSupport;
+
 /**
  * 账号表
  * 均非空
  */
-public class DbAccountBean {
+public class DbAccountBean extends DataSupport {
     private int id;
     private String telephone;
     private String userName;
