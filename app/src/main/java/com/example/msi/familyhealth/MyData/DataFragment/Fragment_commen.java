@@ -1,24 +1,26 @@
 package com.example.msi.familyhealth.MyData.DataFragment;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.msi.familyhealth.Data.BaseItemBean;
-import com.example.msi.familyhealth.Data.UpDataItem;
+import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.example.msi.familyhealth.MvpBase.BaseFragment;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.MainListAdapter;
 import com.example.msi.familyhealth.View.ViewHolder;
+
+import org.litepal.crud.DataSupport;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,11 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
     private static final int BASE = 0;
     private static final int DALIY = 1;
     private static final int BLOOD = 2;
+    private TextView memberTv;
+    private TextView projectTv;
+    private Spinner memberSp;
+    private Spinner projectSp;
+    private MainListAdapter mainListAdapter;
 
 
     /**
@@ -42,33 +49,10 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_commen, container, false);
-        listView = (ListView) view.findViewById(R.id.up_data_list);
 
+        initView(view);
 
-        View view1 = (View)view.findViewById(R.id.list_sp_text1);
-        View view2 = (View)view.findViewById(R.id.list_sp_text2);
-        TextView memberTv = (TextView) view1.findViewById(R.id.list_sp_text);
-        memberTv.setText(R.string.family_member);
-        TextView projectTv = (TextView) view2.findViewById(R.id.list_sp_text);
-        projectTv.setText(R.string.project);
-
-        getPresenter().createList();
-
-        listView.setAdapter(new MainListAdapter(this.getContext(), new FragmentComModel().getList()) {
-            @Override
-            public void convert(ViewHolder viewHolder, String item) {
-                switch (getTpye()) {
-                    case 0:
-                        viewHolder.setText(R.id.list_sp_text, item);
-                        break;
-                    case 1:
-                        viewHolder.setText(R.id.list_ed_text, item);
-                        break;
-                }
-            }
-        });
         return view;
     }
 
@@ -80,6 +64,57 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
     @Override
     public FragmentComContacts.IFragmentPresenter onBindPresenter() {
         return new FragmentComPresenter(this);
+    }
+
+    /**
+     * @param view
+     */
+    public void initView(View view) {
+        listView = (ListView) view.findViewById(R.id.up_data_list);
+        View view1 = (View) view.findViewById(R.id.list_sp_text1);
+        View view2 = (View) view.findViewById(R.id.list_sp_text2);
+        memberTv = (TextView) view1.findViewById(R.id.list_sp_text);
+        memberTv.setText(R.string.family_member);
+        projectTv = (TextView) view2.findViewById(R.id.list_sp_text);
+        projectTv.setText(R.string.project);
+        memberSp = (Spinner) view1.findViewById(R.id.list_spinner);
+        projectSp = (Spinner) view2.findViewById(R.id.list_spinner);
+
+        getPresenter().createList();
+
+
+        mainListAdapter =new MainListAdapter(this.getContext(), getPresenter().getFragmentComModel().getList()) {
+            @Override
+            public void convert(ViewHolder viewHolder, String item) {
+                switch (getTpye()) {
+                    case 0:
+                        viewHolder.setText(R.id.list_sp_text, item);
+                        break;
+                    case 1:
+                        viewHolder.setText(R.id.list_ed_text, item);
+                        break;
+                }
+            }
+        };
+        listView.setAdapter(mainListAdapter);
+
+        projectSp.setAdapter(new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item,getPresenter().getFragmentComModel().getProjectList()));
+
+        /*spinner选中监听*/
+        projectSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getPresenter().projectSelect((String) projectSp.getSelectedItem());
+//                listView.setAdapter(mainListAdapter);
+                mainListAdapter.notifyDataSetChanged();
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override

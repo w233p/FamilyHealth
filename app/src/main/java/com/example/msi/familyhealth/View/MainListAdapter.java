@@ -41,7 +41,7 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
     public int getItemViewType(int position) {
 //        initList();
 
-        if (list.get(position).equals("成员") || list.get(position).equals("项目") || list.get(position).equals("性别")) {
+        if (list.get(position).equals("成员") || list.get(position).equals("项目")) {
             return TYPE_ONE;
         } else {
             return TYPE_TWO;

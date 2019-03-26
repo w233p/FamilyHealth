@@ -2,6 +2,7 @@ package com.example.msi.familyhealth.Data;
 
 import org.litepal.crud.DataSupport;
 
+import java.sql.Date;
 import java.sql.Time;
 
 /**
@@ -9,7 +10,7 @@ import java.sql.Time;
  */
 public class DbPositonBean extends DataSupport {
     private int id;
-    private Time positonTime;
+    private Long positonTime;
     private String LocalX;//经度
     private String LocalY;//纬度
 
@@ -21,11 +22,11 @@ public class DbPositonBean extends DataSupport {
         this.id = id;
     }
 
-    public Time getPositonTime() {
+    public Long getPositonTime() {
         return positonTime;
     }
 
-    public void setPositonTime(Time positonTime) {
+    public void setPositonTime(Long positonTime) {
         this.positonTime = positonTime;
     }
 

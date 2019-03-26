@@ -1,6 +1,8 @@
 package com.example.msi.familyhealth.MyData.DataFragment;
 
 
+import android.view.View;
+
 import com.example.msi.familyhealth.MvpBase.IBaseFrag;
 import com.example.msi.familyhealth.MvpBase.IBasePresenter;
 
@@ -10,11 +12,21 @@ public class FragmentComContacts {
         @Override
         void addListener();
 
+
+        void initView(View view);
     }
 
     public interface IFragmentPresenter extends IBasePresenter {
 
         void createList();
+
+        void memberSelect();
+
+        void projectSelect(String project);
+
+        void setFragmentComModel(FragmentComModel fragmentComModel);
+
+        FragmentComModel getFragmentComModel();
 
     }
 

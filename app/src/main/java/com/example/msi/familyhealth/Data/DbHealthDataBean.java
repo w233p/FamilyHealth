@@ -8,7 +8,7 @@ import java.sql.Time;
 public class DbHealthDataBean extends DataSupport {
     private int id;
     private float healthData;
-    private Time healthTime;
+    private Long healthTime;
     /**
      * 第几次记录
      * 此表中为体检数据，不常用
@@ -32,11 +32,11 @@ public class DbHealthDataBean extends DataSupport {
         this.healthData = healthData;
     }
 
-    public Time getHealthTime() {
+    public Long getHealthTime() {
         return healthTime;
     }
 
-    public void setHealthTime(Time healthTime) {
+    public void setHealthTime(Long healthTime) {
         this.healthTime = healthTime;
     }
 

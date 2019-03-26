@@ -1,5 +1,6 @@
 package com.example.msi.familyhealth.Data;
 
+import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
  */
 public class DbProjectBean extends DataSupport {
     private int id;
+    @Column(unique = true)
     private String project;
     /**
      * 与具体项目一对多的关系
@@ -21,8 +23,9 @@ public class DbProjectBean extends DataSupport {
         return dbItemBeanList;
     }
 
-    public void setDbItemBeanList(List<DbItemBean> dbItemBeanList) {
+    public DbProjectBean setDbItemBeanList(List<DbItemBean> dbItemBeanList) {
         this.dbItemBeanList = dbItemBeanList;
+        return this;
     }
 
     public int getId() {
@@ -37,8 +40,9 @@ public class DbProjectBean extends DataSupport {
         return project;
     }
 
-    public void setProject(String project) {
+    public DbProjectBean setProject(String project) {
         this.project = project;
+        return this;
     }
 
 }
