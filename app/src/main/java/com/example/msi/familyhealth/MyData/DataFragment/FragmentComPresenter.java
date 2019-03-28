@@ -37,7 +37,9 @@ public class FragmentComPresenter extends BaseFragPresenter<FragmentComContacts.
     public void projectSelect(String projects) {
         fragmentComModel.setProjectSpText(projects);
         Log.e("presenter","projectSelect");
-        fragmentComModel.initList();
+//        fragmentComModel.initList();
+        fragmentComModel.refreshList();
     }
+
 
 }

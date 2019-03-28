@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -29,10 +31,6 @@ import java.util.List;
 public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentPresenter> implements FragmentComContacts.IFragmentView {
     private ListView listView;
 
-    private int project;//监听项目栏，选择下面的常量，从而改变list布局等
-    private static final int BASE = 0;
-    private static final int DALIY = 1;
-    private static final int BLOOD = 2;
     private TextView memberTv;
     private TextView projectTv;
     private Spinner memberSp;
@@ -83,7 +81,7 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
         getPresenter().createList();
 
 
-        mainListAdapter =new MainListAdapter(this.getContext(), getPresenter().getFragmentComModel().getList()) {
+        mainListAdapter = new MainListAdapter(this.getContext(), getPresenter().getFragmentComModel().getList()) {
             @Override
             public void convert(ViewHolder viewHolder, String item) {
                 switch (getTpye()) {
@@ -98,7 +96,7 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
         };
         listView.setAdapter(mainListAdapter);
 
-        projectSp.setAdapter(new ArrayAdapter<String>(this.getContext(), android.R.layout.simple_spinner_item,getPresenter().getFragmentComModel().getProjectList()));
+        projectSp.setAdapter(new ArrayAdapter<String>(this.getContext(), R.layout.spinner_item, R.id.spinnerTv, getPresenter().getFragmentComModel().getProjectList()));
 
         /*spinner选中监听*/
         projectSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -107,14 +105,19 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
                 getPresenter().projectSelect((String) projectSp.getSelectedItem());
 //                listView.setAdapter(mainListAdapter);
                 mainListAdapter.notifyDataSetChanged();
+                listView.startAnimation(at_animation());
             }
-
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+    }
+
+    public Animation at_animation() {
+        Animation animation = AnimationUtils.loadAnimation(this.getContext(), R.anim.alpha_translate);
+        return animation;
     }
 
     @Override
