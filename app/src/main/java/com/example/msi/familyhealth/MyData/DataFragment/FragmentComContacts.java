@@ -6,6 +6,8 @@ import android.view.View;
 import com.example.msi.familyhealth.MvpBase.IBaseFrag;
 import com.example.msi.familyhealth.MvpBase.IBasePresenter;
 
+import java.util.List;
+
 
 public class FragmentComContacts {
     public interface IFragmentView extends IBaseFrag {
@@ -20,9 +22,9 @@ public class FragmentComContacts {
 
         void createList();
 
-        void memberSelect();
-
         void projectSelect(String project);
+
+        void memberSelect(String member);
 
         void setFragmentComModel(FragmentComModel fragmentComModel);
 
@@ -33,5 +35,8 @@ public class FragmentComContacts {
     public interface IFragmentModel {
         void initList();
 
+        void initMemberList();
+
+        String getProjectSpText();
     }
 }

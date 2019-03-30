@@ -3,6 +3,7 @@ package com.example.msi.familyhealth.MyData.DataFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,12 +38,9 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
     private Spinner projectSp;
     private MainListAdapter mainListAdapter;
 
-
     /**
      * 手动上传界面的Fragment
      * list适配器在此配置
-     *
-     * @return
      */
     @Nullable
     @Override
@@ -80,7 +78,6 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
 
         getPresenter().createList();
 
-
         mainListAdapter = new MainListAdapter(this.getContext(), getPresenter().getFragmentComModel().getList()) {
             @Override
             public void convert(ViewHolder viewHolder, String item) {
@@ -113,6 +110,23 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
 
             }
         });
+
+        memberSp.setAdapter(new ArrayAdapter<String>(this.getContext(),R.layout.spinner_item,R.id.spinnerTv,getPresenter().getFragmentComModel().getMemberList()));
+
+        /*spinner选中监听*/
+        memberSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                getPresenter().memberSelect((String)memberSp.getSelectedItem());
+                Log.e("member",(String)memberSp.getSelectedItem());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 
     public Animation at_animation() {

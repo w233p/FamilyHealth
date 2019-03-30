@@ -137,7 +137,7 @@ public class ViewHolder {
         public void afterTextChanged(Editable s) {
             int position = (int) viewHolder.getEditText().getTag();
 
-            ((MyDataActivity) context).getEditText(position, s.toString());
+            ((MyDataActivity) context).getPresenter().getEdit(position, s.toString());
             Log.e("after", "run");
         }
     }

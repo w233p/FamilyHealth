@@ -2,6 +2,7 @@ package com.example.msi.familyhealth.MyData.DataFragment;
 
 import android.util.Log;
 
+import com.example.msi.familyhealth.Data.DbMemberBean;
 import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.example.msi.familyhealth.Data.UpDataItem;
 
@@ -13,7 +14,9 @@ import java.util.List;
 public class FragmentComModel implements FragmentComContacts.IFragmentModel {
     private List<String> list;
     private String projectSpText = "基本信息";
+    private String memberSpText = "";
     private List<String> projectList;
+    private List<String> memberList;
 
     /**
      * 获取project的所有项
@@ -23,6 +26,14 @@ public class FragmentComModel implements FragmentComContacts.IFragmentModel {
         projectList = new ArrayList<>();
         for (int i = 0; i < allDbProjectBean.size(); i++) {
             projectList.add(allDbProjectBean.get(i).getProject());
+        }
+    }
+
+    public void initMemberList(){
+        List<DbMemberBean> allDbMemberBean = DataSupport.findAll(DbMemberBean.class);
+        memberList = new ArrayList<>();
+        for (int i = 0;i<allDbMemberBean.size();i++){
+            memberList.add(allDbMemberBean.get(i).getMemberName());
         }
     }
 
@@ -82,11 +93,27 @@ public class FragmentComModel implements FragmentComContacts.IFragmentModel {
         this.projectSpText = projectSpText;
     }
 
+    public String getMemberSpText() {
+        return memberSpText;
+    }
+
+    public void setMemberSpText(String memberSpText) {
+        this.memberSpText = memberSpText;
+    }
+
     public List<String> getProjectList() {
         return projectList;
     }
 
     public void setProjectList(List<String> projectList) {
         this.projectList = projectList;
+    }
+
+    public List<String> getMemberList() {
+        return memberList;
+    }
+
+    public void setMemberList(List<String> memberList) {
+        this.memberList = memberList;
     }
 }

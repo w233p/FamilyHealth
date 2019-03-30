@@ -5,6 +5,8 @@ import android.util.Log;
 import com.example.msi.familyhealth.MvpBase.BaseFragPresenter;
 import com.example.msi.familyhealth.MvpBase.BasePresenter;
 
+import java.util.List;
+
 public class FragmentComPresenter extends BaseFragPresenter<FragmentComContacts.IFragmentView> implements FragmentComContacts.IFragmentPresenter {
 
 
@@ -25,12 +27,8 @@ public class FragmentComPresenter extends BaseFragPresenter<FragmentComContacts.
     @Override
     public void createList() {
         fragmentComModel.initSpinnerList();
+        fragmentComModel.initMemberList();
         fragmentComModel.initList();
-    }
-
-    @Override
-    public void memberSelect() {
-
     }
 
     @Override
@@ -41,5 +39,9 @@ public class FragmentComPresenter extends BaseFragPresenter<FragmentComContacts.
         fragmentComModel.refreshList();
     }
 
+    @Override
+    public void memberSelect(String member) {
+        fragmentComModel.setMemberSpText(member);
+    }
 
 }

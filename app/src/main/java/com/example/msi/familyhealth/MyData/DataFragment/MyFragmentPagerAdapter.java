@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.msi.familyhealth.MvpBase.BaseFragment;
+
 import java.util.List;
 
 /**
@@ -12,9 +14,9 @@ import java.util.List;
  */
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private List<Fragment> fragmentList;
+    private List<BaseFragment<FragmentComContacts.IFragmentPresenter>> fragmentList;
 
-    public MyFragmentPagerAdapter(FragmentManager fm,List<Fragment> fragmentList) {
+    public MyFragmentPagerAdapter(FragmentManager fm, List<BaseFragment<FragmentComContacts.IFragmentPresenter>> fragmentList) {
         super(fm);
         this.fragmentList = fragmentList;
     }
