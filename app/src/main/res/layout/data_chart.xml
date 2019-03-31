@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.msi.familyhealth.View.TitleView
+        android:id="@+id/data_titleView"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        app:background_color="@color/dataBlue"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/check_data"
+        app:title_type="@integer/title_icon" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/checkdata_memberSp"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/checkdata_itemSp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/data_titleView">
+
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/checkdata_itemSp"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:background="@color/healthBule"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/checkdata_memberSp"
+        app:layout_constraintTop_toBottomOf="@+id/data_titleView">
+
+    </android.support.v7.widget.AppCompatSpinner>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/chart_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="132dp"
+        android:background="@drawable/chart_greylayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkdata_memberSp">
+
+        <Button
+            android:id="@+id/thistime_chart"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/chart_bt"
+            android:text="@string/this_time"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/week_chart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/week_chart"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/chart_bt"
+            android:text="@string/week"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/month_chart"
+            app:layout_constraintStart_toEndOf="@+id/thistime_chart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/month_chart"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/chart_bt"
+            android:text="@string/month"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toStartOf="@id/year_chart"
+            app:layout_constraintStart_toEndOf="@+id/week_chart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/year_chart"
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/chart_bt"
+            android:text="@string/year"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/month_chart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@color/colorAccent"
+            android:minHeight="300dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/week_chart">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/chart_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

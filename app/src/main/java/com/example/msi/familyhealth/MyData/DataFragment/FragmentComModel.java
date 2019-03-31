@@ -29,10 +29,10 @@ public class FragmentComModel implements FragmentComContacts.IFragmentModel {
         }
     }
 
-    public void initMemberList(){
+    public void initMemberList() {
         List<DbMemberBean> allDbMemberBean = DataSupport.findAll(DbMemberBean.class);
         memberList = new ArrayList<>();
-        for (int i = 0;i<allDbMemberBean.size();i++){
+        for (int i = 0; i < allDbMemberBean.size(); i++) {
             memberList.add(allDbMemberBean.get(i).getMemberName());
         }
     }
@@ -64,17 +64,17 @@ public class FragmentComModel implements FragmentComContacts.IFragmentModel {
                 Log.e("ric", list.get(i));
             }
         } else if (projectSpText.equals("血液")) {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 9; i++) {
                 list.add(UpDataItem.BLOOD[i]);
                 Log.e("blood", list.get(i));
             }
         } else if (projectSpText.equals("尿检")) {
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 6; i++) {
                 list.add(UpDataItem.URINE[i]);
                 Log.e("blood", list.get(i));
             }
-        }else if (projectSpText.equals("糖尿病")) {
-            for (int i = 0; i < 3; i++) {
+        } else if (projectSpText.equals("糖尿病")) {
+            for (int i = 0; i < 4; i++) {
                 list.add(UpDataItem.INSULIN[i]);
                 Log.e("blood", list.get(i));
             }

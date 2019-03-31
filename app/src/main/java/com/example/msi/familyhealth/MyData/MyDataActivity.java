@@ -38,6 +38,7 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
     private RadioButton commenBt;
     private RadioButton autoBt;
     private TextView projectTv;
+    private Fragment_commen fragment_commen;
 
     /**
      * 数据上传界面
@@ -49,6 +50,8 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.data_layout);
+
+//        getPresenter().getMyDataModel().initItemDataBase();
 
         /*初始化view的控件*/
         initView();
@@ -77,7 +80,9 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
      */
     private List<BaseFragment<FragmentComContacts.IFragmentPresenter>> setFragment() {
         fragmentList = new ArrayList<BaseFragment<FragmentComContacts.IFragmentPresenter>>();
-        fragmentList.add(new Fragment_commen());
+
+        fragment_commen = new Fragment_commen();
+        fragmentList.add(fragment_commen);
         fragmentList.add(new Fragment_auto());
         return fragmentList;
     }
@@ -85,13 +90,12 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
     /**
      * 测试数据库存入时间
      */
-    private void initTimeTest(){
+    private void initTimeTest() {
         Date date = new Date();
         long dateTime = date.getTime();
-        DbDailyDataBean dbDailyDataBean =new DbDailyDataBean().setTime(dateTime).setDbItemBean(DataSupport.find(DbItemBean.class,1)).setData(666).setDbMemberBean(DataSupport.find(DbMemberBean.class,6));
+        DbDailyDataBean dbDailyDataBean = new DbDailyDataBean().setTime(dateTime).setDbItemBean(DataSupport.find(DbItemBean.class, 1)).setData(666).setDbMemberBean(DataSupport.find(DbMemberBean.class, 6));
         dbDailyDataBean.save();
     }
-
 
     /**
      * 保存数据到数据库
@@ -153,6 +157,9 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
         }
     }
 
+
+
+
     @Override
     public void initView() {
         titleView = (TitleView) findViewById(R.id.data_titleView);
@@ -172,8 +179,8 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
             @Override
             public void onClick(View v) {
                 saveToDataBase();
-                test();
-                Log.e("titlee", "click");
+//                test();
+                showToast("添加成功");
             }
         });
 
@@ -224,7 +231,6 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
             }
         });
     }
-
 
     @Override
     public MyDataContacts.IMyDataPresenter onBindPresenter() {

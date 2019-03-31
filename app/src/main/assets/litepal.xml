@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <litepal>
     <dbname value="FHdb"></dbname>
-    <version value="4"></version>
+    <version value="10"></version>
 
     <list>
         <mapping class="com.example.msi.familyhealth.Data.DbAccountBean"></mapping>
@@ -14,6 +14,5 @@
         <mapping class="com.example.msi.familyhealth.Data.DbMemberMessageBean"></mapping>
         <mapping class="com.example.msi.familyhealth.Data.DbPositonBean"></mapping>
         <mapping class="com.example.msi.familyhealth.Data.DbProjectBean"></mapping>
-
     </list>
 </litepal>

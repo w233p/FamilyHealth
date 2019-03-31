@@ -46,4 +46,13 @@
         <item name="colorPrimaryDark">@color/setGreen</item>
         <item name="colorAccent">@color/setGreen</item>
     </style>
+
+    <style name="CheckDataTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/dataBlue</item>
+        <item name="colorPrimaryDark">@color/dataBlue</item>
+        <item name="colorAccent">@color/dataBlue</item>
+        <item name="android:textSize">28dp</item>
+        <item name="android:windowEnterAnimation">@anim/pop_show</item>
+        <item name="android:windowHideAnimation">@anim/pop_hidden</item>
+    </style>
 </resources>

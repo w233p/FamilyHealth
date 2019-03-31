@@ -10,8 +10,9 @@ public class UpDataItem {
     public static final String BASE_ITEM[] = {"年龄/岁", "身高/cm", "体重/kg"};//spinner，ed*3
     /**
      * 日常项目
+     * 注，原为血糖血脂血压，现改为血糖，高低压
      */
-    public static final String DAILY[] = {"血糖", "血脂", "血压"};//ed
+    public static final String DAILY[] = {"血糖(mmol/L)", "高压(mmHg）", "低压(mmHg)"};//ed
     /**
      * 血检项目
      */
@@ -25,7 +26,7 @@ public class UpDataItem {
     /**
      * 糖尿病相关
      */
-    public static final String INSULIN[]={"胰岛素","ICA抗胰岛细胞抗体","GAD抗谷氨酸脱氢酶抗体","IAA抗胰岛素抗体"};
+    public static final String INSULIN[] = {"胰岛素", "ICA抗胰岛细胞抗体", "GAD抗谷氨酸脱氢酶抗体", "IAA抗胰岛素抗体"};
 
 }
 

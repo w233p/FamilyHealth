@@ -12,11 +12,7 @@
         <activity
             android:name=".Login.LoginActivity"
             android:theme="@style/LoginTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -25,27 +21,42 @@
 
         </activity>
 
-        <activity android:name=".MyData.MyDataActivity"
+        <activity
+            android:name=".MyData.MyDataActivity"
             android:theme="@style/DataTheme">
 
         </activity>
-        <activity android:name=".Clock.ClockActivity"
+        <activity
+            android:name=".Clock.ClockActivity"
             android:theme="@style/LoginTheme">
 
         </activity>
 
-        <activity android:name=".HealthTips.HealthTipsActivity"
+        <activity
+            android:name=".HealthTips.HealthTipsActivity"
             android:theme="@style/HealthTheme">
 
         </activity>
 
-        <activity android:name=".Position.PositonActivity"
+        <activity
+            android:name=".Position.PositonActivity"
             android:theme="@style/PositionTheme">
 
         </activity>
-        <activity android:name=".Set.SetActivity"
+        <activity
+            android:name=".Set.SetActivity"
             android:theme="@style/SetTheme">
 
+        </activity>
+
+        <activity
+            android:name=".CheckData.CheckDataActivity"
+            android:theme="@style/CheckDataTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
 

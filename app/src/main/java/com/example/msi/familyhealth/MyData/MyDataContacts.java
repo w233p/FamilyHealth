@@ -37,7 +37,7 @@ public class MyDataContacts {
         void initTemporaryData();
 
         /**
-         *获取EditText的值,保存到临时数组
+         * 获取EditText的值,保存到临时数组
          */
         void getEditText(int position, String str);
 
@@ -48,15 +48,15 @@ public class MyDataContacts {
 
         float getFloat(int dataPosition);
 
-        void saveBaseToDb();
+        void saveBaseToDb(BaseFragment<FragmentComContacts.IFragmentPresenter> fragment_commen);
 
-        void saveDailyToDb();
+        void saveDailyToDb(BaseFragment<FragmentComContacts.IFragmentPresenter> fragment_commen);
 
-        void saveBloodToDb();
+        void saveBloodToDb(BaseFragment<FragmentComContacts.IFragmentPresenter> fragment_commen);
 
-        void saveUrineToDb();
+        void saveUrineToDb(BaseFragment<FragmentComContacts.IFragmentPresenter> fragment_commen);
 
-        void saveInsulinToDb();
+        void saveInsulinToDb(BaseFragment<FragmentComContacts.IFragmentPresenter> fragment_commen);
 
     }
 }

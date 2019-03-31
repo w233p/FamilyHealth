@@ -1,123 +1,81 @@
-package com.example.msi.familyhealth.MyData;
+package com.example.msi.familyhealth.CheckData;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
-import com.example.msi.familyhealth.Data.DbDailyDataBean;
 import com.example.msi.familyhealth.Data.DbItemBean;
-import com.example.msi.familyhealth.Data.DbMemberBean;
-import com.example.msi.familyhealth.Data.DbMemberMessageBean;
 import com.example.msi.familyhealth.Data.DbProjectBean;
-import com.example.msi.familyhealth.MvpBase.BaseFragment;
-import com.example.msi.familyhealth.MyData.DataFragment.FragmentComContacts;
+import com.example.msi.familyhealth.MvpBase.BaseActivity;
+import com.example.msi.familyhealth.R;
 
-import org.litepal.crud.DataSupport;
-
-import java.util.Date;
 import java.util.List;
 
-public class MyDataModel implements MyDataContacts.IMyDataModel {
-    private String[] temporaryData;
+public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckDataPresenter> implements CheckDataContacts.ICheckDataView {
 
-    public void initTemporaryData() {
-        temporaryData = new String[10];
-        for (int i = 0; i < 10; i++) {
-            temporaryData[i] = "0";
-        }
-    }
-
-    public void getEditText(int position, String str) {
-        Log.e("判断", "项目");
-
-        temporaryData[position] = str;
-        for (int i = 0; i < 10; i++) {
-            Log.e("data", position + "::" + temporaryData[i]);
-        }
-    }
-
-    public int getInt(int dataPosition) {
-        int in = Integer.valueOf(temporaryData[dataPosition]);
-        return in;
-    }
-
-    public float getFloat(int dataPosition) {
-        float fl = Float.valueOf(temporaryData[dataPosition]);
-        return fl;
-    }
+    private Spinner itemSp;
+    private Spinner memberSp;
 
 
     @Override
-    public void saveBaseToDb(BaseFragment<FragmentComContacts.IFragmentPresenter> fragment_commen) {
-        //先找到成员
-        List<DbMemberBean> dbMemberBeanList = DataSupport
-                .where("memberName = ?",
-                        String.valueOf(fragment_commen.getPresenter().getFragmentComModel().getMemberSpText()))
-                .find(DbMemberBean.class);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.data_chart);
 
-        //删除该成员历史的基本信息
-        List<DbMemberMessageBean> dbMemberMessageBeanList = DataSupport.where("dbmemberbean_id = ?", String.valueOf(dbMemberBeanList.get(0).getId())).find(DbMemberMessageBean.class);
-        for (int i = 0; i < dbMemberMessageBeanList.size(); i++) {
-            Log.e("getId", String.valueOf(dbMemberMessageBeanList.get(i).getId()));
-            dbMemberMessageBeanList.get(i).delete();
-        }
+        initView();
 
-        //添加新的基本信息
-        DbMemberMessageBean dbMemberMessageBean = new DbMemberMessageBean()
-                .setAge(getInt(0))
-                .setHeight(getInt(1))
-                .setWeight(getFloat(2))
-                .setDbMemberBean(dbMemberBeanList.get(0));
-        dbMemberMessageBean.save();
-    }
+        itemSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getItemSpinnerData()));
 
-    @Override
-    public void saveDailyToDb(BaseFragment<FragmentComContacts.IFragmentPresenter> fragment_commen) {
-        //先找到成员
-        List<DbMemberBean> dbMemberBeanList = DataSupport
-                .where("memberName = ?",
-                        String.valueOf(fragment_commen.getPresenter().getFragmentComModel().getMemberSpText()))
-                .find(DbMemberBean.class);
+        /*spinner选中监听*/
+        itemSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        //添加新的基本信息
-        Date date = new Date();
-        long dateTime = date.getTime();
+            }
 
-        //item :血糖id=1 高压id=2 低压id=3
-        for (int i = 0; i < 3; i++) {
-            DbDailyDataBean dbDailyDataBean = new DbDailyDataBean();
-            dbDailyDataBean.setTime(dateTime);
-            dbDailyDataBean.setData(getFloat(i))
-                    .setDbItemBean(DataSupport.find(DbItemBean.class, i + 1))
-                    .setDbMemberBean(dbMemberBeanList.get(0));
-            dbDailyDataBean.save();
-        }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        DataSupport.delete(DbDailyDataBean.class, 7);
-        DataSupport.delete(DbDailyDataBean.class, 8);
-        DataSupport.delete(DbDailyDataBean.class, 9);
-        DataSupport.delete(DbDailyDataBean.class, 10);
-        DataSupport.delete(DbDailyDataBean.class, 11);
-        DataSupport.delete(DbDailyDataBean.class, 12);
-    }
+            }
+        });
 
-    @Override
-    public void saveBloodToDb(BaseFragment<FragmentComContacts.IFragmentPresenter> fragment_commen) {
+        memberSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getMemberSpinnerData()));
+
+        /*spinner选中监听*/
+        memberSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 
     @Override
-    public void saveUrineToDb(BaseFragment<FragmentComContacts.IFragmentPresenter> fragment_commen) {
-
+    public CheckDataContacts.ICheckDataPresenter onBindPresenter() {
+        return new CheckDataPresenter(this);
     }
 
     @Override
-    public void saveInsulinToDb(BaseFragment<FragmentComContacts.IFragmentPresenter> fragment_commen) {
+    public void initView() {
+        itemSp = (Spinner) findViewById(R.id.checkdata_itemSp);
+        memberSp = (Spinner) findViewById(R.id.checkdata_memberSp);
+    }
+
+    @Override
+    public void addListener() {
 
     }
 
-    /**
-     * 临时初始化项目的数据库
-     */
     public void initItemDataBase() {
         DbProjectBean dbProjectBean = new DbProjectBean().setProject("日常");
         dbProjectBean.save();
