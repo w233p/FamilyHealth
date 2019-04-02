@@ -12,14 +12,22 @@ import com.example.msi.familyhealth.Data.DbItemBean;
 import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckDataPresenter> implements CheckDataContacts.ICheckDataView {
 
     private Spinner itemSp;
     private Spinner memberSp;
-
+    private LineChart mLineChart;
+    private int itemPositon;
+    private int memberPositon;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,35 +36,7 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
 
         initView();
 
-        itemSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getItemSpinnerData()));
-
-        /*spinner选中监听*/
-        itemSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        memberSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getMemberSpinnerData()));
-
-        /*spinner选中监听*/
-        memberSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        addListener();
 
     }
 
@@ -69,11 +49,57 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
     public void initView() {
         itemSp = (Spinner) findViewById(R.id.checkdata_itemSp);
         memberSp = (Spinner) findViewById(R.id.checkdata_memberSp);
+
+        mLineChart = (LineChart)findViewById(R.id.lineChart);
+        mLineChart.setDrawBorders(true);//显示边界
+
+        memberSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getMemberSpinnerData()));
+        itemSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getItemSpinnerData()));
+
+        getPresenter().showChart(mLineChart);
+
     }
 
     @Override
     public void addListener() {
+        /*spinner选中监听*/
+        itemSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setItemPositon(position);
+                getPresenter().itemSelected(position);
+                getPresenter().changeChartData(memberPositon,position);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        /*spinner选中监听*/
+        memberSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setMemberPositon(position);
+                getPresenter().changeChartData(position,itemPositon);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void setItemPositon(int itemPositon) {
+        this.itemPositon = itemPositon;
+    }
+
+    public void setMemberPositon(int memberPositon) {
+        this.memberPositon = memberPositon;
     }
 
     public void initItemDataBase() {
