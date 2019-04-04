@@ -13,13 +13,7 @@ import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckDataPresenter> implements CheckDataContacts.ICheckDataView {
 
@@ -45,18 +39,24 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
         return new CheckDataPresenter(this);
     }
 
+    public void showChart(LineData data) {
+        mLineChart.setData(data);
+        mLineChart.invalidate();
+        mLineChart.notifyDataSetChanged();
+    }
+
     @Override
     public void initView() {
         itemSp = (Spinner) findViewById(R.id.checkdata_itemSp);
         memberSp = (Spinner) findViewById(R.id.checkdata_memberSp);
 
-        mLineChart = (LineChart)findViewById(R.id.lineChart);
+        mLineChart = (LineChart) findViewById(R.id.lineChart);
         mLineChart.setDrawBorders(true);//显示边界
 
         memberSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getMemberSpinnerData()));
         itemSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getItemSpinnerData()));
 
-        getPresenter().showChart(mLineChart);
+        getPresenter().initChart(0, 0);
 
     }
 
@@ -67,8 +67,8 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setItemPositon(position);
-                getPresenter().itemSelected(position);
-                getPresenter().changeChartData(memberPositon,position);
+//                getPresenter().itemSelected(position);
+                getPresenter().changeChartData(memberPositon, position);
             }
 
             @Override
@@ -77,13 +77,12 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
             }
         });
 
-
-
         /*spinner选中监听*/
         memberSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setMemberPositon(position);
+//                getPresenter().memberSelected(position,itemPositon);
                 getPresenter().changeChartData(position,itemPositon);
             }
 

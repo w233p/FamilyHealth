@@ -25,16 +25,22 @@ public class CheckDataPresenter extends BasePresenter<CheckDataContacts.ICheckDa
     }
 
     @Override
-    public void showChart( LineChart mLineChart) {
-        checkDataModel.setChartData(mLineChart);
+    public void initChart(int memberPosition, int itemPosition) {
+        getView().showChart(checkDataModel.setChartData(memberPosition,itemPosition));
     }
 
     @Override
     public void itemSelected(int position) {
-        checkDataModel.changeChartName(position);
+//        checkDataModel.changeChartName(position);
+        getView().showChart(checkDataModel.changeChartName(position));
     }
 
-    public void changeChartData(int memberPositon,int itemPositon){
+    @Override
+    public void memberSelected(int memberPositon, int itemPositon) {
+        getView().showChart(checkDataModel.changeChartData(memberPositon,itemPositon));
+    }
 
+    public void changeChartData(int memberPositon, int itemPositon){
+        getView().showChart(checkDataModel.setChartData(memberPositon,itemPositon));
     }
 }
