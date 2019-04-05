@@ -22,4 +22,5 @@
 
     <color name="listDivider">#AFAEAD</color>
 
+    <color name="chart_mark">#495285</color>
 </resources>

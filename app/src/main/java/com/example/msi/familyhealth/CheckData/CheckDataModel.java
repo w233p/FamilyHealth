@@ -14,7 +14,9 @@ import com.github.mikephil.charting.data.LineDataSet;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
 
@@ -34,9 +36,6 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
         List<DbItemBean> dbItemBeanList = DataSupport.findAll(DbItemBean.class);
         project_item = new ArrayList<>();
 
-//        for (int i = 0; i < dbProjectBeanList.size(); i++) {
-//            project_item.add(dbProjectBeanList.get(i).getProject());
-//        }
         for (int i = 0; i < dbItemBeanList.size(); i++) {
             project_item.add(dbItemBeanList.get(i).getItem());
         }
@@ -56,6 +55,14 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
 
     @Override
     public LineData setChartData(int memberPosition, int itemPosition) {
+
+        Date date = new Date();
+        long dateTime = date.getTime();
+        long zero = dateTime / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset();//今天0点的毫秒数
+        long twelve = zero +24*60*60*1000-1;//今天23点59分59秒
+        long week = twelve - 24*60*60*1000*7;
+//        long month = twelve - 24*60*60*1000*30;
+//        long year = twelve - 24*60*60*1000*365;
 
 
         /**
@@ -98,9 +105,6 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
         } else {
             entries.add(new Entry(1, 0));
         }
-
-
-
 
         /**
          * LineDataSet每一个对象就是一条连接线

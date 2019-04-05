@@ -15,6 +15,7 @@ import org.litepal.crud.DataSupport;
 
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class MyDataModel implements MyDataContacts.IMyDataModel {
     private String[] temporaryData;
@@ -81,11 +82,13 @@ public class MyDataModel implements MyDataContacts.IMyDataModel {
         //添加新的基本信息
         Date date = new Date();
         long dateTime = date.getTime();
+        long zero = dateTime / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset();//今天0点的毫秒数
+        long twelve = zero +24*60*60*1000-1;//今天23点59分59秒
 
         //item :血糖id=1 高压id=2 低压id=3
         for (int i = 0; i < 3; i++) {
             DbDailyDataBean dbDailyDataBean = new DbDailyDataBean();
-            dbDailyDataBean.setTime(dateTime);
+            dbDailyDataBean.setTime(twelve);
             dbDailyDataBean.setData(getFloat(i))
                     .setDbItemBean(DataSupport.find(DbItemBean.class, i + 1))
                     .setDbMemberBean(dbMemberBeanList.get(0));

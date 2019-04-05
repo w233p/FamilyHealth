@@ -6,12 +6,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.msi.familyhealth.Data.DbItemBean;
 import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
+import com.example.msi.familyhealth.View.CheckMarkView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 
@@ -22,6 +24,12 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
     private LineChart mLineChart;
     private int itemPositon;
     private int memberPositon;
+    private CheckMarkView checkMarkView;
+    private Button thisTimeBt;
+    private Button weekBt;
+    private Button monthBt;
+    private Button yearBt;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,9 +57,18 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
     public void initView() {
         itemSp = (Spinner) findViewById(R.id.checkdata_itemSp);
         memberSp = (Spinner) findViewById(R.id.checkdata_memberSp);
+        thisTimeBt = (Button) findViewById(R.id.thistime_chart);
+        weekBt = (Button) findViewById(R.id.week_chart);
+        monthBt = (Button) findViewById(R.id.month_chart);
+        yearBt = (Button) findViewById(R.id.year_chart);
 
         mLineChart = (LineChart) findViewById(R.id.lineChart);
         mLineChart.setDrawBorders(true);//显示边界
+        mLineChart.animateX(200);//从左到右展开
+
+        checkMarkView = new CheckMarkView(this, R.layout.chart_markview);
+        checkMarkView.setChartView(mLineChart);
+        mLineChart.setMarker(checkMarkView);
 
         memberSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getMemberSpinnerData()));
         itemSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getItemSpinnerData()));
@@ -62,6 +79,34 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
 
     @Override
     public void addListener() {
+        thisTimeBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        weekBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        monthBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        yearBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         /*spinner选中监听*/
         itemSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -69,6 +114,8 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
                 setItemPositon(position);
 //                getPresenter().itemSelected(position);
                 getPresenter().changeChartData(memberPositon, position);
+                checkMarkView.setItem(getPresenter().getItemSpinnerData().get(position));
+                mLineChart.animateX(200);//从左到右展开
             }
 
             @Override
@@ -83,7 +130,8 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setMemberPositon(position);
 //                getPresenter().memberSelected(position,itemPositon);
-                getPresenter().changeChartData(position,itemPositon);
+                getPresenter().changeChartData(position, itemPositon);
+                mLineChart.animateX(200);//从左到右展开
             }
 
             @Override
