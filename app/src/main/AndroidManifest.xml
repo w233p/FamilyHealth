@@ -12,7 +12,11 @@
         <activity
             android:name=".Login.LoginActivity"
             android:theme="@style/LoginTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -52,11 +56,7 @@
         <activity
             android:name=".CheckData.CheckDataActivity"
             android:theme="@style/CheckDataTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 

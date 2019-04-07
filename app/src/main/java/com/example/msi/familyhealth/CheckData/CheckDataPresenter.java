@@ -40,7 +40,26 @@ public class CheckDataPresenter extends BasePresenter<CheckDataContacts.ICheckDa
         getView().showChart(checkDataModel.changeChartData(memberPositon,itemPositon));
     }
 
+    @Override
     public void changeChartData(int memberPositon, int itemPositon){
         getView().showChart(checkDataModel.setChartData(memberPositon,itemPositon));
+    }
+
+    @Override
+    public void chooseTimeclick(int time) {
+        switch (time) {
+            case 1:
+                checkDataModel.chartTime = checkDataModel.twelve;
+                break;
+            case 2:
+                checkDataModel.chartTime = checkDataModel.weekTime;
+                break;
+            case 3:
+                checkDataModel.chartTime = checkDataModel.monthTime;
+                break;
+            case 4:
+                checkDataModel.chartTime = checkDataModel.yearTime;
+                break;
+        }
     }
 }

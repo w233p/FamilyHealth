@@ -47,12 +47,6 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
         return new CheckDataPresenter(this);
     }
 
-    public void showChart(LineData data) {
-        mLineChart.setData(data);
-        mLineChart.invalidate();
-        mLineChart.notifyDataSetChanged();
-    }
-
     @Override
     public void initView() {
         itemSp = (Spinner) findViewById(R.id.checkdata_itemSp);
@@ -73,6 +67,7 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
         memberSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getMemberSpinnerData()));
         itemSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getItemSpinnerData()));
 
+        getPresenter().chooseTimeclick(1);
         getPresenter().initChart(0, 0);
 
     }
@@ -82,28 +77,32 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
         thisTimeBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getPresenter().chooseTimeclick(1);
+                getPresenter().changeChartData(memberPositon, itemPositon);
             }
         });
 
         weekBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getPresenter().chooseTimeclick(2);
+                getPresenter().changeChartData(memberPositon, itemPositon);
             }
         });
 
         monthBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getPresenter().chooseTimeclick(3);
+                getPresenter().changeChartData(memberPositon, itemPositon);
             }
         });
 
         yearBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getPresenter().chooseTimeclick(4);
+                getPresenter().changeChartData(memberPositon, itemPositon);
             }
         });
 
@@ -139,6 +138,12 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
 
             }
         });
+    }
+
+    public void showChart(LineData data) {
+        mLineChart.setData(data);
+        mLineChart.invalidate();
+        mLineChart.notifyDataSetChanged();
     }
 
     public void setItemPositon(int itemPositon) {

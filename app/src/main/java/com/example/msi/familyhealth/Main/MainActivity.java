@@ -6,7 +6,9 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 
+import com.example.msi.familyhealth.CheckData.CheckDataActivity;
 import com.example.msi.familyhealth.Clock.ClockActivity;
 import com.example.msi.familyhealth.HealthTips.HealthTipsActivity;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
@@ -22,6 +24,7 @@ public class MainActivity extends BaseActivity<MainContacts.IMainPresenter> impl
     private ConstraintLayout mPositionCl;
     private ConstraintLayout mCallCl;
     private ConstraintLayout mSetCl;
+    private Button mCheckDataBt;
     private Intent intent;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class MainActivity extends BaseActivity<MainContacts.IMainPresenter> impl
         mPositionCl = (ConstraintLayout) findViewById(R.id.constraintLayout4);
         mCallCl = (ConstraintLayout) findViewById(R.id.constraintLayout5);
         mSetCl = (ConstraintLayout) findViewById(R.id.constraintLayout6);
+        mCheckDataBt = (Button) findViewById(R.id.main_bottom_bt);
         intent = new Intent();
     }
 
@@ -91,6 +95,13 @@ public class MainActivity extends BaseActivity<MainContacts.IMainPresenter> impl
             @Override
             public void onClick(View v) {
                 jump(SetActivity.class);
+            }
+        });
+
+        mCheckDataBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                jump(CheckDataActivity.class);
             }
         });
 

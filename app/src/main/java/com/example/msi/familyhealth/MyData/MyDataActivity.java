@@ -1,5 +1,6 @@
 package com.example.msi.familyhealth.MyData;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.msi.familyhealth.CheckData.CheckDataActivity;
 import com.example.msi.familyhealth.Data.DbDailyDataBean;
 import com.example.msi.familyhealth.Data.DbItemBean;
 import com.example.msi.familyhealth.Data.DbMemberBean;
@@ -158,8 +160,6 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
     }
 
 
-
-
     @Override
     public void initView() {
         titleView = (TitleView) findViewById(R.id.data_titleView);
@@ -181,6 +181,8 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
                 saveToDataBase();
 //                test();
                 showToast("添加成功");
+                Intent intent = new Intent(MyDataActivity.this, CheckDataActivity.class);
+                startActivity(intent);
             }
         });
 

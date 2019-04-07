@@ -1,8 +1,10 @@
 package com.example.msi.familyhealth.CheckData;
 
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.example.msi.familyhealth.Data.DbDailyDataBean;
+import com.example.msi.familyhealth.Data.DbHealthDataBean;
 import com.example.msi.familyhealth.Data.DbItemBean;
 import com.example.msi.familyhealth.Data.DbMemberBean;
 import com.example.msi.familyhealth.Data.DbProjectBean;
@@ -14,6 +16,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -25,10 +28,21 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
     private LineDataSet lineDataSet;
     private LineData data;
     private LineChart lineChart;
+
     List<Entry> entries;
     List<DbItemBean> dbItemBeanList;
     List<DbDailyDataBean> dbDailyDataBeanList;
     List<DbMemberBean> dbMemberBeanList;
+    List<DbHealthDataBean> dbHealthDataBeanList;
+
+    public long ONE_DAY_MILLISECONEDS = 24 * 60 * 60 * 1000;
+    public long yearTime;
+    public long monthTime;
+    public long weekTime;
+    public long dateTime;
+    public long zero;
+    public long twelve;
+    public long chartTime;//显示在此时间之后的数据
 
     @Override
     public List<String> itemSpinnerData() {
@@ -53,17 +67,34 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
         return member;
     }
 
+    public void initTime() {
+        Calendar calendar = Calendar.getInstance();
+        //前一年的毫秒
+        calendar.setTime(new Date());
+        calendar.add(Calendar.YEAR, -1);
+        Date year = calendar.getTime();
+        yearTime = year.getTime();
+        //前一月的毫秒
+        calendar.setTime(new Date());
+        calendar.add(Calendar.MONTH, -1);
+        Date month = calendar.getTime();
+        monthTime = month.getTime();
+        //前一周的毫秒
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE, -7);
+        Date week = calendar.getTime();
+        weekTime = week.getTime();
+        //今天零点到24点的毫秒
+        Date date = new Date();
+        dateTime = date.getTime();
+        zero = dateTime / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset();//今天0点的毫秒数
+        twelve = zero + 24 * 60 * 60 * 1000 - 1;//今天23点59分59秒
+    }
+
     @Override
     public LineData setChartData(int memberPosition, int itemPosition) {
 
-        Date date = new Date();
-        long dateTime = date.getTime();
-        long zero = dateTime / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset();//今天0点的毫秒数
-        long twelve = zero +24*60*60*1000-1;//今天23点59分59秒
-        long week = twelve - 24*60*60*1000*7;
-//        long month = twelve - 24*60*60*1000*30;
-//        long year = twelve - 24*60*60*1000*365;
-
+        initTime();
 
         /**
          * Entry 坐标点对象  构造函数 第一个参数为x点坐标 第二个为y点
@@ -83,28 +114,17 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
                 .where("item = ?", String.valueOf(project_item.get(itemPosition)))
                 .find(DbItemBean.class);
 
-//        List<DbDailyDataBean> dbDailyDataBeanList =DataSupport
-//                .where("dbmemberbean_id = ? and dbitembean_id = ?",dbMemberBeanList.get(0).getId(),dbItemBeanList.get(0).getId()).find(DbDailyDataBean.class);
-
         entries = new ArrayList<>();
 
         if (dbDailyDataBeanList != null) {
             dbDailyDataBeanList.clear();
         }
-        if (DataSupport.where("dbmemberbean_id = ?", String.valueOf(dbMemberBeanList.get(0).getId())).find(DbDailyDataBean.class).size() > 1 &&
-                DataSupport.where("dbitembean_id = ?", String.valueOf(dbItemBeanList.get(0).getId())).find(DbDailyDataBean.class).size() > 1) {
-            dbDailyDataBeanList = DataSupport
-                    .where("dbmemberbean_id = ?", String.valueOf(dbMemberBeanList.get(0).getId()))
-                    .where("dbitembean_id = ?", String.valueOf(dbItemBeanList.get(0).getId()))
-                    .find(DbDailyDataBean.class);
-            for (int i = 0; i < dbDailyDataBeanList.size(); i++) {
-                if (dbDailyDataBeanList != null) {
-                    entries.add(new Entry(i, (float) dbDailyDataBeanList.get(i).getData()));
-                }
-            }
-        } else {
-            entries.add(new Entry(1, 0));
+        if (dbHealthDataBeanList != null) {
+            dbHealthDataBeanList.clear();
         }
+        Log.e("position", String.valueOf(itemPosition));
+
+        chooseBean(itemPosition);
 
         /**
          * LineDataSet每一个对象就是一条连接线
@@ -123,7 +143,8 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
 
     @Override
     public LineData changeChartData(int memberPosition, int itemPosition) {
-        dbItemBeanList.clear();
+
+        dbMemberBeanList.clear();
         dbMemberBeanList = DataSupport
                 .where("membername = ?", String.valueOf(member.get(memberPosition)))
                 .find(DbMemberBean.class);
@@ -134,22 +155,65 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
                 .where("item = ?", String.valueOf(project_item.get(itemPosition)))
                 .find(DbItemBean.class);
 
-        dbDailyDataBeanList.clear();
-        dbDailyDataBeanList = DataSupport
-                .where("dbmemberbean_id = ?", String.valueOf(dbMemberBeanList.get(0).getId()))
-                .where("dbitembean_id = ?", String.valueOf(dbItemBeanList.get(0).getId()))
-                .find(DbDailyDataBean.class);
-
         entries = new ArrayList<>();
-        for (int i = 0; i < dbDailyDataBeanList.size(); i++) {
-            entries.add(new Entry(i, (float) dbDailyDataBeanList.get(i).getData()));
-        }
+
+        chooseBean(itemPosition);
 
         data.removeDataSet(lineDataSet);
         lineDataSet = new LineDataSet(entries, String.valueOf(project_item.get(itemPosition)));
 
         data.addDataSet(lineDataSet);
         return data;
+    }
+
+    private void chooseBean(int itemPosition) {
+        if (itemPosition + 1 > 0 && itemPosition < 3) {
+            if (DataSupport.where("dbmemberbean_id = ?", String.valueOf(dbMemberBeanList.get(0).getId())).find(DbDailyDataBean.class).size() >= 1 &&
+                    DataSupport.where("dbitembean_id = ?", String.valueOf(dbItemBeanList.get(0).getId())).find(DbDailyDataBean.class).size() >= 1) {
+
+                dbDailyDataBeanList = DataSupport
+                        .where("dbitembean_id = ? and dbmemberbean_id = ?"
+                                , String.valueOf(dbItemBeanList.get(0).getId())
+                                , String.valueOf(dbMemberBeanList.get(0).getId()))
+                        .find(DbDailyDataBean.class);
+                chooseTime(dbDailyDataBeanList);
+            } else {
+                entries.add(new Entry(1, 0));
+            }
+        } else if (itemPosition > 2) {
+            if (DataSupport.where("dbmemberbean_id = ?", String.valueOf(dbMemberBeanList.get(0).getId())).find(DbHealthDataBean.class).size() >= 1 &&
+                    DataSupport.where("dbitembean_id = ?", String.valueOf(dbItemBeanList.get(0).getId())).find(DbHealthDataBean.class).size() >= 1) {
+                dbHealthDataBeanList = DataSupport
+                        .where("dbitembean_id = ? and dbmemberbean_id = ?"
+                                , String.valueOf(dbItemBeanList.get(0).getId())
+                                , String.valueOf(dbMemberBeanList.get(0).getId()))
+                        .find(DbHealthDataBean.class);
+
+                chooseTime(dbHealthDataBeanList);
+            } else {
+                entries.add(new Entry(1, 0));
+            }
+        }
+    }
+
+    private void chooseTime(List list) {
+        if (list.equals(dbDailyDataBeanList)) {
+            for (int i = 0; i < dbDailyDataBeanList.size(); i++) {
+                if (dbDailyDataBeanList.get(i).getTime() < chartTime && dbDailyDataBeanList != null) {
+                    entries.add(new Entry(i, (float) dbDailyDataBeanList.get(i).getData()));
+                } else {
+                    entries.add(new Entry(i, (float) dbDailyDataBeanList.get(i).getData()));
+                }
+            }
+        } else if (list.equals(dbHealthDataBeanList)) {
+            for (int i = 0; i < dbHealthDataBeanList.size(); i++) {
+                if (dbHealthDataBeanList.get(i).getHealthTime() < chartTime && dbHealthDataBeanList != null) {
+                    entries.add(new Entry(i, (float) dbHealthDataBeanList.get(i).getHealthData()));
+                } else {
+                    entries.add(new Entry(i, (float) dbHealthDataBeanList.get(i).getHealthData()));
+                }
+            }
+        }
     }
 
     public List<String> getProject_item() {

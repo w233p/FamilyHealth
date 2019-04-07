@@ -19,7 +19,7 @@ public class CheckDataContacts {
 
         public List<String> getMemberSpinnerData();
 
-        public void initChart( int memberPosition, int itemPosition);
+        public void initChart(int memberPosition, int itemPosition);
 
         public void itemSelected(int position);
 
@@ -27,6 +27,7 @@ public class CheckDataContacts {
 
         public void changeChartData(int memberPositon, int itemPositon);
 
+        public void chooseTimeclick(int time);
 
     }
 

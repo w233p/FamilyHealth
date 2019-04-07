@@ -9,6 +9,7 @@ public class DbHealthDataBean extends DataSupport {
     private int id;
     private float healthData;
     private Long healthTime;
+    private DbMemberBean dbMemberBean;
     /**
      * 第几次记录
      * 此表中为体检数据，不常用
@@ -46,5 +47,13 @@ public class DbHealthDataBean extends DataSupport {
 
     public void setTimes(int times) {
         this.times = times;
+    }
+
+    public DbMemberBean getDbMemberBean() {
+        return dbMemberBean;
+    }
+
+    public void setDbMemberBean(DbMemberBean dbMemberBean) {
+        this.dbMemberBean = dbMemberBean;
     }
 }

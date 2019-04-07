@@ -25,6 +25,7 @@ public class DbMemberBean extends DataSupport {
      * 一个亲友有多条健康数据
      */
     private List<DbDailyDataBean> dbDailyDataBeanList = new ArrayList<DbDailyDataBean>();
+    private List<DbHealthDataBean> dbHealthDataBeanList = new ArrayList<DbHealthDataBean>();
 
     /**
      * 一个亲友对应多条病史
@@ -39,6 +40,7 @@ public class DbMemberBean extends DataSupport {
     public List<DbPositonBean> getDbPositonBeanList() {
         return dbPositonBeanList;
     }
+
 
     public DbMemberBean setDbPositonBeanList(List<DbPositonBean> dbPositonBeanList) {
         this.dbPositonBeanList = dbPositonBeanList;
@@ -96,5 +98,13 @@ public class DbMemberBean extends DataSupport {
     public DbMemberBean setMemberName(String memberName) {
         this.memberName = memberName;
         return this;
+    }
+
+    public List<DbHealthDataBean> getDbHealthDataBeanList() {
+        return dbHealthDataBeanList;
+    }
+
+    public void setDbHealthDataBeanList(List<DbHealthDataBean> dbHealthDataBeanList) {
+        this.dbHealthDataBeanList = dbHealthDataBeanList;
     }
 }
