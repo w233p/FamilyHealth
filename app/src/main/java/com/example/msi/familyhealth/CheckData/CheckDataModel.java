@@ -199,19 +199,23 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
     private void chooseTime(List list) {
         if (list.equals(dbDailyDataBeanList)) {
             for (int i = 0; i < dbDailyDataBeanList.size(); i++) {
-                if (dbDailyDataBeanList.get(i).getTime() < chartTime && dbDailyDataBeanList != null) {
+                if (dbDailyDataBeanList.get(i).getTime() > chartTime && dbDailyDataBeanList != null) {
                     entries.add(new Entry(i, (float) dbDailyDataBeanList.get(i).getData()));
                 } else {
-                    entries.add(new Entry(i, (float) dbDailyDataBeanList.get(i).getData()));
                 }
+            }
+            if (entries.size() == 0) {
+                entries.add(new Entry(1, 0));
             }
         } else if (list.equals(dbHealthDataBeanList)) {
             for (int i = 0; i < dbHealthDataBeanList.size(); i++) {
-                if (dbHealthDataBeanList.get(i).getHealthTime() < chartTime && dbHealthDataBeanList != null) {
+                if (dbHealthDataBeanList.get(i).getHealthTime() > chartTime && dbHealthDataBeanList != null) {
                     entries.add(new Entry(i, (float) dbHealthDataBeanList.get(i).getHealthData()));
                 } else {
-                    entries.add(new Entry(i, (float) dbHealthDataBeanList.get(i).getHealthData()));
                 }
+            }
+            if (entries.size() == 0) {
+                entries.add(new Entry(1, 0));
             }
         }
     }

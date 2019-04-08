@@ -13,6 +13,7 @@ import com.example.msi.familyhealth.MyData.DataFragment.FragmentComContacts;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -88,19 +89,23 @@ public class MyDataModel implements MyDataContacts.IMyDataModel {
         //item :血糖id=1 高压id=2 低压id=3
         for (int i = 0; i < 3; i++) {
             DbDailyDataBean dbDailyDataBean = new DbDailyDataBean();
-            dbDailyDataBean.setTime(twelve);
+//            dbDailyDataBean.setTime(twelve);
+            //前一月的毫秒
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Date());
+            calendar.add(Calendar.MONTH, -1);
+            Date month = calendar.getTime();
+            long monthTime = month.getTime();
+            dbDailyDataBean.setTime(monthTime);
+
             dbDailyDataBean.setData(getFloat(i))
                     .setDbItemBean(DataSupport.find(DbItemBean.class, i + 1))
                     .setDbMemberBean(dbMemberBeanList.get(0));
             dbDailyDataBean.save();
         }
 
-        DataSupport.delete(DbDailyDataBean.class, 7);
-        DataSupport.delete(DbDailyDataBean.class, 8);
-        DataSupport.delete(DbDailyDataBean.class, 9);
-        DataSupport.delete(DbDailyDataBean.class, 10);
-        DataSupport.delete(DbDailyDataBean.class, 11);
-        DataSupport.delete(DbDailyDataBean.class, 12);
+
+
     }
 
     @Override
