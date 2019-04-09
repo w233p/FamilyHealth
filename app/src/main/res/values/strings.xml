@@ -33,6 +33,8 @@
     <string name="clock_add">添加闹钟</string>
     <string name="time">时间&#160;&#160;|</string>
     <string name="med">药名</string>
+    <string name="repeat">重复</string>
+    <string name="type">类型</string>
     <string name="event">事件</string>
     <string name="health_tip">健康知识</string>
     <string name="positon">位置信息</string>

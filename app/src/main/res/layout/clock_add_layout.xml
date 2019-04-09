@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <com.example.msi.familyhealth.View.TitleView
-        android:id="@+id/clock_add"
+        android:id="@+id/clock_add_titleview"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,22 +19,48 @@
         android:id="@+id/clock_timepicker_v17"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clock_add">
+        app:layout_constraintTop_toBottomOf="@+id/clock_add_titleview">
 
     </TimePicker>
 
-    <ListView
-        android:id="@+id/clock_add_list"
+    <include
+        android:id="@+id/clock_sp_text1"
+        layout="@layout/list_item_spinner"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        android:background="@color/loginYellow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clock_timepicker_v17">
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/clock_timepicker_v17"
+        app:layout_constraintEnd_toStartOf="@id/clock_sp_text2"
+        app:layout_constraintTop_toBottomOf="@id/clock_timepicker_v17" />
 
-    </ListView>
+    <include
+        android:id="@+id/clock_sp_text2"
+        layout="@layout/list_item_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/clock_sp_text3"
+        app:layout_constraintStart_toEndOf="@id/clock_sp_text1"
+        app:layout_constraintTop_toBottomOf="@id/clock_sp_text1"/>
+
+    <include
+        android:id="@+id/clock_sp_text3"
+        layout="@layout/list_item_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/clock_ed_text"
+        app:layout_constraintStart_toEndOf="@id/clock_sp_text2"
+        app:layout_constraintTop_toBottomOf="@id/clock_sp_text2"/>
+
+    <include
+        android:id="@+id/clock_ed_text"
+        layout="@layout/list_item_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/clock_sp_text3"
+        app:layout_constraintTop_toBottomOf="@id/clock_sp_text3" />
+
 </android.support.constraint.ConstraintLayout>
