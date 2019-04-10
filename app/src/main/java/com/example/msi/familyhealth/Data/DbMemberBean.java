@@ -37,6 +37,11 @@ public class DbMemberBean extends DataSupport {
      */
     private List<DbPositonBean> dbPositonBeanList = new ArrayList<DbPositonBean>();
 
+    /**
+     * 闹钟的映射
+     */
+    private List<DbClockBean> dbClockBeanList = new ArrayList<DbClockBean>();
+
     public List<DbPositonBean> getDbPositonBeanList() {
         return dbPositonBeanList;
     }

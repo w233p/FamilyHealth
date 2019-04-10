@@ -18,8 +18,8 @@ import java.util.Map;
  */
 public abstract class MainListAdapter<T> extends MyListViewAdapter {
 
-    private static final int TYPE_ONE = 0;//spinner
-    private static final int TYPE_TWO = 1;//edit
+    private static final int TYPE_ONE = 0;//闹钟
+    private static final int TYPE_TWO = 1;//事件
     private List<String> list;
     private int type;
     private Context context;
@@ -39,8 +39,6 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
      */
     @Override
     public int getItemViewType(int position) {
-//        initList();
-
         if (list.get(position).equals("成员") || list.get(position).equals("项目")) {
             return TYPE_ONE;
         } else {
@@ -68,10 +66,10 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
         type = getItemViewType(position);
         int itemLayoutId;
 
-        itemLayoutId = R.layout.list_item_text;
+        itemLayoutId = R.layout.list_item_edit;
         switch (type) {
             case TYPE_ONE:
-                itemLayoutId = R.layout.list_item_spinner;
+                itemLayoutId = R.layout.list_clock_med;
                 break;
             case TYPE_TWO:
                 itemLayoutId = R.layout.list_item_edit;
@@ -79,8 +77,11 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
         }
 
         ViewHolder viewHolder = getViewHolder(position, convertView, parent, itemLayoutId);
-        //布局若有EditText，则添加EditText监听
-        if (itemLayoutId == R.layout.list_item_edit) {
+
+        //药品提醒添加按钮
+        if (itemLayoutId == R.layout.list_clock_med) {
+            viewHolder.setButton();
+        } else if (itemLayoutId == R.layout.list_item_edit) {
             viewHolder.setEditText();
         }
 

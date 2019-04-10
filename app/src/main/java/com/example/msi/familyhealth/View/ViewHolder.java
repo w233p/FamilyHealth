@@ -1,7 +1,6 @@
 package com.example.msi.familyhealth.View;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -9,22 +8,13 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.example.msi.familyhealth.Login.LoginActivity;
-import com.example.msi.familyhealth.MyData.DataFragment.FragmentComModel;
-import com.example.msi.familyhealth.MyData.DataFragment.FragmentComPresenter;
-import com.example.msi.familyhealth.MyData.DataFragment.Fragment_commen;
 import com.example.msi.familyhealth.MyData.MyDataActivity;
-import com.example.msi.familyhealth.MyData.MyDataContacts;
 import com.example.msi.familyhealth.R;
-
-import java.util.List;
 
 /**
  * 适配器的ViewHolder
@@ -91,6 +81,28 @@ public class ViewHolder {
         return this;
     }
 
+    public void setButton() {
+        ImageButton imageButton1;
+        imageButton1 = getView(R.id.clockIb1);
+        ImageButton imageButton2;
+        imageButton2 = getView(R.id.clockIb2);
+
+        imageButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageButton2.setVisibility(View.VISIBLE);
+                imageButton1.setVisibility(View.GONE);
+            }
+        });
+
+        imageButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageButton1.setVisibility(View.VISIBLE);
+                imageButton2.setVisibility(View.GONE);
+            }
+        });
+    }
 
     /**
      * 设置EditText的文字变化监听器

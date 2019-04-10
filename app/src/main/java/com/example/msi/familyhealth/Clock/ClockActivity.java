@@ -1,27 +1,28 @@
 package com.example.msi.familyhealth.Clock;
 
-import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
+import com.example.msi.familyhealth.View.MainListAdapter;
 import com.example.msi.familyhealth.View.TitleView;
-
-import java.time.Clock;
+import com.example.msi.familyhealth.View.ViewHolder;
 
 //public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckDataPresenter> implements CheckDataContacts.ICheckDataView {
 public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> implements ClockContacts.IClockView {
     private Button addBt;
     private TitleView clockTitleView;
     private TitleView clockAddTitleView;
+    private ListView clockListView;
+    private MainListAdapter clockListAdapter;
 
     private TextView addMember;
     private Spinner addMemberSp;
@@ -59,6 +60,23 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
         addBt.setBackground(gradientDrawable);
 
         clockTitleView = (TitleView) findViewById(R.id.clock_titleView);
+
+        clockListView = (ListView) findViewById(R.id.clock_listview);
+
+//        clockListAdapter = new MainListAdapter(this, getPresenter().getFragmentComModel().getList()) {
+//            @Override
+//            public void convert(ViewHolder viewHolder, String item) {
+//                switch (getTpye()) {
+//                    case 0:
+//                       //getmeddata
+//                        break;
+//                    case 1:
+//                        //geteventdata
+//                        break;
+//                }
+//            }
+//        };
+//        clockListView.setAdapter(clockListAdapter);
     }
 
     private void initAddView() {
@@ -81,6 +99,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
         addMsg = (TextView) view4.findViewById(R.id.list_ed_text);
         addMsg.setText(R.string.med);
         addMsgEd = (EditText) view4.findViewById(R.id.list_edit);
+
     }
 
     @Override
