@@ -92,7 +92,7 @@ public class ViewHolder {
             public void onClick(View v) {
                 imageButton2.setVisibility(View.VISIBLE);
                 imageButton1.setVisibility(View.GONE);
-            }
+				}
         });
 
         imageButton2.setOnClickListener(new View.OnClickListener() {
