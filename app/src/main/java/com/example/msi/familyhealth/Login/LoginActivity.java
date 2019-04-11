@@ -60,7 +60,7 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
         confirmBt = (ImageButton) findViewById(R.id.confirm_bt);
         titleTv = (TextView) findViewById(R.id.title_tv);
         leftTv = (TextView) findViewById(R.id.left_tv);
-        rightTv = (TextView) findViewById(R.id.right_tv);
+//        rightTv = (TextView) findViewById(R.id.right_tv);
         registerTv = (TextView) findViewById(R.id.register_tv);
         forgetTv = (TextView) findViewById(R.id.forget_tv);
         usernameTv = (TextView) findViewById(R.id.login_username_tv);

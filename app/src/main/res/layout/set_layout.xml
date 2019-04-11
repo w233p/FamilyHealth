@@ -15,12 +15,12 @@
         app:title="@string/set"
         app:title_type="@integer/title_back" />
 
-	<include
-		android:layout="R.layout."/>
+	<!--<include-->
+		<!--android:layout="R.layout."/>-->
 	
-    <TextView
-		android:id="@id/acountTvlinkMemberJianhurenCallNumberExitAcountExitApp"/>
-    
+    <!--<TextView-->
+		<!--android:id="@id/acountTvlinkMemberJianhurenCallNumberExitAcountExitApp"/>-->
+    <!---->
 	
 	
     <TextView

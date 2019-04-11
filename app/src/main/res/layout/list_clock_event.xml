@@ -7,7 +7,7 @@
     android:background="@color/mainGray">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/clock_event_timeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="right"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/clock_eventTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="12dp"

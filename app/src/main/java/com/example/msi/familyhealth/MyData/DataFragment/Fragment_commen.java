@@ -85,7 +85,7 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
                     case 0:
                         viewHolder.setText(R.id.list_sp_text, item);
                         break;
-                    case 1:
+                    case 2:
                         viewHolder.setText(R.id.list_ed_text, item);
                         break;
                 }

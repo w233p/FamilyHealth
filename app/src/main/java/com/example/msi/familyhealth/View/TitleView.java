@@ -6,11 +6,16 @@ import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.msi.familyhealth.R;
+
+import java.util.List;
 
 /**
  * 自定义标题栏，改变标题和两侧图标显示
@@ -20,13 +25,13 @@ public class TitleView extends ConstraintLayout {
     private ImageButton confirmBt;
     private TextView titleTv;
     private TextView leftTv;
-    private TextView rightTv;
+    private Spinner rightSpinner;
     private ConstraintLayout titleLayout;
 
     public TitleView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        initView(context,attrs);
+        initView(context, attrs);
     }
 
     /**
@@ -40,7 +45,7 @@ public class TitleView extends ConstraintLayout {
         confirmBt = inflate.findViewById(R.id.confirm_bt);
         titleTv = inflate.findViewById(R.id.title_tv);
         leftTv = inflate.findViewById(R.id.left_tv);
-        rightTv = inflate.findViewById(R.id.right_tv);
+        rightSpinner = inflate.findViewById(R.id.right_tv);
 
         init(context, attributeSet);
     }
@@ -51,7 +56,7 @@ public class TitleView extends ConstraintLayout {
         confirmBt = inflate.findViewById(R.id.confirm_bt);
         titleTv = inflate.findViewById(R.id.titel_tv);
         leftTv = inflate.findViewById(R.id.left_tv);
-        rightTv = inflate.findViewById(R.id.right_text);
+        rightSpinner = inflate.findViewById(R.id.right_text);
        <attr name="background_color" format="integer"/>
         <attr name="title" format="string" />
         <attr name="title_size" format="integer" />
@@ -65,7 +70,7 @@ public class TitleView extends ConstraintLayout {
         <attr name="title_type" format="integer" />*/
     private void init(Context context, AttributeSet attributeSet) {
         TypedArray typedArray = context.obtainStyledAttributes(attributeSet, R.styleable.TitleView);
-        int backgoundColor = typedArray.getColor(R.styleable.TitleView_background_color,getResources().getColor(R.color.loginYellow));
+        int backgoundColor = typedArray.getColor(R.styleable.TitleView_background_color, getResources().getColor(R.color.loginYellow));
         String title = typedArray.getString(R.styleable.TitleView_title);
         int titleSize = typedArray.getInt(R.styleable.TitleView_title_size, 24);
         int leftIcon = typedArray.getResourceId(R.styleable.TitleView_left_icon, 0);
@@ -78,31 +83,31 @@ public class TitleView extends ConstraintLayout {
         int titleType = typedArray.getInt(R.styleable.TitleView_title_type, 0);
 
         //选择顶部导航栏的样式
-        if (titleType == 0){
+        if (titleType == 0) {
             backBt.setVisibility(View.VISIBLE);
             confirmBt.setVisibility(View.VISIBLE);
             leftTv.setVisibility(View.GONE);
-            rightTv.setVisibility(View.GONE);
-        }else if(titleType == 1){
+            rightSpinner.setVisibility(View.GONE);
+        } else if (titleType == 1) {
             backBt.setVisibility(View.GONE);
             confirmBt.setVisibility(View.GONE);
             leftTv.setVisibility(View.VISIBLE);
-            rightTv.setVisibility(View.VISIBLE);
-        }else if (titleType == 2){
+            rightSpinner.setVisibility(View.VISIBLE);
+        } else if (titleType == 2) {
             backBt.setVisibility(View.GONE);
             confirmBt.setVisibility(View.GONE);
             leftTv.setVisibility(View.GONE);
-            rightTv.setVisibility(View.GONE);
-        }else if (titleType == 3){
+            rightSpinner.setVisibility(View.GONE);
+        } else if (titleType == 3) {
             backBt.setVisibility(View.VISIBLE);
             confirmBt.setVisibility(View.GONE);
             leftTv.setVisibility(View.GONE);
-            rightTv.setVisibility(View.VISIBLE);
-        }else if (titleType == 4){
+            rightSpinner.setVisibility(View.VISIBLE);
+        } else if (titleType == 4) {
             backBt.setVisibility(View.VISIBLE);
             confirmBt.setVisibility(View.GONE);
             leftTv.setVisibility(View.GONE);
-            rightTv.setVisibility(View.GONE);
+            rightSpinner.setVisibility(View.GONE);
         }
 
         //设置属性
@@ -112,26 +117,28 @@ public class TitleView extends ConstraintLayout {
         backBt.setBackgroundResource(leftIcon);
         confirmBt.setBackgroundResource(rightIcon);
         leftTv.setText(leftText);
-        rightTv.setText(rightText);
         leftTv.setTextSize(textSize);
-        rightTv.setTextSize(textSize);
     }
 
     /*给布局内控件设置点击事件*/
-    public void setBackBtOnclickListener(OnClickListener onclickListener){
+    public void setBackBtOnclickListener(OnClickListener onclickListener) {
         backBt.setOnClickListener(onclickListener);
     }
 
-    public void setConfirmBtOnclickListener(OnClickListener onclickListener){
+    public void setConfirmBtOnclickListener(OnClickListener onclickListener) {
         confirmBt.setOnClickListener(onclickListener);
     }
 
-    public void setLeftTvOnclickListener(OnClickListener onclickListener){
+    public void setLeftTvOnclickListener(OnClickListener onclickListener) {
         leftTv.setOnClickListener(onclickListener);
     }
 
-    public void setRightTvOnclickListener(OnClickListener onclickListener){
-        rightTv.setOnClickListener(onclickListener);
+    public void setRightSpinnerOnItemSelectListener(AdapterView.OnItemSelectedListener onItemSelectListener) {
+        rightSpinner.setOnItemSelectedListener(onItemSelectListener);
+    }
+
+    public void setRightSpinnerAdapter(Context context, List<String> list) {
+        rightSpinner.setAdapter(new ArrayAdapter<String>(context, R.layout.spinner_item, R.id.spinnerTv, list));
     }
 
 }
