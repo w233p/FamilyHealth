@@ -89,7 +89,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
 
     /**
      * 给list添加adapter，传入list
-     *             list中存储类型，根据list的值，改变布局类型
+     * list中存储类型，根据list的值，改变布局类型
      */
     public void setClockListAdapter() {
         clockListAdapter = new MainListAdapter(this, getPresenter().initList()) {
@@ -98,17 +98,28 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
                 switch (getTpye()) {
                     case 0:
                         //getmeddata
-                        viewHolder.setTextList(R.id.clock_medTv,medList);
+						getPresenter().setMedListUi();
+                       
                         break;
                     case 1:
                         //geteventdata
-                        viewHolder.setTextList(R.id.clock_eventTv,eventList;
-                        break;
+                        getPresenter().setEventListUi();                        break;
                 }
             }
         };
         clockListView.setAdapter(clockListAdapter);
     }
+	
+	public void setMedViewHolder(List medList,List timeList){
+		viewHolder.setTextList(R.id.clock_medTv,medList);
+		viewHolder.setTimeList(R.id.clock_med_timeTv,timeList);
+	}
+	
+	public void setEventViewHolder(List eventList,List timeList){
+		viewHolder.setTextList(R.id.clock_eventTv,eventList);
+		viewHolder.setTimeList(R.id.clock_event_timeTv,timeList);
+	}
+	
 
     public void refreshClockListAdapter() {
         if (clockListAdapter != null) {

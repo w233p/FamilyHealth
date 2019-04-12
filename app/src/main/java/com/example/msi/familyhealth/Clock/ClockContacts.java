@@ -10,7 +10,11 @@ public class ClockContacts {
         public void setClockListAdapter();
 
         public void refreshClockListAdapter();
-    }
+		
+		public void setMedViewHolder(List medList,List timeList);
+		
+		public void setEventViewHolder(List eventList,List timeList);
+		}
 
     public interface IClockPresenter extends IBasePresenter {
         public List initList();
@@ -18,6 +22,10 @@ public class ClockContacts {
         public List<String> initTitleMemberSp();
 
         public void memberSelect(int position);
+		
+		public void setMedListUi();
+		
+		public void setEventListUi();
     }
 
     public interface IClockModel {

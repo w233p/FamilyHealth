@@ -76,6 +76,12 @@ public class ViewHolder {
 		textview.setText(String.valueOf(textList.get(positon)));
 		return this;
 	}
+	
+	public ViewHolder setTimeList(int viewId,List<String> timeList{
+		TextView textview=getView(viewId);
+		textview.setText(String.valueOf(timeList.get(positon)));
+		return this;
+	}
 
     /**
      * @param viewId
