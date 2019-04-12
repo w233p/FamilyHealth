@@ -47,4 +47,6 @@ public class ClockModel implements ClockContacts.IClockModel {
     public void setMember(int position) {
         member.get(position);
     }
+	
+	public
 }

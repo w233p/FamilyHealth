@@ -70,6 +70,12 @@ public class ViewHolder {
         textView.setText(text);
         return this;
     }
+	
+	public ViewHolder setTextList(int viewId,List<String> textList){
+		TextView textview = getView(viewId);
+		textview.setText(String.valueOf(textList.get(positon)));
+		return this;
+	}
 
     /**
      * @param viewId

@@ -98,11 +98,11 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
                 switch (getTpye()) {
                     case 0:
                         //getmeddata
-                        viewHolder.setText(R.id.clock_medTv,item);
+                        viewHolder.setTextList(R.id.clock_medTv,medList);
                         break;
                     case 1:
                         //geteventdata
-                        viewHolder.setText(R.id.clock_eventTv,item);
+                        viewHolder.setTextList(R.id.clock_eventTv,eventList;
                         break;
                 }
             }
