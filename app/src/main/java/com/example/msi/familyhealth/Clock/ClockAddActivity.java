@@ -1,8 +1,11 @@
 package com.example.msi.familyhealth.Clock;
-//public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckDataPresenter> implements CheckDataContacts.ICheckDataView {
 
+import android.app.AlarmManager;
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -12,6 +15,8 @@ import android.widget.TimePicker;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.TitleView;
+
+import java.util.Calendar;
 
 public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPresenter> implements ClockAddContacts.IClockAddView {
     private TitleView clockAddTitleView;
@@ -33,8 +38,9 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         initView();
 
         addListener();
-    }
 
+        ClockTest();
+    }
 
     @Override
     public ClockAddContacts.IClockAddPresenter onBindPresenter() {
@@ -63,9 +69,13 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         addMsg.setText(R.string.med);
         addMsgEd = (EditText) view4.findViewById(R.id.list_textedit);
 
-        addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker_v17);
-        addTimePicker.setDescendantFocusability(TimePicker.FOCUS_BLOCK_DESCENDANTS);
-        addTimePicker.setIs24HourView(true);
+        if (Build.VERSION.SDK_INT >= 17) {
+            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker);
+        } else {
+            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker_v17);
+//            addTimePicker.setDescendantFocusability(TimePicker.FOCUS_BLOCK_DESCENDANTS);
+//            addTimePicker.setIs24HourView(true);
+        }
     }
 
     @Override
@@ -90,10 +100,20 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         clockAddTitleView.setConfirmBtOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 showToast("confirm" + String.valueOf(addTimePicker.getCurrentHour()));
             }
         });
+    }
+
+    public void SetClock() {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Calendar calendar = Calendar.getInstance();
+
+
+    }
+
+    public void ClockTest() {
+        Log.e("setclock","!");
+        AlarmManagerUtil.setAlarm(this, 0, 0, 26, 0, 0, "测试闹钟", 0);
     }
 }

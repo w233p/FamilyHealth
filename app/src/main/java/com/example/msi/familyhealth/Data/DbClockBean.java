@@ -15,8 +15,6 @@ public class DbClockBean extends DataSupport {
     private String medOrEventName;
     @Column(nullable = false)
     private DbMemberBean dbMemberBean;
-    @Column(nullable = false)
-    private int state;
 
     public int getId() {
         return id;
@@ -69,13 +67,5 @@ public class DbClockBean extends DataSupport {
     public DbClockBean setDbMemberBean(DbMemberBean dbMemberBean) {
         this.dbMemberBean = dbMemberBean;
         return this;
-    }
-
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
     }
 }

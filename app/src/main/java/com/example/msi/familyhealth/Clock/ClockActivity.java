@@ -68,14 +68,15 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
 
     private void testInitData() {
         if (DataSupport.findAll(DbClockBean.class).size() == 0) {
+//            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "wyp").find(DbMemberBean.class);
             List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "自己").find(DbMemberBean.class);
+
 
 //        List<DbClockBean> dbClockBeanList = DataSupport.findAll(DbClockBean.class);
 //        for (int i = 0; i < dbClockBeanList.size(); i++) {
 //            dbClockBeanList.get(i).delete();
 //        }
 
-            Log.e("DbMemberBean", DataSupport.where("membername = ?", "自己").find(DbMemberBean.class).get(0).getMemberName());
             DbClockBean dbClockBean = new DbClockBean()
                     .setType(0)
                     .setHour(1)
@@ -100,7 +101,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
      * list中存储类型，根据list的值，改变布局类型
      */
     public void setClockListAdapter() {
-
+//留个坑，adapter好像可以同时传多个列表进去
         clockListAdapter = new MainListAdapter(this, getPresenter().initTypeList()) {
             @Override
             public void convert(ViewHolder viewHolder, String item) {
