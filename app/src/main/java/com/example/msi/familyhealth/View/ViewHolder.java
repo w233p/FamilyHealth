@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.example.msi.familyhealth.MyData.MyDataActivity;
 import com.example.msi.familyhealth.R;
 
+import java.util.List;
+
 /**
  * 适配器的ViewHolder
  */
@@ -25,6 +27,8 @@ public class ViewHolder {
     private Context context;
     private EditText editText;
     private int positon;
+    private List<String> textList;
+    private List<String> timeList;
 
     public ViewHolder(Context context, ViewGroup parent, int itemLayoutId, int position) {
         this.context = context;
@@ -70,18 +74,27 @@ public class ViewHolder {
         textView.setText(text);
         return this;
     }
-	
-	public ViewHolder setTextList(int viewId,List<String> textList){
-		TextView textview = getView(viewId);
-		textview.setText(String.valueOf(textList.get(positon)));
-		return this;
-	}
-	
-	public ViewHolder setTimeList(int viewId,List<String> timeList{
-		TextView textview=getView(viewId);
-		textview.setText(String.valueOf(timeList.get(positon)));
-		return this;
-	}
+
+    public void initClockList(List<String> textList, List<String> timeList) {
+        this.textList = textList;
+        this.timeList = timeList;
+    }
+
+    public ViewHolder setTextList(int viewId) {
+        TextView textview = getView(viewId);
+        if (textList.get(positon) != null) {
+            textview.setText(String.valueOf(textList.get(positon)));
+        }
+        return this;
+    }
+
+    public ViewHolder setTimeList(int viewId) {
+        TextView textview = getView(viewId);
+        if (timeList.get(positon) != null) {
+            textview.setText(String.valueOf(timeList.get(positon)) + "||");
+        }
+        return this;
+    }
 
     /**
      * @param viewId
@@ -94,24 +107,26 @@ public class ViewHolder {
     }
 
     public void setButton() {
-        ImageButton imageButton1;
-        imageButton1 = getView(R.id.clockIb1);
-        ImageButton imageButton2;
-        imageButton2 = getView(R.id.clockIb2);
+        ImageButton imageButton1 = getView(R.id.clockIb1);
+
+        ImageButton imageButton2 = getView(R.id.clockIb2);
+
+        imageButton1.setVisibility(View.VISIBLE);
+        imageButton2.setVisibility(View.INVISIBLE);
 
         imageButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imageButton2.setVisibility(View.VISIBLE);
-                imageButton1.setVisibility(View.GONE);
-				}
+                imageButton1.setVisibility(View.INVISIBLE);
+            }
         });
 
         imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imageButton1.setVisibility(View.VISIBLE);
-                imageButton2.setVisibility(View.GONE);
+                imageButton2.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -132,7 +147,6 @@ public class ViewHolder {
     public EditText getEditText() {
         return this.editText;
     }
-
 
     /**
      * 文字变化监听
@@ -165,6 +179,4 @@ public class ViewHolder {
             Log.e("after", "run");
         }
     }
-
-
 }

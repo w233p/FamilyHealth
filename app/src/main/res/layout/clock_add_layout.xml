@@ -32,8 +32,8 @@
         layout="@layout/list_item_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/clock_timepicker_v17"
         app:layout_constraintEnd_toStartOf="@id/clock_sp_text2"
+        app:layout_constraintStart_toEndOf="@id/clock_timepicker_v17"
         app:layout_constraintTop_toBottomOf="@id/clock_timepicker_v17" />
 
     <include
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@id/clock_sp_text3"
         app:layout_constraintStart_toEndOf="@id/clock_sp_text1"
-        app:layout_constraintTop_toBottomOf="@id/clock_sp_text1"/>
+        app:layout_constraintTop_toBottomOf="@id/clock_sp_text1" />
 
     <include
         android:id="@+id/clock_sp_text3"
@@ -52,11 +52,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@id/clock_ed_text"
         app:layout_constraintStart_toEndOf="@id/clock_sp_text2"
-        app:layout_constraintTop_toBottomOf="@id/clock_sp_text2"/>
+        app:layout_constraintTop_toBottomOf="@id/clock_sp_text2" />
 
     <include
         android:id="@+id/clock_ed_text"
-        layout="@layout/list_item_edit"
+        layout="@layout/list_item_textedit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

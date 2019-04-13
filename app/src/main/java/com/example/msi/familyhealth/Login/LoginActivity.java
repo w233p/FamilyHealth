@@ -12,12 +12,14 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.msi.familyhealth.Data.DbItemBean;
+import com.example.msi.familyhealth.Data.DbMemberBean;
 import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.example.msi.familyhealth.Main.MainActivity;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.TitleView;
 
+import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;
 
 /**
@@ -52,7 +54,21 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
         addListener();
 
         initItemDataBase();
+
+        initMemberData();
     }
+
+    /**
+     * 数据库无用户数据时初始化一个本人的数据
+     */
+    private void initMemberData() {
+        if (DataSupport.findAll(DbMemberBean.class).size() == 0) {
+            DbMemberBean dbMemberBean = new DbMemberBean().setMemberName("自己");
+            dbMemberBean.save();
+        }
+        Log.e("11",DataSupport.findAll(DbMemberBean.class).get(0).getMemberName());
+    }
+
 
     @Override
     public void initView() {
@@ -181,7 +197,7 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
         backBt.setVisibility(View.VISIBLE);
     }
 
-    public String getState(){
+    public String getState() {
         return bottomBt.getText().toString();
     }
 

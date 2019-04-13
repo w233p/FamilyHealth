@@ -112,4 +112,12 @@ public class DbMemberBean extends DataSupport {
     public void setDbHealthDataBeanList(List<DbHealthDataBean> dbHealthDataBeanList) {
         this.dbHealthDataBeanList = dbHealthDataBeanList;
     }
+
+    public List<DbClockBean> getDbClockBeanList() {
+        return dbClockBeanList;
+    }
+
+    public void setDbClockBeanList(List<DbClockBean> dbClockBeanList) {
+        this.dbClockBeanList = dbClockBeanList;
+    }
 }

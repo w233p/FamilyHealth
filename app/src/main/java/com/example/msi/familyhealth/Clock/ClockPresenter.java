@@ -1,56 +1,36 @@
 package com.example.msi.familyhealth.Clock;
 
 import com.example.msi.familyhealth.MvpBase.BasePresenter;
-import com.example.msi.familyhealth.MvpBase.IBasePresenter;
+import com.example.msi.familyhealth.View.ViewHolder;
 
 import java.util.List;
-import android.util.*;
 
-public class ClockPresenter extends BasePresenter<ClockContacts.IClockView> implements ClockContacts.IClockPresenter
-{
+public class ClockPresenter extends BasePresenter<ClockContacts.IClockView> implements ClockContacts.IClockPresenter {
     ClockModel clockModel = new ClockModel();
 
-    public ClockPresenter(ClockContacts.IClockView view)
-	{
+    public ClockPresenter(ClockContacts.IClockView view) {
         super(view);
     }
 
     @Override
-    public List initList()
-	{
-        return clockModel.initListTypeData(0);
+    public List initTypeList() {
+        return clockModel.initListTypeData();
     }
 
     @Override
-    public List<String> initTitleMemberSp()
-	{
+    public List<String> initTitleMemberSp() {
         return clockModel.memberSpinnerData();
     }
 
     @Override
-    public void memberSelect(int position)
-	{
+    public void memberSelect(int position) {
 //        getView().setClockListAdapter(clockModel.initListTypeData(0));
+        clockModel.setMember(position);
         getView().refreshClockListAdapter();
     }
 
-	public void setMedListUi()
-	{
-
-	};
-
-	public void setEventListUi()
-	{
-
-	};
-
-	public void getMedDataSuccess(List medList, List timeList)
-	{
-		getView().setMedViewHolder(medList, timeList);
-	}
-
-	public void getEventDataSuccess(List eventList, List timeList)
-	{
-		getView().setEventViewHolder(eventList,timeList);
-	}
+    @Override
+    public void initClockData(ViewHolder viewHolder) {
+        clockModel.getClockData(viewHolder);
+    }
 }

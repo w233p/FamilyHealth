@@ -22,10 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="@string/med"
+        android:text="test"
         android:textColor="@color/black"
         android:textSize="36dp"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/clock_med_timeTv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton

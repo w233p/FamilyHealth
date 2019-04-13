@@ -18,13 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".Main.MainActivity"
             android:theme="@style/MainTheme">
 
         </activity>
-
         <activity
             android:name=".MyData.MyDataActivity"
             android:theme="@style/DataTheme">
@@ -35,13 +33,16 @@
             android:theme="@style/LoginTheme">
 
         </activity>
+        <activity
+            android:name=".Clock.ClockAddActivity"
+            android:theme="@style/LoginTheme">
 
+        </activity>
         <activity
             android:name=".HealthTips.HealthTipsActivity"
             android:theme="@style/HealthTheme">
 
         </activity>
-
         <activity
             android:name=".Position.PositonActivity"
             android:theme="@style/PositionTheme">
@@ -52,13 +53,11 @@
             android:theme="@style/SetTheme">
 
         </activity>
-
         <activity
             android:name=".CheckData.CheckDataActivity"
             android:theme="@style/CheckDataTheme">
 
         </activity>
-
 
     </application>
 

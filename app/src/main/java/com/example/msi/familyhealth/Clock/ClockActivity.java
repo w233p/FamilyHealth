@@ -1,47 +1,35 @@
 package com.example.msi.familyhealth.Clock;
 
-
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.example.msi.familyhealth.Data.DbClockBean;
+import com.example.msi.familyhealth.Data.DbMemberBean;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.MainListAdapter;
 import com.example.msi.familyhealth.View.TitleView;
 import com.example.msi.familyhealth.View.ViewHolder;
 
-import java.util.ArrayList;
+import org.litepal.crud.DataSupport;
+
 import java.util.List;
 
 //public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckDataPresenter> implements CheckDataContacts.ICheckDataView {
 public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> implements ClockContacts.IClockView {
     private Button addBt;
     private TitleView clockTitleView;
-    private TitleView clockAddTitleView;
     private ListView clockListView;
     private MainListAdapter clockListAdapter;
-
-    private TextView addMember;
-    private Spinner addMemberSp;
-    private TextView addRepeat;
-    private Spinner addRepeatSp;
-    private TextView addType;
-    private Spinner addTypeSp;
-    private TextView addMsg;
-    private EditText addMsgEd;
-    private TimePicker addTimePicker;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +39,8 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
         initView();
 
         addListener();
+
+        setClockListAdapter();
 
     }
 
@@ -73,15 +63,33 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
 
         clockListView = (ListView) findViewById(R.id.clock_listview);
 
-        getPresenter().initList();
-
         testInitData();
     }
 
     private void testInitData() {
-        for (int i = 0; i < 2; i++) {
-            DbClockBean dbClockBean = new DbClockBean().setType(0);
-            DbClockBean dbClockBean1 = new DbClockBean().setType(1);
+        if (DataSupport.findAll(DbClockBean.class).size() == 0) {
+            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "自己").find(DbMemberBean.class);
+
+//        List<DbClockBean> dbClockBeanList = DataSupport.findAll(DbClockBean.class);
+//        for (int i = 0; i < dbClockBeanList.size(); i++) {
+//            dbClockBeanList.get(i).delete();
+//        }
+
+            Log.e("DbMemberBean", DataSupport.where("membername = ?", "自己").find(DbMemberBean.class).get(0).getMemberName());
+            DbClockBean dbClockBean = new DbClockBean()
+                    .setType(0)
+                    .setHour(1)
+                    .setMinute(11)
+                    .setMedOrEventName("test1")
+                    .setDbMemberBean(dbMemberBeanList.get(0));
+
+            DbClockBean dbClockBean1 = new DbClockBean()
+                    .setType(1)
+                    .setHour(2)
+                    .setMinute(22)
+                    .setMedOrEventName("test2")
+                    .setDbMemberBean(dbMemberBeanList.get(0));
+
             dbClockBean.save();
             dbClockBean1.save();
         }
@@ -92,34 +100,33 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
      * list中存储类型，根据list的值，改变布局类型
      */
     public void setClockListAdapter() {
-        clockListAdapter = new MainListAdapter(this, getPresenter().initList()) {
+
+        clockListAdapter = new MainListAdapter(this, getPresenter().initTypeList()) {
             @Override
             public void convert(ViewHolder viewHolder, String item) {
+                getPresenter().initClockData(viewHolder);
                 switch (getTpye()) {
                     case 0:
-                        //getmeddata
-						getPresenter().setMedListUi();
-                       
+                        setMedViewHolder(viewHolder);
                         break;
                     case 1:
-                        //geteventdata
-                        getPresenter().setEventListUi();                        break;
+                        setEventViewHolder(viewHolder);
+                        break;
                 }
             }
         };
         clockListView.setAdapter(clockListAdapter);
     }
-	
-	public void setMedViewHolder(List medList,List timeList){
-		viewHolder.setTextList(R.id.clock_medTv,medList);
-		viewHolder.setTimeList(R.id.clock_med_timeTv,timeList);
-	}
-	
-	public void setEventViewHolder(List eventList,List timeList){
-		viewHolder.setTextList(R.id.clock_eventTv,eventList);
-		viewHolder.setTimeList(R.id.clock_event_timeTv,timeList);
-	}
-	
+
+    public void setMedViewHolder(ViewHolder viewHolder) {
+        viewHolder.setTextList(R.id.clock_medTv)
+                .setTimeList(R.id.clock_med_timeTv);
+    }
+
+    public void setEventViewHolder(ViewHolder viewHolder) {
+        viewHolder.setTextList(R.id.clock_eventTv)
+                .setTimeList(R.id.clock_event_timeTv);
+    }
 
     public void refreshClockListAdapter() {
         if (clockListAdapter != null) {
@@ -128,49 +135,13 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
         }
     }
 
-
-    private void initAddView() {
-        View view1 = (View) findViewById(R.id.clock_sp_text1);
-        addMember = (TextView) view1.findViewById(R.id.list_sp_text);
-        addMember.setText(R.string.family_member);
-        addMemberSp = (Spinner) view1.findViewById(R.id.list_spinner);
-
-        View view2 = (View) findViewById(R.id.clock_sp_text2);
-        addRepeat = (TextView) view2.findViewById(R.id.list_sp_text);
-        addRepeat.setText(R.string.repeat);
-        addRepeatSp = (Spinner) view2.findViewById(R.id.list_spinner);
-
-        View view3 = (View) findViewById(R.id.clock_sp_text3);
-        addType = (TextView) view3.findViewById(R.id.list_sp_text);
-        addType.setText(R.string.type);
-        addTypeSp = (Spinner) view3.findViewById(R.id.list_spinner);
-
-        View view4 = (View) findViewById(R.id.clock_ed_text);
-        addMsg = (TextView) view4.findViewById(R.id.list_ed_text);
-        addMsg.setText(R.string.med);
-        addMsgEd = (EditText) view4.findViewById(R.id.list_edit);
-
-        addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker_v17);
-    }
-
     @Override
     public void addListener() {
         addBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.clock_add_layout);
-                initAddView();
-
-                clockAddTitleView = (TitleView) findViewById(R.id.clock_add_titleview);
-                addAddLayoutListener();
-
-                addTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-                    @Override
-                    public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                        showToast(String.valueOf(hourOfDay) + String.valueOf(minute));
-                    }
-                });
-
+                Intent intent = new Intent(ClockActivity.this, ClockAddActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -181,56 +152,20 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
             }
         });
 
-        clockTitleView.setRightSpinnerAdapter(this, getPresenter().initTitleMemberSp());
-        clockTitleView.setRightSpinnerOnItemSelectListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                getPresenter().memberSelect(position);
-            }
+        if (getPresenter().initTitleMemberSp() != null) {
+            clockTitleView.setRightSpinnerAdapter(this, getPresenter().initTitleMemberSp());
+            clockTitleView.setRightSpinnerOnItemSelectListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    getPresenter().memberSelect(position);
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
-    }
-
-    // /*spinner选中监听*/
-//        itemSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                setItemPositon(position);
-////                getPresenter().itemSelected(position);
-//                getPresenter().changeChartData(memberPositon, position);
-//                checkMarkView.setItem(getPresenter().getItemSpinnerData().get(position));
-//                mLineChart.animateX(200);//从左到右展开
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-
-    private void addAddLayoutListener() {
-        clockAddTitleView.setBackBtOnclickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setContentView(R.layout.clock_layout);
-                initView();
-                addListener();
-            }
-        });
-
-        clockAddTitleView.setConfirmBtOnclickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addTimePicker.setDescendantFocusability(TimePicker.FOCUS_BLOCK_DESCENDANTS);
-                addTimePicker.setIs24HourView(true);
-
-                showToast("confirm" + String.valueOf(addTimePicker.getCurrentHour()));
-            }
-        });
+                }
+            });
+        }
     }
 
     public Animation at_animation() {
