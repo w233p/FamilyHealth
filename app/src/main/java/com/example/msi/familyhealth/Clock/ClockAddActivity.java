@@ -7,11 +7,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.msi.familyhealth.Data.DbClockBean;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.TitleView;
@@ -53,16 +57,19 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         addMember = (TextView) view1.findViewById(R.id.list_sp_text);
         addMember.setText(R.string.family_member);
         addMemberSp = (Spinner) view1.findViewById(R.id.list_spinner);
+        addMemberSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().initMemberSp()));
 
         View view2 = (View) findViewById(R.id.clock_sp_text2);
         addRepeat = (TextView) view2.findViewById(R.id.list_sp_text);
         addRepeat.setText(R.string.repeat);
         addRepeatSp = (Spinner) view2.findViewById(R.id.list_spinner);
+        addRepeatSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getRepeatData()));
 
         View view3 = (View) findViewById(R.id.clock_sp_text3);
         addType = (TextView) view3.findViewById(R.id.list_sp_text);
         addType.setText(R.string.type);
         addTypeSp = (Spinner) view3.findViewById(R.id.list_spinner);
+        addTypeSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getTypeData()));
 
         View view4 = (View) findViewById(R.id.clock_ed_text);
         addMsg = (TextView) view4.findViewById(R.id.list_add_ed_text);
@@ -70,9 +77,10 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         addMsgEd = (EditText) view4.findViewById(R.id.list_textedit);
 
         if (Build.VERSION.SDK_INT >= 17) {
-            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker);
-        } else {
+//            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker);
             addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker_v17);
+        } else {
+
 //            addTimePicker.setDescendantFocusability(TimePicker.FOCUS_BLOCK_DESCENDANTS);
 //            addTimePicker.setIs24HourView(true);
         }
@@ -93,6 +101,7 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         clockAddTitleView.setBackBtOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setClock();
                 finish();
             }
         });
@@ -103,17 +112,31 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
                 showToast("confirm" + String.valueOf(addTimePicker.getCurrentHour()));
             }
         });
+
+        addTypeSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(addTypeSp.getSelectedItem().equals("事件")){
+                    addMsg.setText("事件内容");
+                }else {
+                    addMsg.setText("吃药");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
-    public void SetClock() {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Calendar calendar = Calendar.getInstance();
+    public void setClock() {
 
 
     }
 
     public void ClockTest() {
-        Log.e("setclock","!");
+        Log.e("setclock", "!");
         AlarmManagerUtil.setAlarm(this, 0, 14, 19, 0, 0, "测试闹钟", 0);
     }
 }

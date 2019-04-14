@@ -68,8 +68,10 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
 
     private void testInitData() {
         if (DataSupport.findAll(DbClockBean.class).size() == 0) {
-//            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "wyp").find(DbMemberBean.class);
-            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "自己").find(DbMemberBean.class);
+            //模拟器上测试用
+            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "wyp").find(DbMemberBean.class);
+            //真机测试用
+//            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "自己").find(DbMemberBean.class);
 
 
 //        List<DbClockBean> dbClockBeanList = DataSupport.findAll(DbClockBean.class);
