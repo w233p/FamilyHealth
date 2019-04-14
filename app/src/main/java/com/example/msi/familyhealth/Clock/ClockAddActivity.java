@@ -114,6 +114,6 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
 
     public void ClockTest() {
         Log.e("setclock","!");
-        AlarmManagerUtil.setAlarm(this, 0, 0, 26, 0, 0, "测试闹钟", 0);
+        AlarmManagerUtil.setAlarm(this, 0, 14, 19, 0, 0, "测试闹钟", 0);
     }
 }

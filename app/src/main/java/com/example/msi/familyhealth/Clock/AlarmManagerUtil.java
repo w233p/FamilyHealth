@@ -58,6 +58,7 @@ public class AlarmManagerUtil {
         intent.putExtra("msg", tips);
         intent.putExtra("id", id);
         intent.putExtra("soundOrVibrator", soundOrVibrator);
+//        intent.setFlags(intent.getFlags() | Intent.Flag_Rece);
         PendingIntent sender = PendingIntent.getBroadcast(context, id, intent, PendingIntent
                 .FLAG_CANCEL_CURRENT);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
