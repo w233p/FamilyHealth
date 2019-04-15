@@ -15,6 +15,8 @@ public class DbClockBean extends DataSupport {
     private String medOrEventName;
     @Column(nullable = false)
     private DbMemberBean dbMemberBean;
+    @Column(nullable = false)
+    private int repeat;
 
     public int getId() {
         return id;
@@ -66,6 +68,15 @@ public class DbClockBean extends DataSupport {
 
     public DbClockBean setDbMemberBean(DbMemberBean dbMemberBean) {
         this.dbMemberBean = dbMemberBean;
+        return this;
+    }
+
+    public int getRepeat() {
+        return repeat;
+    }
+
+    public DbClockBean setRepeat(int repeat) {
+        this.repeat = repeat;
         return this;
     }
 }

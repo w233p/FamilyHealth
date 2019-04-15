@@ -4,6 +4,7 @@ package com.example.msi.familyhealth.Clock;
 import com.example.msi.familyhealth.MvpBase.BasePresenter;
 
 import java.util.List;
+
 import android.content.*;
 
 public class ClockAddPresenter extends BasePresenter<ClockAddContacts.IClockAddView> implements ClockAddContacts.IClockAddPresenter {
@@ -27,9 +28,9 @@ public class ClockAddPresenter extends BasePresenter<ClockAddContacts.IClockAddV
     public List<String> getTypeData() {
         return clockAddModel.TypeData();
     }
-	
-	public void addClockBtClick(Context context,int type,int hour,int minute,String medOrEventName,String memberName){
-		clockAddModel.setClockDb(context,type,hour,minute,medOrEventName,memberName);
-		getView().setClockOver();
-	}
+
+    public void addClockBtClick(Context context, int type, int repeat, int hour, int minute, String medOrEventName, String memberName) {
+        clockAddModel.setClockDb(context, type, repeat, hour, minute, medOrEventName, memberName);
+        getView().setClockOver();
+    }
 }

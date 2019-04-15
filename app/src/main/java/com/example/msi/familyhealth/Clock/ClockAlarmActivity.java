@@ -4,13 +4,21 @@ import android.app.Service;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.constraint.solver.LinearSystem;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.msi.familyhealth.Data.DbClockBean;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.SimpleDialog;
 
-public class ClockAlarmActivity extends AppCompatActivity{
+import org.litepal.crud.DataSupport;
+
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.List;
+
+public class ClockAlarmActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
     private Vibrator vibrator;
@@ -22,6 +30,8 @@ public class ClockAlarmActivity extends AppCompatActivity{
         String message = this.getIntent().getStringExtra("msg");
         int flag = this.getIntent().getIntExtra("flag", 0);
         showDialogInBroadcastReceiver(message, flag);
+
+        deleteNoRepeatClock(message);
     }
 
     private void showDialogInBroadcastReceiver(String message, final int flag) {
@@ -57,7 +67,20 @@ public class ClockAlarmActivity extends AppCompatActivity{
                 }
             }
         });
+    }
 
+    public void deleteNoRepeatClock(String message) {
+        List<DbClockBean> dbClockBeanList = DataSupport.where("medOrEventName = ?", message).find(DbClockBean.class);
+        Calendar calendar = Calendar.getInstance();
 
+        for (int i = 0; i < dbClockBeanList.size(); i++) {
+            if (dbClockBeanList.get(i).getHour() == calendar.get(Calendar.HOUR_OF_DAY)) {
+                if (dbClockBeanList.get(i).getMinute() == calendar.get(Calendar.MINUTE)) {
+                    if (dbClockBeanList.get(i).getRepeat() == 0) {
+                        dbClockBeanList.get(i).delete();
+                    }
+                }
+            }
+        }
     }
 }

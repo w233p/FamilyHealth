@@ -19,7 +19,7 @@ public class ClockAddContacts {
 
         public List<String> getTypeData();
 		
-		public void addClockBtClick(Context context, int type,int hour,int minute,String medOrEventName,String memberName);
+		public void addClockBtClick(Context context, int type,int repeat,int hour,int minute,String medOrEventName,String memberName);
     }
 
     public interface IClockAddModel {
@@ -29,7 +29,7 @@ public class ClockAddContacts {
 
         public List<String> TypeData();
 		
-		public void setClockDb(Context context, int type,int hour,int minute,String medOrEventName,String memberName);
+		public void setClockDb(Context context, int type,int repeat,int hour,int minute,String medOrEventName,String memberName);
     }
 
 

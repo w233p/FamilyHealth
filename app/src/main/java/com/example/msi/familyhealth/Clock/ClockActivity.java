@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -69,9 +68,9 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
     private void testInitData() {
         if (DataSupport.findAll(DbClockBean.class).size() == 0) {
             //模拟器上测试用
-            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "wyp").find(DbMemberBean.class);
+//            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "wyp").find(DbMemberBean.class);
             //真机测试用
-//            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "自己").find(DbMemberBean.class);
+            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "自己").find(DbMemberBean.class);
 
 
 //        List<DbClockBean> dbClockBeanList = DataSupport.findAll(DbClockBean.class);
@@ -145,7 +144,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
             public void onClick(View v) {
                 Intent intent = new Intent(ClockActivity.this, ClockAddActivity.class);
                 startActivity(intent);
-				this.finish();
+				finish();
             }
         });
 
@@ -173,7 +172,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
     }
 
     public Animation at_animation() {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha_translate);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha_translate_x);
         return animation;
     }
 }

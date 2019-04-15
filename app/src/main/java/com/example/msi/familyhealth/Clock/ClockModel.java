@@ -101,4 +101,5 @@ public class ClockModel implements ClockContacts.IClockModel {
         viewHolder.initClockList(medList, timeList);
     }
 
+
 }

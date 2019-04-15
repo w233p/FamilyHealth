@@ -27,6 +27,7 @@ public class ClockPresenter extends BasePresenter<ClockContacts.IClockView> impl
 //        getView().setClockListAdapter(clockModel.initListTypeData(0));
         clockModel.setMember(position);
         getView().refreshClockListAdapter();
+        getView().setClockListAdapter();
     }
 
     @Override

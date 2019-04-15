@@ -2,6 +2,7 @@ package com.example.msi.familyhealth.Clock;
 
 import android.app.AlarmManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -43,7 +44,7 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
 
         addListener();
 
-      //  ClockTest();
+        //  ClockTest();
     }
 
     @Override
@@ -77,8 +78,10 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         addMsgEd = (EditText) view4.findViewById(R.id.list_textedit);
 
         if (Build.VERSION.SDK_INT >= 17) {
-//            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker);
-            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker_v17);
+            //真机
+            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker);
+            //虚拟机
+//            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker_v17);
         } else {
 
 //            addTimePicker.setDescendantFocusability(TimePicker.FOCUS_BLOCK_DESCENDANTS);
@@ -101,7 +104,6 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         clockAddTitleView.setBackBtOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setClock();
                 finish();
             }
         });
@@ -110,18 +112,24 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
             @Override
             public void onClick(View v) {
                 showToast("confirm" + String.valueOf(addTimePicker.getCurrentHour()));
-				
-				getPresenter().addClockBtClick(this,addTypeSp.getSelectedItemPosition(),addTimePicker.getCurrentHour()
-				addTimePicker.getCurrentMinute(),addMsgEd.getText(),addMemberSp.getSelectedItem());
+
+                getPresenter().addClockBtClick(ClockAddActivity.this
+                        , addTypeSp.getSelectedItemPosition()
+                        , addRepeatSp.getSelectedItemPosition()
+                        , addTimePicker.getCurrentHour()
+                        , addTimePicker.getCurrentMinute()
+                        , addMsgEd.getText().toString()
+                        , addMemberSp.getSelectedItem().toString()
+                );
             }
         });
 
         addTypeSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(addTypeSp.getSelectedItem().equals("事件")){
+                if (addTypeSp.getSelectedItem().equals("事件")) {
                     addMsg.setText("事件内容");
-                }else {
+                } else {
                     addMsg.setText("吃药");
                 }
             }
@@ -134,7 +142,9 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
     }
 
     public void setClockOver() {
-        this.finish();
+        Intent intent = new Intent(ClockAddActivity.this, ClockActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     public void ClockTest() {

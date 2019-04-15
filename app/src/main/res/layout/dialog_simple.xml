@@ -41,10 +41,12 @@
         android:gravity="center_vertical"
         android:padding="10dp"
         android:textColor="@color/black"
+        android:editable="false"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_title" />
+        app:layout_constraintTop_toBottomOf="@+id/dialog_title"
+        tools:ignore="Deprecated" />
 
     <!--<view-->
         <!--android:id="@+id/view2"-->

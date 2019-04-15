@@ -31,8 +31,6 @@ public class ClockContacts {
         public List<String> memberSpinnerData();
 
         public void setMember(int position);
-		
-		public void setClockDb();
 
     }
 }
