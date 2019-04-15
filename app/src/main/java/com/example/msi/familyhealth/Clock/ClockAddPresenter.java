@@ -26,4 +26,8 @@ public class ClockAddPresenter extends BasePresenter<ClockAddContacts.IClockAddV
     public List<String> getTypeData() {
         return clockAddModel.TypeData();
     }
+	
+	public void addClockBtClick(int type,int hour,int minute,String medOrEventName){
+		clockAddModel.setClockDb(type,hour,minute,medOrEventName);
+	}
 }

@@ -39,4 +39,8 @@ public class ClockAddModel implements ClockAddContacts.IClockAddModel {
         list.add("事件");
         return list;
     }
+	
+	public void setClockDb(int type,int hour,int minute,String medOrEventName){
+		
+	}
 }

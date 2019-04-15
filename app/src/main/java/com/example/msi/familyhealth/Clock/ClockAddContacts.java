@@ -16,6 +16,8 @@ public class ClockAddContacts {
         public List<String> getRepeatData();
 
         public List<String> getTypeData();
+		
+		public void addClockBtClick(int type,int hour,int minute,String medOrEventName);
     }
 
     public interface IClockAddModel {
@@ -24,6 +26,8 @@ public class ClockAddContacts {
         public List<String> repeatData();
 
         public List<String> TypeData();
+		
+		public void setClockDb(int type,int hour,int minute,String medOrEventName);
     }
 
 

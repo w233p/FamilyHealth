@@ -110,6 +110,9 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
             @Override
             public void onClick(View v) {
                 showToast("confirm" + String.valueOf(addTimePicker.getCurrentHour()));
+				
+				getPresenter().addClockBtClick(addTypeSp.getSelectedItemPosition(),addTimePicker.getCurrentHour()
+				addTimePicker.getCurrentMinute(),addMsgEd.getText());
             }
         });
 
