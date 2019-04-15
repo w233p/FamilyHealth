@@ -4,9 +4,11 @@ import com.example.msi.familyhealth.MvpBase.IBasePresenter;
 import com.example.msi.familyhealth.MvpBase.IBaseView;
 
 import java.util.List;
+import android.content.*;
 
 public class ClockAddContacts {
     public interface IClockAddView extends IBaseView {
+		public void setClockOver();
 
     }
 
@@ -17,7 +19,7 @@ public class ClockAddContacts {
 
         public List<String> getTypeData();
 		
-		public void addClockBtClick(int type,int hour,int minute,String medOrEventName);
+		public void addClockBtClick(Context context, int type,int hour,int minute,String medOrEventName,String memberName);
     }
 
     public interface IClockAddModel {
@@ -27,7 +29,7 @@ public class ClockAddContacts {
 
         public List<String> TypeData();
 		
-		public void setClockDb(int type,int hour,int minute,String medOrEventName);
+		public void setClockDb(Context context, int type,int hour,int minute,String medOrEventName,String memberName);
     }
 
 

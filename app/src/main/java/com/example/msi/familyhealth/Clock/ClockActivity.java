@@ -145,6 +145,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
             public void onClick(View v) {
                 Intent intent = new Intent(ClockActivity.this, ClockAddActivity.class);
                 startActivity(intent);
+				this.finish();
             }
         });
 

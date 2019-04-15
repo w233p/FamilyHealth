@@ -43,7 +43,7 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
 
         addListener();
 
-        ClockTest();
+      //  ClockTest();
     }
 
     @Override
@@ -111,8 +111,8 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
             public void onClick(View v) {
                 showToast("confirm" + String.valueOf(addTimePicker.getCurrentHour()));
 				
-				getPresenter().addClockBtClick(addTypeSp.getSelectedItemPosition(),addTimePicker.getCurrentHour()
-				addTimePicker.getCurrentMinute(),addMsgEd.getText());
+				getPresenter().addClockBtClick(this,addTypeSp.getSelectedItemPosition(),addTimePicker.getCurrentHour()
+				addTimePicker.getCurrentMinute(),addMsgEd.getText(),addMemberSp.getSelectedItem());
             }
         });
 
@@ -133,9 +133,8 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         });
     }
 
-    public void setClock() {
-
-
+    public void setClockOver() {
+        this.finish();
     }
 
     public void ClockTest() {

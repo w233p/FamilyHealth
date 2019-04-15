@@ -6,6 +6,8 @@ import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.example.msi.familyhealth.Data.*;
+import android.content.*;
 
 public class ClockAddModel implements ClockAddContacts.IClockAddModel {
     List<DbMemberBean> dbMemberBeanList;
@@ -40,7 +42,19 @@ public class ClockAddModel implements ClockAddContacts.IClockAddModel {
         return list;
     }
 	
-	public void setClockDb(int type,int hour,int minute,String medOrEventName){
+	public void setClockDb(Context context, int type,int hour,int minute,String medOrEventName,String memberName){
+		DbClockBean dbClockBean = new DbClockBean()
+		.setType(type)
+		.setHour(hour)
+		.setMinute(minute)
+		.setMedOrEventName(medOrEventName);
 		
+		List<DbMemberBean> dbMemberBeanList= DataSupport.where
+		
+		dbClockBean.save();
+		
+     //   AlarmManagerUtil.setAlarm(this, 0, 14, 19, 0, 0, "测试闹钟", 0);
+		//xiugai
+		AlarmManagerUtil.setAlarm(context,0,hour,minute,dbClockBean.getId(),0,medOrEventName,0);
 	}
 }
