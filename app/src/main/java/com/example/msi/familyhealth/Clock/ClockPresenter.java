@@ -34,4 +34,13 @@ public class ClockPresenter extends BasePresenter<ClockContacts.IClockView> impl
     public void initClockData(ViewHolder viewHolder) {
         clockModel.getClockData(viewHolder);
     }
+
+	@Override
+	public void itemLongClick(int clickPosition)
+	{
+		// TODO: Implement this method
+		clockModel.deleteItemClock(clickPosition);
+	}
+
+	
 }

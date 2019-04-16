@@ -101,5 +101,11 @@ public class ClockModel implements ClockContacts.IClockModel {
         viewHolder.initClockList(medList, timeList);
     }
 
+	@Override
+	public void deleteItemClock(int clickPosition)
+	{
+		List<DbClockBean> dbClockBeanList=DataSupport.where("membername = ?",currentMember).find
+		// TODO: Implement this method
+	}
 
 }

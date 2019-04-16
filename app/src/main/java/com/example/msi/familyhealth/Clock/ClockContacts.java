@@ -21,7 +21,9 @@ public class ClockContacts {
 
         public void memberSelect(int position);
 
-        void initClockData(ViewHolder viewHolder);
+        public void initClockData(ViewHolder viewHolder);
+		
+		public void itemLongClick(int clickPosition);
 
     }
 
@@ -31,6 +33,8 @@ public class ClockContacts {
         public List<String> memberSpinnerData();
 
         public void setMember(int position);
+		
+	    public void	deleteItemClock(int clickPosition);
 
     }
 }
