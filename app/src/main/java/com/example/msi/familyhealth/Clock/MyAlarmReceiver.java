@@ -25,7 +25,5 @@ public class MyAlarmReceiver extends BroadcastReceiver {
         clockIntent.putExtra("flag", flag);
         clockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(clockIntent);
-
-
     }
 }

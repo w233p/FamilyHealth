@@ -1,11 +1,13 @@
 package com.example.msi.familyhealth.Data;
 
+import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
 public class DbDailyDataBean extends DataSupport {
     private int id;
     private float data;
     private Long time;
+    @Column(nullable = false)
     private DbMemberBean dbMemberBean;
     private DbItemBean dbItemBean;
 

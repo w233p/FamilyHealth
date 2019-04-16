@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,21 +23,20 @@ import com.example.msi.familyhealth.View.ViewHolder;
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
+
 import android.widget.AdapterView.*;
 import android.app.*;
 import android.content.*;
 
 //public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckDataPresenter> implements CheckDataContacts.ICheckDataView {
-public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> implements ClockContacts.IClockView
-{
+public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> implements ClockContacts.IClockView {
     private Button addBt;
     private TitleView clockTitleView;
     private ListView clockListView;
     private MainListAdapter clockListAdapter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState)
-	{
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clock_layout);
 
@@ -49,14 +49,12 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
     }
 
     @Override
-    public ClockContacts.IClockPresenter onBindPresenter()
-	{
+    public ClockContacts.IClockPresenter onBindPresenter() {
         return new ClockPresenter(this);
     }
 
     @Override
-    public void initView()
-	{
+    public void initView() {
         /*设置Button的样式*/
         addBt = (Button) findViewById(R.id.clock_add);
         GradientDrawable gradientDrawable = new GradientDrawable();
@@ -72,14 +70,12 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
         testInitData();
     }
 
-    private void testInitData()
-	{
-        if (DataSupport.findAll(DbClockBean.class).size() == 0)
-		{
+    private void testInitData() {
+        if (DataSupport.findAll(DbClockBean.class).size() == 0) {
             //模拟器上测试用
-//            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "wyp").find(DbMemberBean.class);
+            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "wyp").find(DbMemberBean.class);
             //真机测试用
-            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "自己").find(DbMemberBean.class);
+//            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "自己").find(DbMemberBean.class);
 
 
 //        List<DbClockBean> dbClockBeanList = DataSupport.findAll(DbClockBean.class);
@@ -88,18 +84,18 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
 //        }
 
             DbClockBean dbClockBean = new DbClockBean()
-				.setType(0)
-				.setHour(1)
-				.setMinute(11)
-				.setMedOrEventName("test1")
-				.setDbMemberBean(dbMemberBeanList.get(0));
+                    .setType(0)
+                    .setHour(1)
+                    .setMinute(11)
+                    .setMedOrEventName("test1")
+                    .setDbMemberBean(dbMemberBeanList.get(0));
 
             DbClockBean dbClockBean1 = new DbClockBean()
-				.setType(1)
-				.setHour(2)
-				.setMinute(22)
-				.setMedOrEventName("test2")
-				.setDbMemberBean(dbMemberBeanList.get(0));
+                    .setType(1)
+                    .setHour(2)
+                    .setMinute(22)
+                    .setMedOrEventName("test2")
+                    .setDbMemberBean(dbMemberBeanList.get(0));
 
             dbClockBean.save();
             dbClockBean1.save();
@@ -110,20 +106,20 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
      * 给list添加adapter，传入list
      * list中存储类型，根据list的值，改变布局类型
      */
-    public void setClockListAdapter()
-	{
+    public void setClockListAdapter() {
 //留个坑，adapter好像可以同时传多个列表进去
         clockListAdapter = new MainListAdapter(this, getPresenter().initTypeList()) {
             @Override
-            public void convert(ViewHolder viewHolder, String item)
-			{
-                getPresenter().initClockData(viewHolder);
-                switch (getTpye())
-				{
+            public void convert(ViewHolder viewHolder, String item) {
+
+                Log.e("initclockdata","1");
+                switch (getTpye()) {
                     case 0:
+                        getPresenter().initClockData(viewHolder);
                         setMedViewHolder(viewHolder);
                         break;
                     case 1:
+                        getPresenter().initClockData(viewHolder);
                         setEventViewHolder(viewHolder);
                         break;
                 }
@@ -131,97 +127,86 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
         };
         clockListView.setAdapter(clockListAdapter);
 
-		clockListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-				@Override
-				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,final int arg2, long arg3)
-				{
-					//Do something
-					//AdapterView parent, View view, int position, long id)
-					Log.e("longClickListener",arg2.toString()+arg3.toString());
-					
-					AlertDialog.Builder builder = new AlertDialog.Builder(this);
-					builder.setMessage("deleteClock?");
-					builder.setPositiveButton(R.String.comfirm,new DialogInterface.OnClickListener(){
-						public void onClick(DialogInterface dialog,int which){
-							getPresenter().itemLongClick(arg2);
-						}
-					});
+        clockListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, final int arg2, long arg3) {
+                //Do something
+                //AdapterView parent, View view, int position, long id)
+                Log.e("longClickListener", String.valueOf(arg2) + String.valueOf(arg3));
 
-					builder.setNegativeButton("cancel",new DialogInterface.OnClickListener(){
-						public void onClick(DialogInterface dialog,int which){
-							
-						}
-					});
-					
-					builder.create().show();
-					return true;
-				}
-			});
-	}
+                AlertDialog.Builder builder = new AlertDialog.Builder(ClockActivity.this);
+                builder.setMessage("deleteClock?");
+                builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        getPresenter().itemLongClick(ClockActivity.this,arg2);
+                        getPresenter().memberSelect(getPresenter().getCurrentMemberPosition());
+                    }
+                });
 
-    public void setMedViewHolder(ViewHolder viewHolder)
-	{
+                builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                builder.create().show();
+                return true;
+            }
+        });
+    }
+
+    public void setMedViewHolder(ViewHolder viewHolder) {
         viewHolder.setTextList(R.id.clock_medTv)
-			.setTimeList(R.id.clock_med_timeTv);
+                .setTimeList(R.id.clock_med_timeTv);
     }
 
-    public void setEventViewHolder(ViewHolder viewHolder)
-	{
+    public void setEventViewHolder(ViewHolder viewHolder) {
         viewHolder.setTextList(R.id.clock_eventTv)
-			.setTimeList(R.id.clock_event_timeTv);
+                .setTimeList(R.id.clock_event_timeTv);
     }
 
-    public void refreshClockListAdapter()
-	{
-        if (clockListAdapter != null)
-		{
+    public void refreshClockListAdapter() {
+        if (clockListAdapter != null) {
             clockListAdapter.notifyDataSetChanged();
             clockListView.startAnimation(at_animation());
         }
     }
 
     @Override
-    public void addListener()
-	{
+    public void addListener() {
         addBt.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v)
-				{
-					Intent intent = new Intent(ClockActivity.this, ClockAddActivity.class);
-					startActivity(intent);
-					finish();
-				}
-			});
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ClockActivity.this, ClockAddActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         clockTitleView.setBackBtOnclickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v)
-				{
-					finish();
-				}
-			});
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-        if (getPresenter().initTitleMemberSp() != null)
-		{
+        if (getPresenter().initTitleMemberSp() != null) {
             clockTitleView.setRightSpinnerAdapter(this, getPresenter().initTitleMemberSp());
             clockTitleView.setRightSpinnerOnItemSelectListener(new AdapterView.OnItemSelectedListener() {
-					@Override
-					public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-					{
-						getPresenter().memberSelect(position);
-					}
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    getPresenter().memberSelect(position);
+                }
 
-					@Override
-					public void onNothingSelected(AdapterView<?> parent)
-					{
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-					}
-				});
+                }
+            });
         }
     }
 
-    public Animation at_animation()
-	{
+    public Animation at_animation() {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha_translate_x);
         return animation;
     }

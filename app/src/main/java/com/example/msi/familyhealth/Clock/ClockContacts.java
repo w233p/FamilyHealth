@@ -1,5 +1,7 @@
 package com.example.msi.familyhealth.Clock;
 
+import android.content.Context;
+
 import com.example.msi.familyhealth.MvpBase.IBasePresenter;
 import com.example.msi.familyhealth.MvpBase.IBaseView;
 import com.example.msi.familyhealth.View.ViewHolder;
@@ -23,8 +25,9 @@ public class ClockContacts {
 
         public void initClockData(ViewHolder viewHolder);
 		
-		public void itemLongClick(int clickPosition);
+		public void itemLongClick(Context context, int clickPosition);
 
+        public int getCurrentMemberPosition();
     }
 
     public interface IClockModel {
@@ -34,7 +37,7 @@ public class ClockContacts {
 
         public void setMember(int position);
 		
-	    public void	deleteItemClock(int clickPosition);
+	    public void	deleteItemClock(Context context, int clickPosition);
 
     }
 }

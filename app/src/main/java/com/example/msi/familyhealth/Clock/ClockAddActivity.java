@@ -79,9 +79,9 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
 
         if (Build.VERSION.SDK_INT >= 17) {
             //真机
-            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker);
+//            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker);
             //虚拟机
-//            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker_v17);
+            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker_v17);
         } else {
 
 //            addTimePicker.setDescendantFocusability(TimePicker.FOCUS_BLOCK_DESCENDANTS);

@@ -19,9 +19,15 @@
 		<!--android:layout="R.layout."/>-->
 	
     <!--<TextView-->
-		<!--android:id="@id/acountTvlinkMemberJianhurenCallNumberExitAcountExitApp"/>-->
+		<!--android:id="@id/acountTv linkMember Jianhuren CallNumber ExitAcount ExitApp"/>-->
     <!---->
-	
+    <ListView
+        android:layout_width="wrap_content"
+        android:id="@+id/set_listview"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/set_titleView">
+
+    </ListView>
 	
     <TextView
         android:id="@+id/author"

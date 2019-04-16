@@ -1,5 +1,6 @@
 package com.example.msi.familyhealth.Clock;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.msi.familyhealth.Data.DbClockBean;
@@ -16,6 +17,7 @@ public class ClockModel implements ClockContacts.IClockModel {
     private List<String> medList;
     private List<String> timeList;
     private String currentMember;
+    private int currentMemberPosition;
     List<DbMemberBean> dbMemberBeanList;
     List<DbClockBean> dbClockBeanList;
 
@@ -24,13 +26,13 @@ public class ClockModel implements ClockContacts.IClockModel {
      */
     @Override
     public List initListTypeData() {
-        List<String> typeList;
+
+        List typeList = new ArrayList<>();
 
         if (currentMember == null) {
             currentMember = member.get(0);
         }
 
-        typeList = new ArrayList<>();
         if (dbClockBeanList != null) {
             dbClockBeanList.clear();
         }
@@ -46,8 +48,13 @@ public class ClockModel implements ClockContacts.IClockModel {
         for (int i = 0; i < dbClockBeanList.size(); i++) {
             typeList.add(String.valueOf(dbClockBeanList.get(i).getType()));
         }
+
         return typeList;
     }
+
+//    public List<String> getTypeList() {
+//        return typeList;
+//    }
 
     /**
      * @return 返回所有的成员
@@ -70,6 +77,7 @@ public class ClockModel implements ClockContacts.IClockModel {
             Log.e("currentMember", currentMember);
             Log.e("memberList", member.get(position));
         }
+
     }
 
     public void getClockData(ViewHolder viewHolder) {
@@ -87,11 +95,20 @@ public class ClockModel implements ClockContacts.IClockModel {
         }
 
         if (dbClockBeanList == null) {
-            dbClockBeanList = DataSupport.where("membername = ?", String.valueOf(currentMember)).find(DbClockBean.class);
+            dbClockBeanList = DataSupport.where("dbmemberbean_id = ?"
+                    , String.valueOf(DataSupport.where("membername =  ?"
+                            , String.valueOf(currentMember))
+                            .find(DbMemberBean.class)
+                            .get(0)
+                            .getId()))
+                    .find(DbClockBean.class);
+            Log.e("where(membername = ?", "e,,,");
         }
+
         for (int i = 0; i < dbClockBeanList.size(); i++) {
             medList.add(dbClockBeanList.get(i).getMedOrEventName());
             timeList.add(dbClockBeanList.get(i).getHour() + ":" + dbClockBeanList.get(i).getMinute());
+            Log.e("111", String.valueOf(dbClockBeanList.get(0).getId()));
         }
 
         if (medList.size() == dbClockBeanList.size()) {
@@ -101,11 +118,28 @@ public class ClockModel implements ClockContacts.IClockModel {
         viewHolder.initClockList(medList, timeList);
     }
 
-	@Override
-	public void deleteItemClock(int clickPosition)
-	{
-		List<DbClockBean> dbClockBeanList=DataSupport.where("membername = ?",currentMember).find
-		// TODO: Implement this method
-	}
+    @Override
+    public void deleteItemClock(Context context, int clickPosition) {
 
+//		List<DbClockBean> deleteDbClockBeanList=DataSupport.where("dbmemberbean_id = ?"
+//                , String.valueOf(DataSupport.where("membername =  ?"
+//                        , String.valueOf(currentMember))
+//                        .find(DbMemberBean.class)
+//                        .get(0)
+//                        .getId()))
+//                .find(DbClockBean.class); //根据名字找到这个人的所有
+
+        AlarmManagerUtil.cancelAlarm(context, AlarmManagerUtil.ALARM_ACTION, dbClockBeanList.get(clickPosition).getId());//得到点击列表所对应的ID。闹钟的ID与数据ID一致
+
+        dbClockBeanList.get(clickPosition).delete();
+        Log.e("delete", String.valueOf(dbClockBeanList.get(clickPosition).getId()));
+    }
+
+    public int getCurrentMemberPosition() {
+        return currentMemberPosition;
+    }
+
+    public void setCurrentMemberPosition(int currentMemberPosition) {
+        this.currentMemberPosition = currentMemberPosition;
+    }
 }
