@@ -24,6 +24,7 @@ import org.litepal.crud.DataSupport;
 import java.util.List;
 import android.widget.AdapterView.*;
 import android.app.*;
+import android.content.*;
 
 //public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckDataPresenter> implements CheckDataContacts.ICheckDataView {
 public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> implements ClockContacts.IClockView
@@ -132,14 +133,27 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
 
 		clockListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
 				@Override
-				public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+				public boolean onItemLongClick(AdapterView<?> arg0, View arg1,final int arg2, long arg3)
 				{
 					//Do something
 					//AdapterView parent, View view, int position, long id)
 					Log.e("longClickListener",arg2.toString()+arg3.toString());
 					
 					AlertDialog.Builder builder = new AlertDialog.Builder(this);
-					getPresenter().itemLongClick(arg2);
+					builder.setMessage("deleteClock?");
+					builder.setPositiveButton(R.String.comfirm,new DialogInterface.OnClickListener(){
+						public void onClick(DialogInterface dialog,int which){
+							getPresenter().itemLongClick(arg2);
+						}
+					});
+
+					builder.setNegativeButton("cancel",new DialogInterface.OnClickListener(){
+						public void onClick(DialogInterface dialog,int which){
+							
+						}
+					});
+					
+					builder.create().show();
 					return true;
 				}
 			});

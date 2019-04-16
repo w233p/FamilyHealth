@@ -41,6 +41,4 @@ public class ClockPresenter extends BasePresenter<ClockContacts.IClockView> impl
 		// TODO: Implement this method
 		clockModel.deleteItemClock(clickPosition);
 	}
-
-	
 }
