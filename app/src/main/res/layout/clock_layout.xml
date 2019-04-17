@@ -15,13 +15,13 @@
         app:right_text="@string/family_member"
         app:title_type="@integer/title_back_text" />
 
-    <ListView
+    <com.example.msi.familyhealth.View.OneListView
         android:id="@+id/clock_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/clock_titleView">
 
-    </ListView>
+    </com.example.msi.familyhealth.View.OneListView>
 
     <Button
         android:id="@+id/clock_add"

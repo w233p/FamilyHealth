@@ -1,6 +1,10 @@
 package com.example.msi.familyhealth.View;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
+import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -78,6 +82,16 @@ public class ViewHolder {
     public void initClockList(List<String> textList, List<String> timeList) {
         this.textList = textList;
         this.timeList = timeList;
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public ViewHolder setBackGround(int viewId) {
+        ConstraintLayout constraintLayout = getView(viewId);
+
+        constraintLayout.setBackgroundColor(R.color.listDivider);
+        constraintLayout.setMaxHeight(32);
+
+        return this;
     }
 
     public ViewHolder setTextList(int viewId) {

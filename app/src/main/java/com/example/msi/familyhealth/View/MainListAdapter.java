@@ -1,10 +1,13 @@
 package com.example.msi.familyhealth.View;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.example.msi.familyhealth.Clock.ClockActivity;
 import com.example.msi.familyhealth.R;
 
 import java.util.List;
@@ -28,6 +31,11 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
         this.context = context;
         this.list = list;
         inflater = LayoutInflater.from(context);
+    }
+
+    @Override
+    public String getItem(int position) {
+        return list.get(position);
     }
 
     /**
@@ -63,6 +71,8 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+
         type = getItemViewType(position);
         int itemLayoutId;
 
@@ -80,6 +90,13 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
         }
 
         ViewHolder viewHolder = getViewHolder(position, convertView, parent, itemLayoutId);
+
+        //防止getview多次调用
+        if (parent instanceof OneListView) {
+            if (((OneListView) parent).isOnMeasure) {
+                return viewHolder.getConvertView();
+            }
+        }
 
         //药品提醒添加按钮
         if (itemLayoutId == R.layout.list_clock_med) {

@@ -17,6 +17,7 @@ import com.example.msi.familyhealth.Data.DbMemberBean;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.MainListAdapter;
+import com.example.msi.familyhealth.View.OneListView;
 import com.example.msi.familyhealth.View.TitleView;
 import com.example.msi.familyhealth.View.ViewHolder;
 
@@ -32,7 +33,7 @@ import android.content.*;
 public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> implements ClockContacts.IClockView {
     private Button addBt;
     private TitleView clockTitleView;
-    private ListView clockListView;
+    private OneListView clockListView;
     private MainListAdapter clockListAdapter;
 
     @Override
@@ -65,7 +66,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
 
         clockTitleView = (TitleView) findViewById(R.id.clock_titleView);
 
-        clockListView = (ListView) findViewById(R.id.clock_listview);
+        clockListView = (OneListView) findViewById(R.id.clock_listview);
 
         testInitData();
     }
@@ -112,7 +113,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
             @Override
             public void convert(ViewHolder viewHolder, String item) {
 
-                Log.e("initclockdata","1");
+                Log.e("initclockdata", "1");
                 switch (getTpye()) {
                     case 0:
                         getPresenter().initClockData(viewHolder);
@@ -138,7 +139,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
                 builder.setMessage("deleteClock?");
                 builder.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        getPresenter().itemLongClick(ClockActivity.this,arg2);
+                        getPresenter().itemLongClick(ClockActivity.this, arg2);
                         getPresenter().memberSelect(getPresenter().getCurrentMemberPosition());
                     }
                 });
@@ -153,13 +154,13 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
                 return true;
             }
         });
-		
-		clockListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-			
-				public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2, long arg3){
-					showToast("xiugai");
-				}
-		});
+
+        clockListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2, long arg3) {
+                showToast("xiugai");
+            }
+        });
     }
 
     public void setMedViewHolder(ViewHolder viewHolder) {

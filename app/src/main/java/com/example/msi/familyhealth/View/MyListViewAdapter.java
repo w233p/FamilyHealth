@@ -1,11 +1,12 @@
 package com.example.msi.familyhealth.View;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.example.msi.familyhealth.R;
 
 import java.util.List;
 
@@ -16,25 +17,25 @@ import java.util.List;
 public abstract class MyListViewAdapter<T> extends BaseAdapter {
 
     private Context context;
-    private List<String> list;
+    private List<String> textList;
     private LayoutInflater inflater;
     private int itemLayoutId;
 
-    public MyListViewAdapter(Context context,List<String> list) {
+    public MyListViewAdapter(Context context, List<String> list) {
         this.context = context;
-        this.list = list;
-//        this.itemLayoutId = itemLayoutId;
+        this.textList = list;
+        this.itemLayoutId = itemLayoutId;
         inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return list == null ? 0 : list.size();
+        return textList == null ? 0 : textList.size();
     }
 
     @Override
     public String getItem(int position) {
-        return list.get(position);
+        return textList.get(position);
     }
 
     @Override
@@ -44,7 +45,8 @@ public abstract class MyListViewAdapter<T> extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = getViewHolder(position, convertView, parent,itemLayoutId);
+        itemLayoutId = R.layout.list_item_text;
+        ViewHolder holder = getViewHolder(position, convertView, parent, itemLayoutId);
 
         convert(holder, getItem(position));
         return holder.getConvertView();
@@ -52,7 +54,7 @@ public abstract class MyListViewAdapter<T> extends BaseAdapter {
 
     public abstract void convert(ViewHolder viewHolder, String item);
 
-    public ViewHolder getViewHolder(int position, View convertView, ViewGroup parent,int itemLayoutId) {
+    public ViewHolder getViewHolder(int position, View convertView, ViewGroup parent, int itemLayoutId) {
         return ViewHolder.get(context, convertView, parent, itemLayoutId, position);
     }
 }
