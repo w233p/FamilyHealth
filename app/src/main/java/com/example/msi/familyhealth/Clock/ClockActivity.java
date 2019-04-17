@@ -153,6 +153,13 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
                 return true;
             }
         });
+		
+		clockListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+			
+				public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2, long arg3){
+					showToast("xiugai");
+				}
+		});
     }
 
     public void setMedViewHolder(ViewHolder viewHolder) {
