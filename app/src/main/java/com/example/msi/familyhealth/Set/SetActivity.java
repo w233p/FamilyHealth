@@ -1,16 +1,19 @@
 package com.example.msi.familyhealth.Set;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.example.msi.familyhealth.R;
 
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.example.msi.familyhealth.MvpBase.*;
 import com.example.msi.familyhealth.View.MyListViewAdapter;
 import com.example.msi.familyhealth.View.OneListView;
 import com.example.msi.familyhealth.View.TitleView;
+import com.example.msi.familyhealth.View.TwoEditDialog;
 import com.example.msi.familyhealth.View.ViewHolder;
 
 public class SetActivity extends BaseActivity<SetContacts.ISetPresenter> implements SetContacts.ISetView {
@@ -62,6 +65,24 @@ public class SetActivity extends BaseActivity<SetContacts.ISetPresenter> impleme
             }
         });
 
-
+        setListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 2:
+                        TwoEditDialog twoEditDialog = new TwoEditDialog.Builder(SetActivity.this).create();
+                        twoEditDialog.show();
+                        break;
+                    case 5:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 }
