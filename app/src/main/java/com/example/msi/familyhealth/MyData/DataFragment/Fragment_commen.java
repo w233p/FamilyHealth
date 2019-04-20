@@ -20,6 +20,7 @@ import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.example.msi.familyhealth.MvpBase.BaseFragment;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.MainListAdapter;
+import com.example.msi.familyhealth.View.OneListView;
 import com.example.msi.familyhealth.View.ViewHolder;
 
 import org.litepal.crud.DataSupport;
@@ -30,7 +31,7 @@ import java.util.List;
 
 //public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> implements LoginContacts.ILoginView
 public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentPresenter> implements FragmentComContacts.IFragmentView {
-    private ListView listView;
+    private OneListView listView;
 
     private TextView memberTv;
     private TextView projectTv;
@@ -66,7 +67,7 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
      * @param view
      */
     public void initView(View view) {
-        listView = (ListView) view.findViewById(R.id.up_data_list);
+        listView = (OneListView) view.findViewById(R.id.up_data_list);
         View view1 = (View) view.findViewById(R.id.list_sp_text1);
         View view2 = (View) view.findViewById(R.id.list_sp_text2);
         memberTv = (TextView) view1.findViewById(R.id.list_sp_text);
@@ -85,7 +86,7 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
                     case 0:
                         viewHolder.setText(R.id.list_sp_text, item);
                         break;
-                    case 1:
+                    case 2:
                         viewHolder.setText(R.id.list_ed_text, item);
                         break;
                 }

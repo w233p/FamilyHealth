@@ -1,17 +1,16 @@
 package com.example.msi.familyhealth.View;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.constraint.ConstraintLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.example.msi.familyhealth.Clock.ClockActivity;
 import com.example.msi.familyhealth.R;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @param <T>适应多布局的列表适配器
@@ -20,6 +19,7 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
 
     private static final int TYPE_ONE = 0;//闹钟
     private static final int TYPE_TWO = 1;//事件
+    private static final int TYPE_THREE = 2;//editText
     private List<String> list;
     private int type;
     private Context context;
@@ -33,16 +33,24 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
         inflater = LayoutInflater.from(context);
     }
 
+    @Override
+    public String getItem(int position) {
+        return list.get(position);
+    }
+
     /**
      * @param position 确定列表的样式，多布局的关键点
      * @return
      */
     @Override
     public int getItemViewType(int position) {
-        if (list.get(position).equals("成员") || list.get(position).equals("项目")) {
+//0is med,   1 is event
+        if (list.get(position).equals("0")) {
             return TYPE_ONE;
-        } else {
+        } else if (list.get(position).equals("1")) {
             return TYPE_TWO;
+        } else {
+            return TYPE_THREE;
         }
     }
 
@@ -53,7 +61,7 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
      */
     @Override
     public int getViewTypeCount() {
-        return 2;
+        return 3;
     }
 
     /**
@@ -63,6 +71,8 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+
         type = getItemViewType(position);
         int itemLayoutId;
 
@@ -72,11 +82,21 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
                 itemLayoutId = R.layout.list_clock_med;
                 break;
             case TYPE_TWO:
+                itemLayoutId = R.layout.list_clock_event;
+                break;
+            case TYPE_THREE:
                 itemLayoutId = R.layout.list_item_edit;
                 break;
         }
 
         ViewHolder viewHolder = getViewHolder(position, convertView, parent, itemLayoutId);
+
+        //防止getview多次调用
+        if (parent instanceof OneListView) {
+            if (((OneListView) parent).isOnMeasure) {
+                return viewHolder.getConvertView();
+            }
+        }
 
         //药品提醒添加按钮
         if (itemLayoutId == R.layout.list_clock_med) {
@@ -95,6 +115,5 @@ public abstract class MainListAdapter<T> extends MyListViewAdapter {
     public int getTpye() {
         return type;
     }
-
 
 }

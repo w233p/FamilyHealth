@@ -64,8 +64,12 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
         checkMarkView.setChartView(mLineChart);
         mLineChart.setMarker(checkMarkView);
 
-        memberSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getMemberSpinnerData()));
-        itemSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getItemSpinnerData()));
+        if (getPresenter().getMemberSpinnerData() != null) {
+            memberSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getMemberSpinnerData()));
+        }
+        if (getPresenter().getMemberSpinnerData() != null) {
+            itemSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getItemSpinnerData()));
+        }
 
         getPresenter().chooseTimeclick(1);
         getPresenter().initChart(0, 0);
