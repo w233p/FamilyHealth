@@ -15,17 +15,23 @@ import com.example.msi.familyhealth.View.OneListView;
 import com.example.msi.familyhealth.View.TitleView;
 import com.example.msi.familyhealth.View.TwoEditDialog;
 import com.example.msi.familyhealth.View.ViewHolder;
+import android.content.*;
+import com.example.msi.familyhealth.Login.*;
+import java.util.*;
 
 public class SetActivity extends BaseActivity<SetContacts.ISetPresenter> implements SetContacts.ISetView {
 
     private OneListView setListView;
     private TitleView titleView;
     private MyListViewAdapter myListViewAdapter;
+	private List<Activity> activityList= new LinkedList();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.set_layout);
+		
+		ExitApplication.getInstance().addActivity(this);
 
         initView();
 
@@ -76,6 +82,8 @@ public class SetActivity extends BaseActivity<SetContacts.ISetPresenter> impleme
                     case 5:
                         break;
                     case 7:
+						Intent intent = new Intent(SetActivity.this,LoginActivity.class);
+						startActivity(intent);
                         break;
                     case 8:
                         break;
@@ -85,4 +93,11 @@ public class SetActivity extends BaseActivity<SetContacts.ISetPresenter> impleme
             }
         });
     }
+	
+	public void exit(){
+		for(Activity act:activityList){
+			act.finish();
+		}
+		System.exit(0);
+	}
 }

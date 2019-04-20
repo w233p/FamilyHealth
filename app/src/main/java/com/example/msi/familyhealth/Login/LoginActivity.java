@@ -48,7 +48,9 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-
+		
+		ExitApplication.getInstance().addActivity(this);
+		
         initView();
 
         addListener();
