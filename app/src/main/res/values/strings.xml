@@ -12,6 +12,8 @@
     <string name="login">登&#160;&#160;&#160;&#160;陆</string>
     <string name="register">注&#160;&#160;&#160;&#160;册</string>
     <string name="password">密&#160;&#160;&#160;&#160;码</string>
+    <string name="password_digits">0123456789qwertyuiopasdfghjklzxcvbnm</string>
+    <string name="phone_digits">0123456789+</string>
     <string name="change_password">更改密码</string>
     <string name="forget">忘记密码</string>
     <string name="new_password">新密码</string>

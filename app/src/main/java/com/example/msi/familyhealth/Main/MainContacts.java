@@ -1,5 +1,7 @@
 package com.example.msi.familyhealth.Main;
 
+import android.content.Context;
+
 import com.example.msi.familyhealth.MvpBase.IBasePresenter;
 import com.example.msi.familyhealth.MvpBase.IBaseView;
 
@@ -22,10 +24,10 @@ public class MainContacts {
     }
 
     public interface IMainPresenter extends IBasePresenter {
-
+        void call(Context context);
     }
 
     public interface IMainModel {
-
+        String getPhoneNumber();
     }
 }

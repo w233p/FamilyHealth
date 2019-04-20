@@ -24,6 +24,7 @@ import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.MyData.DataFragment.Fragment_auto;
 import com.example.msi.familyhealth.MyData.DataFragment.Fragment_commen;
 import com.example.msi.familyhealth.MyData.DataFragment.MyFragmentPagerAdapter;
+import com.example.msi.familyhealth.View.ExitApplication;
 import com.example.msi.familyhealth.View.TitleView;
 
 import org.litepal.crud.DataSupport;
@@ -52,6 +53,7 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.data_layout);
+        ExitApplication.getInstance().addActivity(this);
 
 //        getPresenter().getMyDataModel().initItemDataBase();
 
@@ -112,40 +114,7 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
 //        DataSupport.deleteAll(DbMemberMessageBean.class);
 //        DataSupport.deleteAll(DbMemberBean.class);
 
-
         /*总算明白了，互相有变量才能关联，添加其中一个时两边都能关联上*/
-//        DbMemberMessageBean memberMessageBean = new DbMemberMessageBean().setAge(getInt(0)).setHeight(getInt(1)).setWeight(getFloat(2));
-////        List<DbMemberBean>  dbMemberBean2 = DataSupport.where("memberName = ?","王易培").find(DbMemberBean.class);
-////        DbMemberBean dbMemberBean1 = DataSupport.find(DbMemberBean.class,1);
-////        memberMessageBean.setDbMemberBean(dbMemberBean1);
-//        if (memberMessageBean.save()){
-//            showToast("储存成功");
-//        }else{
-//            showToast("储存失败");
-//        }
-//
-//        DbMemberBean dbMemberBean = new DbMemberBean().setMemberName("wyp").setMemberTelephone("13629714107");
-////        dbMemberBean.setDbMemberMessageBean(memberMessageBean);
-//        if (dbMemberBean.save()){
-//            showToast("人物储存成功");
-//        }else{
-//            showToast("人物储存失败");
-//        }
-//
-//
-//        /*添加关联，本次储存的数据关联上人物的信息
-//        * 先用名字查找到人物的项
-//        * 再添加此次数据
-//        * update给找到的人物，作为该人物的关联信息
-//        * 因为人名是唯一数据，所以找到后直接获取列表第一项的id*/
-//        List<DbMemberBean>  dbMemberBean2 = DataSupport.where("memberName = ?","王易培").find(DbMemberBean.class);
-//        DbMemberBean dbMemberBean1 = new DbMemberBean();
-//        dbMemberBean1.setDbMemberMessageBean(memberMessageBean);
-//        dbMemberBean1.setMemberName("wyp2");
-//        dbMemberBean1.update(dbMemberBean2.get(0).getId());
-////        dbMemberBean1.save();
-//        Log.e("iid",String.valueOf(dbMemberBean2.get(0).getId()));
-
         getPresenter().writeDb(fragmentList.get(0));
     }
 

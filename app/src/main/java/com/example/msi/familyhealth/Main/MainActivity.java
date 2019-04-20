@@ -1,10 +1,11 @@
 package com.example.msi.familyhealth.Main;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +17,7 @@ import com.example.msi.familyhealth.MyData.MyDataActivity;
 import com.example.msi.familyhealth.Position.PositonActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.Set.SetActivity;
+import com.example.msi.familyhealth.View.ExitApplication;
 
 public class MainActivity extends BaseActivity<MainContacts.IMainPresenter> implements MainContacts.IMainView {
     private ConstraintLayout mHealthDataCl;
@@ -26,13 +28,14 @@ public class MainActivity extends BaseActivity<MainContacts.IMainPresenter> impl
     private ConstraintLayout mSetCl;
     private Button mCheckDataBt;
     private Intent intent;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-		
-		ExitApplication.getInstance().addActivity(this);
-		
+
+        ExitApplication.getInstance().addActivity(this);
+
         initView();
 
         addListener();
@@ -89,6 +92,24 @@ public class MainActivity extends BaseActivity<MainContacts.IMainPresenter> impl
         mCallCl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("紧急拨号");
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getPresenter().call(MainActivity.this);
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("点错了", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+
                 showToast("紧急call");
             }
         });
@@ -109,9 +130,9 @@ public class MainActivity extends BaseActivity<MainContacts.IMainPresenter> impl
 
     }
 
-    private void jump(Class target){
-        showToast("click jump to"+target.getName().toString());
-        intent.setClass(MainActivity.this,target);
+    private void jump(Class target) {
+        showToast("click jump to" + target.getName().toString());
+        intent.setClass(MainActivity.this, target);
         startActivity(intent);
     }
 }

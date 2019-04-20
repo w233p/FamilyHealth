@@ -13,11 +13,21 @@ public class SetContacts {
 
     public interface ISetPresenter extends IBasePresenter {
         public List<String> getSetListDataItem();
+
+        public void addMemberClick(String memberName, String phone);
+
+        public String[] getMemberList();
+
+        public String getPhoneNumber(int position);
     }
 
     public interface ISetModel {
         public List<String> initSetListDataItem();
 
+        public boolean addMember(String memberName, String phone);
 
+        public String[] getMember();
+
+        public String phoneNumber(int position);
     }
 }

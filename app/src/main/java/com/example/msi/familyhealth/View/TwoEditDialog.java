@@ -41,6 +41,14 @@ public class TwoEditDialog extends Dialog {
 
         private TwoEditDialog twoEditDialog;
 
+        public String getMemberNameText() {
+            return memberNameEt.getText().toString();
+        }
+
+        public String getPhoneText() {
+            return phoneEt.getText().toString();
+        }
+
         public Builder(Context context) {
             twoEditDialog = new TwoEditDialog(context, R.style.Theme_AppCompat_Dialog);
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -60,6 +68,10 @@ public class TwoEditDialog extends Dialog {
             return this;
         }
 
+        public TwoEditDialog getThisDialog(){
+            return twoEditDialog;
+        }
+
 
         public Builder setEditText2(String meg) {
             phoneEt.setHint(meg);
@@ -69,24 +81,30 @@ public class TwoEditDialog extends Dialog {
         public Builder setPositiveButton(String text, View.OnClickListener listener) {
             positiveButton.setText(text);
             positiveButton.setOnClickListener(listener);
+            this.positiveButtonOnClickListener = listener;
             return this;
         }
 
         public Builder setNegativeButton(String text, View.OnClickListener listener) {
             negativeButton.setText(text);
             negativeButton.setOnClickListener(listener);
+            this.negativeButtonOnClickListener = listener;
             return this;
         }
 
         public TwoEditDialog create() {
-            positiveButton.setOnClickListener(view -> {
-                twoEditDialog.dismiss();
-                positiveButtonOnClickListener.onClick(view);
+            positiveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    twoEditDialog.dismiss();
+                    positiveButtonOnClickListener.onClick(v);
+                }
             });
 
-            negativeButton.setOnClickListener(view -> {
+            //   ->lambda表达式,就是匿名函数，这里试一下
+            negativeButton.setOnClickListener(v -> {
                 twoEditDialog.dismiss();
-                negativeButtonOnClickListener.onClick(view);
+                negativeButtonOnClickListener.onClick(v);
             });
 
             twoEditDialog.setContentView(mLayout);

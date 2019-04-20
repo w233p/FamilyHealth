@@ -16,4 +16,20 @@ public class SetPresents extends BasePresenter<SetContacts.ISetView> implements 
         return setModel.initSetListDataItem();
     }
 
+    @Override
+    public void addMemberClick(String memberName, String phone) {
+        if (setModel.addMember(memberName, phone)) {
+            getView().showToast("添加成功！");
+        }
+    }
+
+    @Override
+    public String[] getMemberList() {
+        return setModel.getMember();
+    }
+
+    @Override
+    public String getPhoneNumber(int position) {
+        return setModel.phoneNumber(position);
+    }
 }

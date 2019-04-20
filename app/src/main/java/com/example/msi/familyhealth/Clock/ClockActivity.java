@@ -16,6 +16,7 @@ import com.example.msi.familyhealth.Data.DbClockBean;
 import com.example.msi.familyhealth.Data.DbMemberBean;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
+import com.example.msi.familyhealth.View.ExitApplication;
 import com.example.msi.familyhealth.View.MainListAdapter;
 import com.example.msi.familyhealth.View.OneListView;
 import com.example.msi.familyhealth.View.TitleView;
@@ -40,6 +41,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clock_layout);
+        ExitApplication.getInstance().addActivity(this);
 
         initView();
 

@@ -14,6 +14,7 @@ import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.CheckMarkView;
+import com.example.msi.familyhealth.View.ExitApplication;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 
@@ -35,6 +36,7 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.data_chart);
+        ExitApplication.getInstance().addActivity(this);
 
         initView();
 

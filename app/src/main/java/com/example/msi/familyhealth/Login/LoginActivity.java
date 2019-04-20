@@ -17,6 +17,7 @@ import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.example.msi.familyhealth.Main.MainActivity;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
+import com.example.msi.familyhealth.View.ExitApplication;
 import com.example.msi.familyhealth.View.TitleView;
 
 import org.litepal.crud.DataSupport;
@@ -44,33 +45,38 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
     private Button bottomBt;
     private TitleView titleView;
 
+    public int state;
+    public static final int LOGIN = 0;
+    public static final int REGISTER = 1;
+    public static final int CHANGE_PASSWORD = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_layout);
-		
-		ExitApplication.getInstance().addActivity(this);
-		
+
+        ExitApplication.getInstance().addActivity(this);
+
         initView();
 
         addListener();
 
+
         initItemDataBase();
-
-        initMemberData();
+//登陆写好就删除
+//        initMemberData();
     }
 
-    /**
-     * 数据库无用户数据时初始化一个本人的数据
-     */
-    private void initMemberData() {
-        if (DataSupport.findAll(DbMemberBean.class).size() == 0) {
-            DbMemberBean dbMemberBean = new DbMemberBean().setMemberName("自己");
-            dbMemberBean.save();
-        }
-        Log.e("11",DataSupport.findAll(DbMemberBean.class).get(0).getMemberName());
-    }
-
+//    /**
+//     * 数据库无用户数据时初始化一个本人的数据
+//     */
+//    private void initMemberData() {
+//        if (DataSupport.findAll(DbMemberBean.class).size() == 0) {
+//            DbMemberBean dbMemberBean = new DbMemberBean().setMemberName("自己");
+//            dbMemberBean.save();
+//        }
+//        Log.e("11", DataSupport.findAll(DbMemberBean.class).get(0).getMemberName());
+//    }
 
     @Override
     public void initView() {
@@ -89,30 +95,17 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
         phoneEd = (EditText) findViewById(R.id.login_phone_ed);
         bottomBt = (Button) findViewById(R.id.bottom_bt);
         titleView = (TitleView) findViewById(R.id.login_titleView);
-    }
 
+        state = LOGIN;
+    }
 
     @Override
     public void addListener() {
-        //点击测试
-        registerTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setRegisterView();
-            }
-        });
-
-        titleTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("title", "onClick: 111");
-            }
-        });
 
         bottomBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getPresenter().login("test", "1");
+                getPresenter().buttomBtClick(state);
             }
         });
 
@@ -144,7 +137,6 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
         return new LoginPresenter(this);
     }
 
-
     /**
      * 设置为登陆布局
      */
@@ -159,7 +151,10 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
         forgetTv.startAnimation(ain_animation());
         registerTv.setVisibility(View.VISIBLE);
         registerTv.startAnimation(ain_animation());
+        passwordEd.setHint("");
         bottomBt.setText(getResources().getString(R.string.login));
+
+        state = LOGIN;
     }
 
     /**
@@ -175,8 +170,11 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
         forgetTv.startAnimation(aout_animation());
         registerTv.setVisibility(View.GONE);
         registerTv.startAnimation(aout_animation());
+        passwordEd.setHint("密码为6-12位的数字");
         bottomBt.setText(getResources().getString(R.string.register));
         backBt.setVisibility(View.VISIBLE);
+
+        state = REGISTER;
     }
 
     /**
@@ -195,12 +193,11 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
         forgetTv.startAnimation(aout_animation());
         registerTv.setVisibility(View.GONE);
         registerTv.startAnimation(aout_animation());
+        passwordEd.setHint("密码为6-12位的数字");
         bottomBt.setText(getResources().getString(R.string.change_password));
         backBt.setVisibility(View.VISIBLE);
-    }
 
-    public String getState() {
-        return bottomBt.getText().toString();
+        state = CHANGE_PASSWORD;
     }
 
     @Override
@@ -213,28 +210,48 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
     }
 
     @Override
-    public void loginFailure() {
-
+    public void loginFailure(String message) {
+        showToast("登陆失败:" + message);
     }
 
     @Override
     public void registerSuccess() {
-
+        showToast("注册成功");
+        setLoginView();
     }
 
     @Override
-    public void registerFailure() {
-
+    public void registerFailure(String msg) {
+        usernameEd.setText("");
+        passwordEd.setText("");
+        phoneEd.setText("");
+        showToast("注册失败:" + msg);
     }
 
     @Override
     public void changePasswordSuccess() {
-
+        showToast("修改成功");
+        setLoginView();
     }
 
     @Override
-    public void changePasswordFailure() {
+    public void changePasswordFailure(String msg) {
+        usernameEd.setText("");
+        passwordEd.setText("");
+        phoneEd.setText("");
+        showToast("修改失败:" + msg);
+    }
 
+    public String userText() {
+        return usernameEd.getText().toString();
+    }
+
+    public String passwordText() {
+        return passwordEd.getText().toString();
+    }
+
+    public String phoneText() {
+        return phoneEd.getText().toString();
     }
 
     public Animation at_animation() {

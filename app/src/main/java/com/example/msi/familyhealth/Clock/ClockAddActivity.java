@@ -19,6 +19,7 @@ import android.widget.TimePicker;
 import com.example.msi.familyhealth.Data.DbClockBean;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
+import com.example.msi.familyhealth.View.ExitApplication;
 import com.example.msi.familyhealth.View.TitleView;
 
 import java.util.Calendar;
@@ -39,6 +40,7 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clock_add_layout);
+        ExitApplication.getInstance().addActivity(this);
 
         initView();
 
@@ -77,16 +79,8 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         addMsg.setText(R.string.med);
         addMsgEd = (EditText) view4.findViewById(R.id.list_textedit);
 
-        if (Build.VERSION.SDK_INT >= 17) {
-            //真机
-//            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker);
-            //虚拟机
-            addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker_v17);
-        } else {
+        addTimePicker = (TimePicker) findViewById(R.id.clock_timepicker_v17);
 
-//            addTimePicker.setDescendantFocusability(TimePicker.FOCUS_BLOCK_DESCENDANTS);
-//            addTimePicker.setIs24HourView(true);
-        }
     }
 
     @Override
@@ -104,6 +98,8 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         clockAddTitleView.setBackBtOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(ClockAddActivity.this, ClockActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
