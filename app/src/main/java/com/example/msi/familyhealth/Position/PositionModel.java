@@ -1,4 +1,4 @@
 package com.example.msi.familyhealth.Position;
 
-public class PositionModel {
+public class PositionModel implements PositionContacts.IPositionModel {
 }

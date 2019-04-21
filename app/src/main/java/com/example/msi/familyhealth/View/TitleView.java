@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.msi.familyhealth.R;
@@ -25,6 +24,7 @@ public class TitleView extends ConstraintLayout {
     private ImageButton confirmBt;
     private TextView titleTv;
     private TextView leftTv;
+    private TextView rightTv;
     private Spinner rightSpinner;
     private ConstraintLayout titleLayout;
 
@@ -45,7 +45,8 @@ public class TitleView extends ConstraintLayout {
         confirmBt = inflate.findViewById(R.id.confirm_bt);
         titleTv = inflate.findViewById(R.id.title_tv);
         leftTv = inflate.findViewById(R.id.left_tv);
-        rightSpinner = inflate.findViewById(R.id.right_tv);
+        rightTv = inflate.findViewById(R.id.right_tv);
+        rightSpinner = inflate.findViewById(R.id.right_sp);
 
         init(context, attributeSet);
     }
@@ -88,26 +89,37 @@ public class TitleView extends ConstraintLayout {
             confirmBt.setVisibility(View.VISIBLE);
             leftTv.setVisibility(View.GONE);
             rightSpinner.setVisibility(View.GONE);
+            rightTv.setVisibility(View.GONE);
         } else if (titleType == 1) {
             backBt.setVisibility(View.GONE);
             confirmBt.setVisibility(View.GONE);
             leftTv.setVisibility(View.VISIBLE);
             rightSpinner.setVisibility(View.VISIBLE);
+            rightTv.setVisibility(View.GONE);
         } else if (titleType == 2) {
             backBt.setVisibility(View.GONE);
             confirmBt.setVisibility(View.GONE);
             leftTv.setVisibility(View.GONE);
             rightSpinner.setVisibility(View.GONE);
+            rightTv.setVisibility(View.GONE);
         } else if (titleType == 3) {
             backBt.setVisibility(View.VISIBLE);
             confirmBt.setVisibility(View.GONE);
             leftTv.setVisibility(View.GONE);
             rightSpinner.setVisibility(View.VISIBLE);
+            rightTv.setVisibility(View.GONE);
         } else if (titleType == 4) {
             backBt.setVisibility(View.VISIBLE);
             confirmBt.setVisibility(View.GONE);
             leftTv.setVisibility(View.GONE);
             rightSpinner.setVisibility(View.GONE);
+            rightTv.setVisibility(View.GONE);
+        } else if (titleType == 5) {
+            backBt.setVisibility(View.VISIBLE);
+            confirmBt.setVisibility(View.GONE);
+            leftTv.setVisibility(View.GONE);
+            rightSpinner.setVisibility(View.GONE);
+            rightTv.setVisibility(View.VISIBLE);
         }
 
         //设置属性
@@ -116,6 +128,8 @@ public class TitleView extends ConstraintLayout {
         titleTv.setTextSize(titleSize);
         backBt.setBackgroundResource(leftIcon);
         confirmBt.setBackgroundResource(rightIcon);
+        rightTv.setText(rightText);
+        rightTv.setTextSize(textSize);
         leftTv.setText(leftText);
         leftTv.setTextSize(textSize);
     }

@@ -14,6 +14,7 @@
     <string name="password">密&#160;&#160;&#160;&#160;码</string>
     <string name="password_digits">0123456789qwertyuiopasdfghjklzxcvbnm</string>
     <string name="phone_digits">0123456789+</string>
+    <string name="path">显示轨迹</string>
     <string name="change_password">更改密码</string>
     <string name="forget">忘记密码</string>
     <string name="new_password">新密码</string>
@@ -48,7 +49,8 @@
     <integer name="title_icon">0</integer>
     <integer name="title_text">1</integer>
     <integer name="title_none">2</integer>
-    <integer name="title_back_text">3</integer>
+    <integer name="title_back_spinner">3</integer>
     <integer name="title_back">4</integer>
+    <integer name="title_back_text">5</integer>
     <string name="add">+</string>
 </resources>

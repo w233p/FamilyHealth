@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <com.example.msi.familyhealth.View.TitleView
         android:id="@+id/position_titleView"
@@ -12,8 +12,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:right_text="@string/path"
         app:title="@string/positon"
-        app:title_type="@integer/title_back" />
+        app:title_type="@integer/title_back_text" />
 
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:clickable="true"
+        app:layout_constraintTop_toBottomOf="@+id/position_titleView" />
 
 </android.support.constraint.ConstraintLayout>
