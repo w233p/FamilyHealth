@@ -152,6 +152,7 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
                 showToast("添加成功");
                 Intent intent = new Intent(MyDataActivity.this, CheckDataActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

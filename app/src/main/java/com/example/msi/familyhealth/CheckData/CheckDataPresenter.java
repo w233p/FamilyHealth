@@ -49,7 +49,7 @@ public class CheckDataPresenter extends BasePresenter<CheckDataContacts.ICheckDa
     public void chooseTimeclick(int time) {
         switch (time) {
             case 1:
-                checkDataModel.chartTime = checkDataModel.twelve;
+                checkDataModel.chartTime = checkDataModel.zero;
                 break;
             case 2:
                 checkDataModel.chartTime = checkDataModel.weekTime;

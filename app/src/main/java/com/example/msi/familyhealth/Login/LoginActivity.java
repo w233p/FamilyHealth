@@ -153,6 +153,7 @@ public class LoginActivity extends BaseActivity<LoginContacts.ILoginPresenter> i
         registerTv.startAnimation(ain_animation());
         passwordEd.setHint("");
         bottomBt.setText(getResources().getString(R.string.login));
+        backBt.setVisibility(View.GONE);
 
         state = LOGIN;
     }

@@ -21,16 +21,16 @@ public class MyLocationListener extends BDAbstractLocationListener {
 
         int errorCode = location.getLocType();
         //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
-/**上面位经纬度定位数据，下面是定位显示*/
+/**上面位经纬度定位数据，下面是定位显示,此处有问题未解决*/
         //mapView 销毁后不在处理新接收的位置
-        if (location == null || mMapView == null){
-            return;
-        }
-        MyLocationData locData = new MyLocationData.Builder()
-                .accuracy(location.getRadius())
-                // 此处设置开发者获取到的方向信息，顺时针0-360
-                .direction(location.getDirection()).latitude(location.getLatitude())
-                .longitude(location.getLongitude()).build();
-        mBaiduMap.setMyLocationData(locData);
+//        if (location == null || mMapView == null){
+//            return;
+//        }
+//        MyLocationData locData = new MyLocationData.Builder()
+//                .accuracy(location.getRadius())
+//                // 此处设置开发者获取到的方向信息，顺时针0-360
+//                .direction(location.getDirection()).latitude(location.getLatitude())
+//                .longitude(location.getLongitude()).build();
+//        mBaiduMap.setMyLocationData(locData);
     }
 }

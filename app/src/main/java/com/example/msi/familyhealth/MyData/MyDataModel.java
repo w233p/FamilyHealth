@@ -94,9 +94,9 @@ public class MyDataModel implements MyDataContacts.IMyDataModel {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             calendar.add(Calendar.MONTH, -1);
-            Date month = calendar.getTime();
-            long monthTime = month.getTime();
-            dbDailyDataBean.setTime(monthTime);
+//            Date month = calendar.getTime();
+//            long monthTime = month.getTime();
+            dbDailyDataBean.setTime(twelve);
 
             dbDailyDataBean.setData(getFloat(i))
                     .setDbItemBean(DataSupport.find(DbItemBean.class, i + 1))

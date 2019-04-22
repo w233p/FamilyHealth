@@ -36,11 +36,11 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
     List<DbHealthDataBean> dbHealthDataBeanList;
 
     public long ONE_DAY_MILLISECONEDS = 24 * 60 * 60 * 1000;
-    public long yearTime;
+    public long yearTime;//大于一年前
     public long monthTime;
     public long weekTime;
     public long dateTime;
-    public long zero;
+    public long zero;//大于今晚0点
     public long twelve;
     public long chartTime;//显示在此时间之后的数据
 
@@ -89,6 +89,12 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
         dateTime = date.getTime();
         zero = dateTime / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset();//今天0点的毫秒数
         twelve = zero + 24 * 60 * 60 * 1000 - 1;//今天23点59分59秒
+    }
+
+
+
+    public void dataAnalysis(List<DbDailyDataBean> dbDailyDataBeanList){
+
     }
 
     @Override

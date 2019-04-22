@@ -101,7 +101,6 @@ public class Fragment_commen extends BaseFragment<FragmentComContacts.IFragmentP
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 getPresenter().projectSelect((String) projectSp.getSelectedItem());
-//                listView.setAdapter(mainListAdapter);
                 mainListAdapter.notifyDataSetChanged();
                 listView.startAnimation(at_animation());
             }

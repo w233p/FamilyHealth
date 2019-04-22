@@ -75,7 +75,8 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
 
         getPresenter().chooseTimeclick(1);
         getPresenter().initChart(0, 0);
-
+        getPresenter().chooseTimeclick(1);
+        getPresenter().changeChartData(memberPositon, itemPositon);
     }
 
     @Override

@@ -11,6 +11,8 @@ public class UpDataItem {
     /**
      * 日常项目
      * 注，原为血糖血脂血压，现改为血糖，高低压
+     * 血糖范围（3.9-7.8）
+     * 血压-收缩压90-140-舒张压60-90
      */
     public static final String DAILY[] = {"血糖(mmol/L)", "高压(mmHg）", "低压(mmHg)"};//ed
     /**
