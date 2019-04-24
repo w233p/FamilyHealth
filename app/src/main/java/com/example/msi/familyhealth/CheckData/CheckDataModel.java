@@ -1,13 +1,11 @@
 package com.example.msi.familyhealth.CheckData;
 
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.example.msi.familyhealth.Data.DbDailyDataBean;
 import com.example.msi.familyhealth.Data.DbHealthDataBean;
 import com.example.msi.familyhealth.Data.DbItemBean;
 import com.example.msi.familyhealth.Data.DbMemberBean;
-import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -28,6 +26,7 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
     private LineDataSet lineDataSet;
     private LineData data;
     private LineChart lineChart;
+    private int itemPosition;
 
     List<Entry> entries;
     List<DbItemBean> dbItemBeanList;
@@ -35,6 +34,7 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
     List<DbMemberBean> dbMemberBeanList;
     List<DbHealthDataBean> dbHealthDataBeanList;
 
+    public String result = null;
     public long ONE_DAY_MILLISECONEDS = 24 * 60 * 60 * 1000;
     public long yearTime;//大于一年前
     public long monthTime;
@@ -46,24 +46,26 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
 
     @Override
     public List<String> itemSpinnerData() {
-        List<DbProjectBean> dbProjectBeanList = DataSupport.findAll(DbProjectBean.class);
         List<DbItemBean> dbItemBeanList = DataSupport.findAll(DbItemBean.class);
         project_item = new ArrayList<>();
 
-        for (int i = 0; i < dbItemBeanList.size(); i++) {
+        for (int i = 0, len = dbItemBeanList.size(); i < len; i++) {
             project_item.add(dbItemBeanList.get(i).getItem());
         }
         return project_item;
     }
 
+
+    //注：初始化时运行了3次
     @Override
     public List<String> memberSpinnerData() {
         List<DbMemberBean> dbMemberBeanList = DataSupport.findAll(DbMemberBean.class);
         member = new ArrayList<>();
 
-        for (int i = 0; i < dbMemberBeanList.size(); i++) {
+        for (int i = 0, len = dbMemberBeanList.size(); i < len; i++) {
             member.add(dbMemberBeanList.get(i).getMemberName());
         }
+
         return member;
     }
 
@@ -91,14 +93,9 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
         twelve = zero + 24 * 60 * 60 * 1000 - 1;//今天23点59分59秒
     }
 
-
-
-    public void dataAnalysis(List<DbDailyDataBean> dbDailyDataBeanList){
-
-    }
-
     @Override
     public LineData setChartData(int memberPosition, int itemPosition) {
+        this.itemPosition = itemPosition;
 
         initTime();
 
@@ -149,7 +146,7 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
 
     @Override
     public LineData changeChartData(int memberPosition, int itemPosition) {
-
+        this.itemPosition = itemPosition;
         dbMemberBeanList.clear();
         dbMemberBeanList = DataSupport
                 .where("membername = ?", String.valueOf(member.get(memberPosition)))
@@ -173,10 +170,10 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
     }
 
     private void chooseBean(int itemPosition) {
-        if (itemPosition + 1 > 0 && itemPosition < 3) {
+        this.itemPosition = itemPosition;
+        if (itemPosition > -1 && itemPosition < 3) {
             if (DataSupport.where("dbmemberbean_id = ?", String.valueOf(dbMemberBeanList.get(0).getId())).find(DbDailyDataBean.class).size() >= 1 &&
                     DataSupport.where("dbitembean_id = ?", String.valueOf(dbItemBeanList.get(0).getId())).find(DbDailyDataBean.class).size() >= 1) {
-
                 dbDailyDataBeanList = DataSupport
                         .where("dbitembean_id = ? and dbmemberbean_id = ?"
                                 , String.valueOf(dbItemBeanList.get(0).getId())
@@ -204,12 +201,14 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
 
     private void chooseTime(List list) {
         if (list.equals(dbDailyDataBeanList)) {
+            List<Float> data = new ArrayList<>();
             for (int i = 0; i < dbDailyDataBeanList.size(); i++) {
                 if (dbDailyDataBeanList.get(i).getTime() > chartTime && dbDailyDataBeanList != null) {
+                    data.add((float) dbDailyDataBeanList.get(i).getData());
                     entries.add(new Entry(i, (float) dbDailyDataBeanList.get(i).getData()));
-                } else {
                 }
             }
+            result = DataAnalysis.dailyDataAnalysis(data, itemPosition);
             if (entries.size() == 0) {
                 entries.add(new Entry(1, 0));
             }
@@ -217,7 +216,6 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
             for (int i = 0; i < dbHealthDataBeanList.size(); i++) {
                 if (dbHealthDataBeanList.get(i).getHealthTime() > chartTime && dbHealthDataBeanList != null) {
                     entries.add(new Entry(i, (float) dbHealthDataBeanList.get(i).getHealthData()));
-                } else {
                 }
             }
             if (entries.size() == 0) {
@@ -264,5 +262,13 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
 
     public void setLineChart(LineChart lineChart) {
         this.lineChart = lineChart;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }

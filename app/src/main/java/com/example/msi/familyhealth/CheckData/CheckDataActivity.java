@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.msi.familyhealth.Data.DbItemBean;
 import com.example.msi.familyhealth.Data.DbProjectBean;
@@ -30,6 +31,7 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
     private Button weekBt;
     private Button monthBt;
     private Button yearBt;
+    private TextView analysisText;
 
 
     @Override
@@ -57,6 +59,7 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
         weekBt = (Button) findViewById(R.id.week_chart);
         monthBt = (Button) findViewById(R.id.month_chart);
         yearBt = (Button) findViewById(R.id.year_chart);
+        analysisText = (TextView) findViewById(R.id.analysisText);
 
         mLineChart = (LineChart) findViewById(R.id.lineChart);
         mLineChart.setDrawBorders(true);//显示边界
@@ -73,7 +76,7 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
             itemSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getItemSpinnerData()));
         }
 
-        getPresenter().chooseTimeclick(1);
+//        getPresenter().chooseTimeclick(1);
         getPresenter().initChart(0, 0);
         getPresenter().chooseTimeclick(1);
         getPresenter().changeChartData(memberPositon, itemPositon);
@@ -159,5 +162,9 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
 
     public void setMemberPositon(int memberPositon) {
         this.memberPositon = memberPositon;
+    }
+
+    public void setAnalysisText(String msg) {
+        analysisText.setText(msg);
     }
 }

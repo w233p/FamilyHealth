@@ -2,7 +2,6 @@ package com.example.msi.familyhealth.CheckData;
 
 import com.example.msi.familyhealth.MvpBase.IBasePresenter;
 import com.example.msi.familyhealth.MvpBase.IBaseView;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 
 import java.util.List;
@@ -11,36 +10,38 @@ public class CheckDataContacts {
 
     public interface ICheckDataView extends IBaseView {
         void showChart(LineData data);
+
+        void setAnalysisText(String msg);
     }
 
 
     public interface ICheckDataPresenter extends IBasePresenter {
-        public List<String> getItemSpinnerData();
+        List<String> getItemSpinnerData();
 
-        public List<String> getMemberSpinnerData();
+        List<String> getMemberSpinnerData();
 
-        public void initChart(int memberPosition, int itemPosition);
+        void initChart(int memberPosition, int itemPosition);
 
-        public void itemSelected(int position);
+        void itemSelected(int position);
 
-        public void memberSelected(int memberPositon, int itemPositon);
+        void memberSelected(int memberPositon, int itemPositon);
 
-        public void changeChartData(int memberPositon, int itemPositon);
+        void changeChartData(int memberPositon, int itemPositon);
 
-        public void chooseTimeclick(int time);
+        void chooseTimeclick(int time);
 
     }
 
     public interface ICheakDataModel {
-        public List<String> itemSpinnerData();
+        List<String> itemSpinnerData();
 
-        public List<String> memberSpinnerData();
+        List<String> memberSpinnerData();
 
-        public LineData setChartData(int memberPosition, int itemPosition);
+        LineData setChartData(int memberPosition, int itemPosition);
 
-        public LineData changeChartName(int position);
+        LineData changeChartName(int position);
 
-        public LineData changeChartData(int memberPositon, int itemPositon);
+        LineData changeChartData(int memberPositon, int itemPositon);
     }
 
 }
