@@ -16,6 +16,7 @@ import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.CheckMarkView;
 import com.example.msi.familyhealth.View.ExitApplication;
+import com.example.msi.familyhealth.View.TitleView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.LineData;
 
@@ -32,7 +33,7 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
     private Button monthBt;
     private Button yearBt;
     private TextView analysisText;
-
+    private TitleView checkDataTitleView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
         monthBt = (Button) findViewById(R.id.month_chart);
         yearBt = (Button) findViewById(R.id.year_chart);
         analysisText = (TextView) findViewById(R.id.analysisText);
+        checkDataTitleView = (TitleView) findViewById(R.id.data_titleView);
 
         mLineChart = (LineChart) findViewById(R.id.lineChart);
         mLineChart.setDrawBorders(true);//显示边界
@@ -146,6 +148,13 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        checkDataTitleView.setBackBtOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

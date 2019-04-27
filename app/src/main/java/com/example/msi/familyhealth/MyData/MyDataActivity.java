@@ -147,12 +147,15 @@ public class MyDataActivity extends BaseActivity<MyDataContacts.IMyDataPresenter
         titleView.setConfirmBtOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveToDataBase();
-//                test();
-                showToast("添加成功");
-                Intent intent = new Intent(MyDataActivity.this, CheckDataActivity.class);
-                startActivity(intent);
-                finish();
+                if (viewPager.getCurrentItem() == 0) {
+                    saveToDataBase();
+                    showToast("添加成功");
+                    Intent intent = new Intent(MyDataActivity.this, CheckDataActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    showToast("暂不支持自动上传");
+                }
             }
         });
 

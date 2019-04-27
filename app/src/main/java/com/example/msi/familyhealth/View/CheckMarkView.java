@@ -35,7 +35,6 @@ public class CheckMarkView extends MarkerView {
 
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
-        TimeTest.TimeTestStart();
         if (e instanceof CandleEntry) {
             CandleEntry candleEntry = (CandleEntry) e;
             textView2.setText("" + MyUtils.formatNumber(candleEntry.getHigh(), 2, true));
@@ -45,7 +44,6 @@ public class CheckMarkView extends MarkerView {
 
         setWaring();
         textView1.setText(item);
-        TimeTest.TimeTestEnd("setWaring");
         super.refreshContent(e, highlight);
     }
 

@@ -10,6 +10,7 @@ import com.example.msi.familyhealth.Data.DbMemberMessageBean;
 import com.example.msi.familyhealth.Data.DbProjectBean;
 import com.example.msi.familyhealth.MvpBase.BaseFragment;
 import com.example.msi.familyhealth.MyData.DataFragment.FragmentComContacts;
+import com.example.msi.familyhealth.TimeTest;
 
 import org.litepal.crud.DataSupport;
 
@@ -84,28 +85,30 @@ public class MyDataModel implements MyDataContacts.IMyDataModel {
         Date date = new Date();
         long dateTime = date.getTime();
         long zero = dateTime / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset();//今天0点的毫秒数
-        long twelve = zero +24*60*60*1000-1;//今天23点59分59秒
+        long twelve = zero + 24 * 60 * 60 * 1000 - 1;//今天23点59分59秒
 
+        Float data;
+        TimeTest.TimeTestStart();
         //item :血糖id=1 高压id=2 低压id=3
         for (int i = 0; i < 3; i++) {
-            DbDailyDataBean dbDailyDataBean = new DbDailyDataBean();
+            data = getFloat(i);
+            if (data != 0) {
+                DbDailyDataBean dbDailyDataBean = new DbDailyDataBean();
 //            dbDailyDataBean.setTime(twelve);
-            //前一月的毫秒
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Date());
-            calendar.add(Calendar.MONTH, -1);
+//            Calendar calendar = Calendar.getInstance();
+//            calendar.setTime(new Date());
+//            calendar.add(Calendar.MONTH, -1);
 //            Date month = calendar.getTime();
 //            long monthTime = month.getTime();
-            dbDailyDataBean.setTime(twelve);
+                dbDailyDataBean.setTime(twelve);
+                dbDailyDataBean.setData(data)//                           数据库的id是从1开始的
+                        .setDbItemBean(DataSupport.find(DbItemBean.class, i + 1))
+                        .setDbMemberBean(dbMemberBeanList.get(0));
 
-            dbDailyDataBean.setData(getFloat(i))
-                    .setDbItemBean(DataSupport.find(DbItemBean.class, i + 1))
-                    .setDbMemberBean(dbMemberBeanList.get(0));
-            dbDailyDataBean.save();
+                dbDailyDataBean.save();
+            }
         }
-
-
-
+        TimeTest.TimeTestEnd("写入数据");
     }
 
     @Override

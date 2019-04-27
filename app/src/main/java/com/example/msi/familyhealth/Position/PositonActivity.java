@@ -1,32 +1,33 @@
 package com.example.msi.familyhealth.Position;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.CoordType;
-import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.MapStatus;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.example.msi.familyhealth.Manifest;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.model.LatLng;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.ExitApplication;
 
+//212265轨迹服务id
+
 public class PositonActivity extends BaseActivity<PositionContacts.IPositionPresenter> implements PositionContacts.IPositionView {
     private MapView mMapView = null;
+//    private SensorManager mSensorManager;
     private BaiduMap mBaiduMap = null;
-    public LocationClient mLocationClient = null;
+    private LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
+    boolean isFirstLoc = true; // 是否首次定位
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class PositonActivity extends BaseActivity<PositionContacts.IPositionPres
         mMapView = (MapView) findViewById(R.id.bmapView);
         mBaiduMap = mMapView.getMap();
         mBaiduMap.setMyLocationEnabled(true);
+// mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);//&#x83b7;&#x53d6;&#x4f20;&#x611f;&#x5668;&#x7ba1;&#x7406;&#x670d;&#x52a1;
     }
 
     @Override
@@ -66,6 +68,8 @@ public class PositonActivity extends BaseActivity<PositionContacts.IPositionPres
         super.onResume();
         //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
         mMapView.onResume();
+//        mSensorManager.registerListener((SensorEventListener) this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
+//                SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
@@ -73,6 +77,12 @@ public class PositonActivity extends BaseActivity<PositionContacts.IPositionPres
         super.onPause();
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapView.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+//        mSensorManager.unregisterListener((SensorEventListener) this);
+        super.onStop();
     }
 
     @Override
@@ -141,5 +151,44 @@ public class PositonActivity extends BaseActivity<PositionContacts.IPositionPres
         //调用LocationClient的start()方法，便可发起定位请求
 
         // 只需发起定位，便能够从BDAbstractLocationListener监听接口中获取定位结果信息。
+    }
+
+    public class MyLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            //此处的BDLocation为定位结果信息类，通过它的各种get方法可获取定位相关的全部结果
+            //以下只列举部分获取经纬度相关（常用）的结果信息
+            //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
+
+            double latitude = location.getLatitude();    //获取纬度信息
+            double longitude = location.getLongitude();    //获取经度信息
+            float radius = location.getRadius();    //获取定位精度，默认值为0.0f
+
+            String coorType = location.getCoorType();
+            //获取经纬度坐标类型，以LocationClientOption中设置过的坐标类型为准
+
+            int errorCode = location.getLocType();
+            //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明
+/**上面位经纬度定位数据，下面是定位显示,此处有问题未解决*/
+            //mapView 销毁后不在处理新接收的位置
+            if (location == null || mMapView == null) {
+                return;
+            }
+            MyLocationData locData = new MyLocationData.Builder()
+                    .accuracy(location.getRadius())
+                    // 此处设置开发者获取到的方向信息，顺时针0-360
+                    .direction(location.getDirection()).latitude(location.getLatitude())
+                    .longitude(location.getLongitude()).build();
+            mBaiduMap.setMyLocationData(locData);
+
+            if (isFirstLoc) {
+                isFirstLoc = false;
+                LatLng ll = new LatLng(location.getLatitude(),
+                        location.getLongitude());
+                MapStatus.Builder builder = new MapStatus.Builder();
+                builder.target(ll).zoom(18.0f);
+                mBaiduMap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+            }
+        }
     }
 }
