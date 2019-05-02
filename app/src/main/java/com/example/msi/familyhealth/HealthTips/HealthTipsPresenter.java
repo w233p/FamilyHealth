@@ -18,11 +18,15 @@ public class HealthTipsPresenter extends BasePresenter<HealthTipsContacts.IHealt
 
     @Override
     public void listSetAdapter(Context context, ListView tipListView) {
-        tipListView.setAdapter(new HealthTipListViewAdapter(context,healthTipsModel.initTipData()) {
+        tipListView.setAdapter(new HealthTipListViewAdapter(context, healthTipsModel.initTipData()) {
             @Override
             public void convert(ViewHolder viewHolder, String item) {
-                viewHolder.setText(R.id.health_tip_text,item);
+                viewHolder.setText(R.id.health_tip_text, item);
             }
         });
+    }
+
+    public void showTip(int position) {
+        healthTipsModel.getPositionData(position);
     }
 }

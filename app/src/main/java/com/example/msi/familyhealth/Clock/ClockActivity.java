@@ -70,16 +70,20 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
 
         clockListView = (OneListView) findViewById(R.id.clock_listview);
 
-        testInitData();
+//        testInitData();
     }
 
     private void testInitData() {
         if (DataSupport.findAll(DbClockBean.class).size() == 0) {
-            //模拟器上测试用
-            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "wyp").find(DbMemberBean.class);
-            //真机测试用
-//            List<DbMemberBean> dbMemberBeanList = DataSupport.where("membername = ?", "自己").find(DbMemberBean.class);
+            List<DbMemberBean> dbMemberBeanList;
 
+            if (DataSupport.where("membername = ?", "wyp").find(DbMemberBean.class) != null) {
+                //模拟器上测试用
+                dbMemberBeanList = DataSupport.where("membername = ?", "wyp").find(DbMemberBean.class);
+            } else {
+                //真机测试用
+                dbMemberBeanList = DataSupport.where("membername = ?", "自己").find(DbMemberBean.class);
+            }
 
 //        List<DbClockBean> dbClockBeanList = DataSupport.findAll(DbClockBean.class);
 //        for (int i = 0; i < dbClockBeanList.size(); i++) {
@@ -220,6 +224,4 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha_translate_x);
         return animation;
     }
-
-
 }

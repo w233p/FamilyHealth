@@ -4,7 +4,18 @@ import android.content.Context;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.widget.Button;
 
+import com.baidu.trace.Trace;
+import com.baidu.trace.LBSTraceClient;
+import com.baidu.trace.model.OnCustomAttributeListener;
+import com.baidu.trace.model.OnTraceListener;
+import com.baidu.trace.api.track.OnTrackListener;
+import com.baidu.trace.api.fence.OnFenceListener;
+import com.baidu.trace.api.entity.OnEntityListener;
+import com.baidu.trace.api.analysis.OnAnalysisListener;
+import com.baidu.trace.api.bos.OnBosListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -15,19 +26,23 @@ import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.trace.LBSTraceClient;
+import com.baidu.trace.model.PushMessage;
 import com.example.msi.familyhealth.MvpBase.BaseActivity;
 import com.example.msi.familyhealth.R;
 import com.example.msi.familyhealth.View.ExitApplication;
+import com.example.msi.familyhealth.View.TitleView;
 
 //212265轨迹服务id
 
 public class PositonActivity extends BaseActivity<PositionContacts.IPositionPresenter> implements PositionContacts.IPositionView {
     private MapView mMapView = null;
-//    private SensorManager mSensorManager;
     private BaiduMap mBaiduMap = null;
     private LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
     boolean isFirstLoc = true; // 是否首次定位
+
+    private TitleView positionTitleView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,7 +58,9 @@ public class PositonActivity extends BaseActivity<PositionContacts.IPositionPres
         getPresenter().getPermission(this);
 
         position(getApplicationContext());
+
     }
+
 
     @Override
     public PositionContacts.IPositionPresenter onBindPresenter() {
@@ -53,14 +70,19 @@ public class PositonActivity extends BaseActivity<PositionContacts.IPositionPres
     @Override
     public void initView() {
         mMapView = (MapView) findViewById(R.id.bmapView);
+        positionTitleView = (TitleView) findViewById(R.id.position_titleView);
         mBaiduMap = mMapView.getMap();
         mBaiduMap.setMyLocationEnabled(true);
-// mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);//&#x83b7;&#x53d6;&#x4f20;&#x611f;&#x5668;&#x7ba1;&#x7406;&#x670d;&#x52a1;
     }
 
     @Override
     public void addListener() {
+        positionTitleView.setRightTextViewOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     @Override

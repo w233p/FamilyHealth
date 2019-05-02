@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.msi.familyhealth.R;
@@ -23,12 +21,9 @@ public class SimpleDialog extends Dialog {
     public TextView dialog_title;
     public EditText dialog_message;
     public Button bt_cancel, bt_confirm;
-//    private LinearLayout ll_button;
     protected Context mContext;
     private View.OnClickListener listener;
     private View customView;
-    //	@Bind(R.id.icon)
-//    ImageView icon;
 
 
     public SimpleDialog(Context context, int style) {
@@ -36,9 +31,6 @@ public class SimpleDialog extends Dialog {
         mContext = context;
         customView = LayoutInflater.from(context).inflate(R.layout.dialog_simple, null);
 
-//        icon = (ImageView) customView.findViewById(R.id.icon);
-
-//        ll_button = (LinearLayout) customView.findViewById(R.id.ll_button);
         dialog_title = (TextView) customView.findViewById(R.id.dialog_title);
         setTitle("提示信息");
         dialog_message = (EditText) customView.findViewById(R.id.dialog_message);
@@ -60,8 +52,6 @@ public class SimpleDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(customView);
-        //ButterKnife  view绑定
-        //ButterKnife.bind(this,customView);
     }
 
     public SimpleDialog setClickListener(View.OnClickListener listener) {
@@ -79,12 +69,4 @@ public class SimpleDialog extends Dialog {
         dialog_title.setText(title);
         return this;
     }
-
-//    public SimpleDialog setIcon(int iconResId) {
-//        dialog_title.setVisibility(View.GONE);
-//        icon.setVisibility(View.VISIBLE);
-//        icon.setBackgroundResource(iconResId);
-//
-//        return this;
-//    }
 }

@@ -1,6 +1,8 @@
 package com.example.msi.familyhealth.Set;
 
 
+import com.baidu.trace.LBSTraceClient;
+import com.baidu.trace.model.OnTraceListener;
 import com.example.msi.familyhealth.MvpBase.IBasePresenter;
 import com.example.msi.familyhealth.MvpBase.IBaseView;
 
@@ -12,22 +14,32 @@ public class SetContacts {
     }
 
     public interface ISetPresenter extends IBasePresenter {
-        public List<String> getSetListDataItem();
+        List<String> getSetListDataItem();
 
-        public void addMemberClick(String memberName, String phone);
+        void addMemberClick(String memberName, String phone);
 
-        public String[] getMemberList();
+        String[] getMemberList();
 
-        public String getPhoneNumber(int position);
+        String getPhoneNumber(int position);
+
+        void initTrace();
+
+//        OnTraceListener getmTraceListener();
+//
+//        LBSTraceClient getmTraceClient();
+
+        void traceStart();
+
+        void traceStop();
     }
 
     public interface ISetModel {
-        public List<String> initSetListDataItem();
+        List<String> initSetListDataItem();
 
-        public boolean addMember(String memberName, String phone);
+        boolean addMember(String memberName, String phone);
 
-        public String[] getMember();
+        String[] getMember();
 
-        public String phoneNumber(int position);
+        String phoneNumber(int position);
     }
 }

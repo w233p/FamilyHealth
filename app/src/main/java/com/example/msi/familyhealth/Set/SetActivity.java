@@ -34,6 +34,7 @@ public class SetActivity extends BaseActivity<SetContacts.ISetPresenter> impleme
     private MyListViewAdapter myListViewAdapter;
     private List<Activity> activityList = new LinkedList();
     public String phoneNumber;
+    int[] index = {-1, 1};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -105,11 +106,12 @@ public class SetActivity extends BaseActivity<SetContacts.ISetPresenter> impleme
                         twoEditDialog.show();
                         break;
                     case 5:
-                        AlertDialog.Builder builder = new AlertDialog.Builder(SetActivity.this);
-                        builder.setTitle("设置谁为紧急联系人");
-                        builder.setSingleChoiceItems(getPresenter().getMemberList(), -1, new DialogInterface.OnClickListener() {
+                        AlertDialog.Builder callSetBuilder = new AlertDialog.Builder(SetActivity.this);
+                        callSetBuilder.setTitle("设置谁为紧急联系人");
+                        callSetBuilder.setSingleChoiceItems(getPresenter().getMemberList(), index[0], new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                index[0] = which;
                                 phoneNumber = getPresenter().getPhoneNumber(which);
                                 showToast(phoneNumber);
                                 ContentValues contentValues = new ContentValues();
@@ -118,14 +120,35 @@ public class SetActivity extends BaseActivity<SetContacts.ISetPresenter> impleme
                                 dialog.dismiss();
                             }
                         });
-                        builder.show();
+                        callSetBuilder.show();
                         break;
-                    case 7:
+                    case 6:
+                        AlertDialog.Builder traceSetBuilder = new AlertDialog.Builder(SetActivity.this);
+                        traceSetBuilder.setTitle("开启/关闭轨迹搜集");
+                        String[] open_close = {"开启", "关闭"};
+                        traceSetBuilder.setSingleChoiceItems(open_close, index[1], new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                index[1] = which;
+                                switch (which) {
+                                    case 0:
+                                        getPresenter().traceStart();
+                                        dialog.dismiss();
+                                        break;
+                                    case 1:
+                                        getPresenter().traceStop();
+                                        dialog.dismiss();
+                                }
+                            }
+                        });
+                        traceSetBuilder.show();
+                        break;
+                    case 8:
                         Intent intent = new Intent(SetActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                         break;
-                    case 8:
+                    case 9:
                         ExitApplication.getInstance().finishAllActivity();//退出所有activity
                         break;
                     default:

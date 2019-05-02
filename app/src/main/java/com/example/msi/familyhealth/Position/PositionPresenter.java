@@ -10,6 +10,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 
+import com.baidu.trace.LBSTraceClient;
+import com.baidu.trace.api.track.OnTrackListener;
+import com.baidu.trace.model.ProtocolType;
 import com.example.msi.familyhealth.MvpBase.BasePresenter;
 
 public class PositionPresenter extends BasePresenter<PositionContacts.IPositionView> implements PositionContacts.IPositionPresenter {
@@ -18,10 +21,52 @@ public class PositionPresenter extends BasePresenter<PositionContacts.IPositionV
     private static final int BAIDU_ACCESS_FINE_LOCATION = 300;
     private static final int BAIDU_READ_EXTERNAL_STORAGE = 400;
     private static final int BAIDU_WRITE_EXTERNAL_STORAGE = 500;
+    private LBSTraceClient client;
 
     public PositionPresenter(PositionContacts.IPositionView view) {
         super(view);
     }
+
+//    @Override
+//    public void showTrace() {
+//        client = new LBSTraceClient(getView().getSelfActivity().getApplication().getApplicationContext());
+//
+//        // 设置协议类型，0为http，1为https
+////        int protocoType = 1;
+//        client.setProtocolType(ProtocolType.HTTPS);
+//
+//        long serviceId = 212265;
+////entity标识
+//        String entityName = "wyp's phone";
+////是否返回精简的结果（0 : 将只返回经纬度，1 : 将返回经纬度及其他属性信息）
+//        int simpleReturn = 0;
+////开始时间（Unix时间戳）
+//        int startTime = (int) (System.currentTimeMillis() / 1000 - 24 * 60 * 60);
+////结束时间（Unix时间戳）
+//        int endTime = (int) (System.currentTimeMillis() / 1000);
+////分页大小
+//        int pageSize = 1000;
+////分页索引
+//        int pageIndex = 1;
+//
+//        //轨迹查询监听器
+//        OnTrackListener trackListener = new OnTrackListener() {
+//            //请求失败回调接口
+//            @Override
+//            public void onRequestFailedCallback(String arg0) {
+//                System.out.println("track请求失败回调接口消息 : " + arg0);
+//            }
+//
+//            // 查询历史轨迹回调接口
+//            @Override
+//            public void onQueryHistoryTrackCallback(String arg0) {
+//                System.out.println("查询历史轨迹回调接口消息 : " + arg0);
+//            }
+//        };
+//
+////查询历史轨迹
+//        this.client.queryHistoryTrack(serviceId, entityName, simpleReturn, startTime, endTime, pageSize, pageIndex, trackListener);
+//    }
 
     @Override
     public void getPermission(Context context) {

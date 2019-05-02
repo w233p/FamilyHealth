@@ -13,4 +13,8 @@ public class HealthTipsModel implements HealthTipsContacts.IHealthTipModel {
         }
         return tipList;
     }
+
+    public String getPositionData(int position) {
+        return tipList.get(position);
+    }
 }

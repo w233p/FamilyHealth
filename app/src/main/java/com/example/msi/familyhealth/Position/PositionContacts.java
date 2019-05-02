@@ -12,6 +12,8 @@ public class PositionContacts {
 
     public interface IPositionPresenter extends IBasePresenter {
         void getPermission(Context context);
+
+//        void showTrace();
     }
 
     public interface IPositionModel {

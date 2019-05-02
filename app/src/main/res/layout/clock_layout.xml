@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/clock"
         app:right_text="@string/family_member"
-        app:title_type="@integer/title_back_text" />
+        app:title_type="@integer/title_back_spinner" />
 
     <com.example.msi.familyhealth.View.OneListView
         android:id="@+id/clock_listview"

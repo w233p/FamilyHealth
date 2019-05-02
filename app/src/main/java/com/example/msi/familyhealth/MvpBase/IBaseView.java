@@ -1,5 +1,7 @@
 package com.example.msi.familyhealth.MvpBase;
 
+import android.content.DialogInterface;
+
 /**
  * view的接口
  */
@@ -17,6 +19,8 @@ public interface IBaseView extends IBaseXView {
     /**
      * 显示dialog
      */
+    void showDialog(String positiveMsg, String negativeMsg, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener);
+
     void showDialog();
 
     /**

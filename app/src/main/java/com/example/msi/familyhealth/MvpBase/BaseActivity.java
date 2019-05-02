@@ -1,5 +1,8 @@
 package com.example.msi.familyhealth.MvpBase;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Toast;
@@ -13,9 +16,16 @@ public abstract class BaseActivity<P extends IBasePresenter> extends BaseXActivi
         LitePal.initialize(this);
     }
 
-    /**
-     * 显示dialog
-     */
+//    /**
+//     * 显示dialog
+//     */
+//    @Override
+//    public void showDialog(String positiveMsg, String negativeMsg, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener) {
+//        AlertDialog.Builder builder = new AlertDialog().Builder(this);
+//        builder.setPositiveButton(positiveMsg, positiveListener);
+//        builder.setNegativeButton(negativeMsg, negativeListener);
+//    }
+
     @Override
     public void showDialog() {
 

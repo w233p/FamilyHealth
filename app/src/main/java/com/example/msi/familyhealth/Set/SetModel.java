@@ -20,6 +20,7 @@ public class SetModel implements SetContacts.ISetModel {
         dataList.add("1");
         dataList.add("监护人选项");
         dataList.add("紧急呼叫号码");
+        dataList.add("定位选项");
         dataList.add("1");
         dataList.add("退出账号");
         dataList.add("退出软件");
@@ -53,4 +54,6 @@ public class SetModel implements SetContacts.ISetModel {
 
         return dbMemberBeanList.get(position).getMemberTelephone();
     }
+
+
 }

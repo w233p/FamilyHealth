@@ -155,4 +155,8 @@ public class TitleView extends ConstraintLayout {
         rightSpinner.setAdapter(new ArrayAdapter<String>(context, R.layout.spinner_item, R.id.spinnerTv, list));
     }
 
+    public void setRightTextViewOnclickListener(OnClickListener onclickListener) {
+        rightTv.setOnClickListener(onclickListener);
+    }
+
 }

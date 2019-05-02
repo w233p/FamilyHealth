@@ -15,12 +15,6 @@
         app:title="@string/set"
         app:title_type="@integer/title_back" />
 
-	<!--<include-->
-		<!--android:layout="R.layout."/>-->
-	
-    <!--<TextView-->
-		<!--android:id="@id/acountTv linkMember Jianhuren CallNumber ExitAcount ExitApp"/>-->
-    <!---->
     <com.example.msi.familyhealth.View.OneListView
         android:layout_width="match_parent"
         android:id="@+id/set_listview"

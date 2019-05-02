@@ -3,7 +3,7 @@ package com.example.msi.familyhealth.CheckData;
 import com.example.msi.familyhealth.MvpBase.BasePresenter;
 
 import java.util.List;
-
+//论文选题提纲思路，模块实现调试
 public class CheckDataPresenter extends BasePresenter<CheckDataContacts.ICheckDataView> implements CheckDataContacts.ICheckDataPresenter {
 
     CheckDataModel checkDataModel = new CheckDataModel();
