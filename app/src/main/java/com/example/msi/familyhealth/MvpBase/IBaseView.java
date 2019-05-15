@@ -19,7 +19,7 @@ public interface IBaseView extends IBaseXView {
     /**
      * 显示dialog
      */
-    void showDialog(String positiveMsg, String negativeMsg, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener);
+//    void showDialog(String positiveMsg, String negativeMsg, DialogInterface.OnClickListener positiveListener, DialogInterface.OnClickListener negativeListener);
 
     void showDialog();
 

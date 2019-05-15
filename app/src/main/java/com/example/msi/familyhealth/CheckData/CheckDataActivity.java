@@ -78,10 +78,10 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
             itemSp.setAdapter(new ArrayAdapter<String>(this, R.layout.spinner_item, R.id.spinnerTv, getPresenter().getItemSpinnerData()));
         }
 
-//        getPresenter().chooseTimeclick(1);
         getPresenter().initChart(0, 0);
         getPresenter().chooseTimeclick(1);
         getPresenter().changeChartData(memberPositon, itemPositon);
+        Log.e("main","1");
     }
 
     @Override
@@ -123,7 +123,6 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setItemPositon(position);
-//                getPresenter().itemSelected(position);
                 getPresenter().changeChartData(memberPositon, position);
                 checkMarkView.setItem(getPresenter().getItemSpinnerData().get(position));
                 mLineChart.animateX(200);//从左到右展开
@@ -140,7 +139,6 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setMemberPositon(position);
-//                getPresenter().memberSelected(position,itemPositon);
                 getPresenter().changeChartData(position, itemPositon);
                 mLineChart.animateX(200);//从左到右展开
             }

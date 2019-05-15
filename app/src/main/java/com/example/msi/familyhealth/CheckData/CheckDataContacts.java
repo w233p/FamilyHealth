@@ -39,9 +39,8 @@ public class CheckDataContacts {
 
         LineData setChartData(int memberPosition, int itemPosition);
 
-        LineData changeChartName(int position);
+        LineData changeChartLabel(int position);
 
-        LineData changeChartData(int memberPositon, int itemPositon);
     }
 
 }

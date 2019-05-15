@@ -28,7 +28,7 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
     private LineChart lineChart;
     private int itemPosition;
 
-    List<Entry> entries;
+    List<Entry> entries = null;
     List<DbItemBean> dbItemBeanList;
     List<DbDailyDataBean> dbDailyDataBeanList;
     List<DbMemberBean> dbMemberBeanList;
@@ -117,7 +117,11 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
                 .where("item = ?", String.valueOf(project_item.get(itemPosition)))
                 .find(DbItemBean.class);
 
-        entries = new ArrayList<>();
+        if (entries == null) {
+            entries = new ArrayList<>();
+        } else {
+            entries.clear();
+        }
 
         if (dbDailyDataBeanList != null) {
             dbDailyDataBeanList.clear();
@@ -138,36 +142,37 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
     }
 
     @Override
-    public LineData changeChartName(int position) {
+    public LineData changeChartLabel(int position) {
         lineDataSet.setLabel(String.valueOf(project_item.get(position)));
         data = new LineData(lineDataSet);
         return data;
     }
-
-    @Override
-    public LineData changeChartData(int memberPosition, int itemPosition) {
-        this.itemPosition = itemPosition;
-        dbMemberBeanList.clear();
-        dbMemberBeanList = DataSupport
-                .where("membername = ?", String.valueOf(member.get(memberPosition)))
-                .find(DbMemberBean.class);
-        Log.e("changeChartData: ", String.valueOf(member.get(memberPosition)));
-
-        dbItemBeanList.clear();
-        dbItemBeanList = DataSupport
-                .where("item = ?", String.valueOf(project_item.get(itemPosition)))
-                .find(DbItemBean.class);
-
-        entries = new ArrayList<>();
-
-        chooseBean(itemPosition);
-
-        data.removeDataSet(lineDataSet);
-        lineDataSet = new LineDataSet(entries, String.valueOf(project_item.get(itemPosition)));
-
-        data.addDataSet(lineDataSet);
-        return data;
-    }
+/**
+ * 与setchanrtdata代码逻辑重复*/
+//    @Override
+//    public LineData changeChartData(int memberPosition, int itemPosition) {
+//        this.itemPosition = itemPosition;
+//        dbMemberBeanList.clear();
+//        dbMemberBeanList = DataSupport
+//                .where("membername = ?", String.valueOf(member.get(memberPosition)))
+//                .find(DbMemberBean.class);
+//        Log.e("changeChartData: ", String.valueOf(member.get(memberPosition)));
+//
+//        dbItemBeanList.clear();
+//        dbItemBeanList = DataSupport
+//                .where("item = ?", String.valueOf(project_item.get(itemPosition)))
+//                .find(DbItemBean.class);
+//
+//        entries = new ArrayList<>();
+//
+//        chooseBean(itemPosition);
+//
+//        data.removeDataSet(lineDataSet);
+//        lineDataSet = new LineDataSet(entries, String.valueOf(project_item.get(itemPosition)));
+//
+//        data.addDataSet(lineDataSet);
+//        return data;
+//    }
 
     private void chooseBean(int itemPosition) {
         this.itemPosition = itemPosition;
@@ -202,7 +207,7 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
     private void chooseTime(List list) {
         if (list.equals(dbDailyDataBeanList)) {
             List<Float> data = new ArrayList<>();
-            for (int i = 0; i < dbDailyDataBeanList.size(); i++) {
+            for (int i = 0,len =dbDailyDataBeanList.size(); i < len; i++) {
                 if (dbDailyDataBeanList.get(i).getTime() > chartTime && dbDailyDataBeanList != null) {
                     data.add((float) dbDailyDataBeanList.get(i).getData());
                     entries.add(new Entry(i, (float) dbDailyDataBeanList.get(i).getData()));
@@ -213,7 +218,7 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
                 entries.add(new Entry(1, 0));
             }
         } else if (list.equals(dbHealthDataBeanList)) {
-            for (int i = 0; i < dbHealthDataBeanList.size(); i++) {
+            for (int i = 0,len = dbHealthDataBeanList.size();i < len; i++) {
                 if (dbHealthDataBeanList.get(i).getHealthTime() > chartTime && dbHealthDataBeanList != null) {
                     entries.add(new Entry(i, (float) dbHealthDataBeanList.get(i).getHealthData()));
                 }

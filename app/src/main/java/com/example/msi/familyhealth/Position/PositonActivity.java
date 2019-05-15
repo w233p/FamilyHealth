@@ -4,6 +4,7 @@ import android.content.Context;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -81,6 +82,13 @@ public class PositonActivity extends BaseActivity<PositionContacts.IPositionPres
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        positionTitleView.setBackBtOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
@@ -196,6 +204,7 @@ public class PositonActivity extends BaseActivity<PositionContacts.IPositionPres
             if (location == null || mMapView == null) {
                 return;
             }
+            Log.e("position","1");
             MyLocationData locData = new MyLocationData.Builder()
                     .accuracy(location.getRadius())
                     // 此处设置开发者获取到的方向信息，顺时针0-360
