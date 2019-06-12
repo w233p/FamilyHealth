@@ -63,7 +63,7 @@ public class ClockActivity extends BaseActivity<ClockContacts.IClockPresenter> i
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setCornerRadius(10);
         gradientDrawable.setShape(GradientDrawable.OVAL);
-        gradientDrawable.setColor(getResources().getColor(R.color.loginYellow));
+        gradientDrawable.setColor(getResources().getColor(R.color.c2));
         addBt.setBackground(gradientDrawable);
 
         clockTitleView = (TitleView) findViewById(R.id.clock_titleView);

@@ -46,5 +46,4 @@ public class DbPositonBean extends DataSupport {
         LocalY = localY;
     }
 
-
 }

@@ -30,6 +30,9 @@ public class CheckDataContacts {
 
         void chooseTimeclick(int time);
 
+        void getDataFromServer();
+
+        void getDataFromServerDone(LineData data);
     }
 
     public interface ICheakDataModel {
@@ -40,6 +43,8 @@ public class CheckDataContacts {
         LineData setChartData(int memberPosition, int itemPosition);
 
         LineData changeChartLabel(int position);
+
+        void setChartDataByServer(CheckDataPresenter checkDataPresenter);
 
     }
 

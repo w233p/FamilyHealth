@@ -91,7 +91,7 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         addTimePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                showToast(String.valueOf(hourOfDay) + String.valueOf(minute));
+//                showToast(String.valueOf(hourOfDay) + String.valueOf(minute));
             }
         });
 
@@ -107,7 +107,7 @@ public class ClockAddActivity extends BaseActivity<ClockAddContacts.IClockAddPre
         clockAddTitleView.setConfirmBtOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("confirm" + String.valueOf(addTimePicker.getCurrentHour()));
+//                showToast("confirm" + String.valueOf(addTimePicker.getCurrentHour()));
 
                 getPresenter().addClockBtClick(ClockAddActivity.this
                         , addTypeSp.getSelectedItemPosition()

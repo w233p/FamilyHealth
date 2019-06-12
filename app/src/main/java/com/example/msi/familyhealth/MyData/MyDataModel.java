@@ -81,7 +81,6 @@ public class MyDataModel implements MyDataContacts.IMyDataModel {
                         String.valueOf(fragment_commen.getPresenter().getFragmentComModel().getMemberSpText()))
                 .find(DbMemberBean.class);
 
-        //添加新的基本信息
         Date date = new Date();
         long dateTime = date.getTime();
         long zero = dateTime / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset();//今天0点的毫秒数

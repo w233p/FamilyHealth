@@ -23,4 +23,11 @@
     <color name="listDivider">#AFAEAD</color>
 
     <color name="chart_mark">#495285</color>
+
+    <color name="c6">#E0BFC8</color>
+    <color name="c5">#8B7991</color>
+    <color name="c4">#4D669E</color>
+    <color name="c3">#88B7C9</color>
+    <color name="c2">#C9DEEF</color>
+    <color name="c1">#EDF4FA</color>
 </resources>

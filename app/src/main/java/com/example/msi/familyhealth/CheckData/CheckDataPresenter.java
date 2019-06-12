@@ -1,10 +1,17 @@
 package com.example.msi.familyhealth.CheckData;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.msi.familyhealth.MvpBase.BasePresenter;
+import com.github.mikephil.charting.data.LineData;
 
+import java.io.IOException;
 import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
 //论文选题提纲思路，模块实现调试
 public class CheckDataPresenter extends BasePresenter<CheckDataContacts.ICheckDataView> implements CheckDataContacts.ICheckDataPresenter {
 
@@ -64,5 +71,15 @@ public class CheckDataPresenter extends BasePresenter<CheckDataContacts.ICheckDa
                 checkDataModel.chartTime = checkDataModel.yearTime;
                 break;
         }
+    }
+
+    @Override
+    public void getDataFromServer() {
+        checkDataModel.setChartDataByServer(this);
+
+    }
+
+    public void getDataFromServerDone(LineData data){
+        getView().showChart(data);
     }
 }

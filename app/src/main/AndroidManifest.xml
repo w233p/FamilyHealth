@@ -111,12 +111,12 @@
         </activity>
         <activity
             android:name=".Clock.ClockActivity"
-            android:theme="@style/LoginTheme">
+            android:theme="@style/ClockTheme">
 
         </activity>
         <activity
             android:name=".Clock.ClockAddActivity"
-            android:theme="@style/LoginTheme">
+            android:theme="@style/ClockTheme">
 
         </activity>
         <activity

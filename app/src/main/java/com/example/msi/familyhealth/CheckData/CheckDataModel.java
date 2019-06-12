@@ -1,23 +1,32 @@
 package com.example.msi.familyhealth.CheckData;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.msi.familyhealth.Data.DbDailyDataBean;
 import com.example.msi.familyhealth.Data.DbHealthDataBean;
 import com.example.msi.familyhealth.Data.DbItemBean;
 import com.example.msi.familyhealth.Data.DbMemberBean;
+import com.example.msi.familyhealth.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import org.json.JSONArray;
 import org.litepal.crud.DataSupport;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
 
@@ -137,6 +146,7 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
          * LineDataSet每一个对象就是一条连接线
          */
         lineDataSet = new LineDataSet(entries, String.valueOf(project_item.get(itemPosition)));
+        lineDataSet.setColor(R.color.c4);
         data = new LineData(lineDataSet);
         return data;
     }
@@ -147,8 +157,11 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
         data = new LineData(lineDataSet);
         return data;
     }
-/**
- * 与setchanrtdata代码逻辑重复*/
+
+
+    /**
+     * 与setchanrtdata代码逻辑重复
+     */
 //    @Override
 //    public LineData changeChartData(int memberPosition, int itemPosition) {
 //        this.itemPosition = itemPosition;
@@ -173,7 +186,6 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
 //        data.addDataSet(lineDataSet);
 //        return data;
 //    }
-
     private void chooseBean(int itemPosition) {
         this.itemPosition = itemPosition;
         if (itemPosition > -1 && itemPosition < 3) {
@@ -207,7 +219,7 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
     private void chooseTime(List list) {
         if (list.equals(dbDailyDataBeanList)) {
             List<Float> data = new ArrayList<>();
-            for (int i = 0,len =dbDailyDataBeanList.size(); i < len; i++) {
+            for (int i = 0, len = dbDailyDataBeanList.size(); i < len; i++) {
                 if (dbDailyDataBeanList.get(i).getTime() > chartTime && dbDailyDataBeanList != null) {
                     data.add((float) dbDailyDataBeanList.get(i).getData());
                     entries.add(new Entry(i, (float) dbDailyDataBeanList.get(i).getData()));
@@ -218,7 +230,7 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
                 entries.add(new Entry(1, 0));
             }
         } else if (list.equals(dbHealthDataBeanList)) {
-            for (int i = 0,len = dbHealthDataBeanList.size();i < len; i++) {
+            for (int i = 0, len = dbHealthDataBeanList.size(); i < len; i++) {
                 if (dbHealthDataBeanList.get(i).getHealthTime() > chartTime && dbHealthDataBeanList != null) {
                     entries.add(new Entry(i, (float) dbHealthDataBeanList.get(i).getHealthData()));
                 }
@@ -226,6 +238,68 @@ public class CheckDataModel implements CheckDataContacts.ICheakDataModel {
             if (entries.size() == 0) {
                 entries.add(new Entry(1, 0));
             }
+        }
+    }
+
+
+    @Override
+    public void setChartDataByServer(CheckDataPresenter checkDataPresenter) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client = new OkHttpClient();
+
+                try {
+                    Request request = new Request.Builder().url("http://119.23.50.255:8080/FamilyHealth/getData").build();
+
+                    Response response = client.newCall(request).execute();
+                    String responseData = response.body().string();
+
+                    //清空数据
+                    if (entries == null) {
+                        entries = new ArrayList<>();
+                    } else {
+                        entries.clear();
+                    }
+
+                    Request request2 = new Request.Builder().url("http://119.23.50.255:8080/FamilyHealth/getString").build();
+                    Response response2 = client.newCall(request2).execute();
+                    result = response2.body().string();
+
+//                    result = response2.body().string();
+                    Log.e("json:", result.toString());
+
+                    checkDataPresenter.getView().getSelfActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setChartDataWithJSONObject(responseData);
+
+                            checkDataPresenter.getView().setAnalysisText(result);
+                            lineDataSet = new LineDataSet(entries, String.valueOf("血糖"));
+                            lineDataSet.setColor(R.color.c4);
+                            data = new LineData(lineDataSet);
+                            checkDataPresenter.getDataFromServerDone(data);
+                            checkDataPresenter.getView().showToast("成功从服务器获取数据");
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void setChartDataWithJSONObject(String JsonData) {
+        try {
+            JSONArray jsonArray = new JSONArray(JsonData);
+
+            for (int i = 0, len = jsonArray.length(); i < len; i++) {
+                Float msg = Float.parseFloat(jsonArray.getString(i));
+                entries.add(new Entry(i, msg));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

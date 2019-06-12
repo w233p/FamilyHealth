@@ -159,4 +159,8 @@ public class TitleView extends ConstraintLayout {
         rightTv.setOnClickListener(onclickListener);
     }
 
+    public void setTitleTvOnclickListener(OnClickListener onclickListener) {
+        titleTv.setOnClickListener(onclickListener);
+    }
+
 }

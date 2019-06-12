@@ -9,48 +9,57 @@
     </style>
 
     <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/loginYellow</item>
-        <item name="colorPrimaryDark">@color/loginYellow</item>
-        <item name="colorAccent">@color/loginYellow</item>
+        <item name="colorPrimary">@color/c1</item>
+        <item name="colorPrimaryDark">@color/c1</item>
+        <item name="colorAccent">@color/c1</item>
     </style>
 
     <style name="MainTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/mainGray</item>
-        <item name="colorPrimaryDark">@color/mainGray</item>
-        <item name="colorAccent">@color/mainGray</item>
+        <item name="colorPrimary">@color/c2</item>
+        <item name="colorPrimaryDark">@color/c2</item>
+        <item name="colorAccent">@color/c2</item>
     </style>
 
     <style name="DataTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/dataBlue</item>
-        <item name="colorPrimaryDark">@color/dataBlue</item>
-        <item name="colorAccent">@color/dataBlue</item>
+        <item name="colorPrimary">@color/c1</item>
+        <item name="colorPrimaryDark">@color/c1</item>
+        <item name="colorAccent">@color/c1</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:windowEnterAnimation">@anim/pop_show</item>
+        <item name="android:windowHideAnimation">@anim/pop_hidden</item>
+    </style>
+
+    <style name="ClockTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/c2</item>
+        <item name="colorPrimaryDark">@color/c1</item>
+        <item name="colorAccent">@color/c1</item>
         <item name="android:textSize">20dp</item>
         <item name="android:windowEnterAnimation">@anim/pop_show</item>
         <item name="android:windowHideAnimation">@anim/pop_hidden</item>
     </style>
 
     <style name="HealthTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/healthBule</item>
-        <item name="colorPrimaryDark">@color/healthBule</item>
-        <item name="colorAccent">@color/healthBule</item>
+        <item name="colorPrimary">@color/c3</item>
+        <item name="colorPrimaryDark">@color/c3</item>
+        <item name="colorAccent">@color/c3</item>
     </style>
 
     <style name="PositionTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/loginGreen</item>
-        <item name="colorPrimaryDark">@color/loginGreen</item>
-        <item name="colorAccent">@color/loginGreen</item>
+        <item name="colorPrimary">@color/c4</item>
+        <item name="colorPrimaryDark">@color/c4</item>
+        <item name="colorAccent">@color/c4</item>
     </style>
 
     <style name="SetTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/setGreen</item>
-        <item name="colorPrimaryDark">@color/setGreen</item>
-        <item name="colorAccent">@color/setGreen</item>
+        <item name="colorPrimary">@color/c6</item>
+        <item name="colorPrimaryDark">@color/c6</item>
+        <item name="colorAccent">@color/c6</item>
     </style>
 
     <style name="CheckDataTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/dataBlue</item>
-        <item name="colorPrimaryDark">@color/dataBlue</item>
-        <item name="colorAccent">@color/dataBlue</item>
+        <item name="colorPrimary">@color/c2</item>
+        <item name="colorPrimaryDark">@color/c2</item>
+        <item name="colorAccent">@color/c2</item>
         <item name="android:textSize">28dp</item>
         <item name="android:windowEnterAnimation">@anim/pop_show</item>
         <item name="android:windowHideAnimation">@anim/pop_hidden</item>

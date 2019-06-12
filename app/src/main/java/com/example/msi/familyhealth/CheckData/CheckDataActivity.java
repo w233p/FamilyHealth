@@ -86,6 +86,8 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
 
     @Override
     public void addListener() {
+
+
         thisTimeBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,6 +157,14 @@ public class CheckDataActivity extends BaseActivity<CheckDataContacts.ICheckData
                 finish();
             }
         });
+
+        checkDataTitleView.setTitleTvOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().getDataFromServer();
+            }
+        });
+
     }
 
     public void showChart(LineData data) {

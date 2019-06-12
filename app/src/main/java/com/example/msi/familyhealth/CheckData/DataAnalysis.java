@@ -82,7 +82,7 @@ public class DataAnalysis {
         }
         standardDeviation = Math.sqrt(n / len);
 
-        stringBuilder.append("波动情况：（数据波动过大，有异常）/（波动小,健康情况很稳定）");
+//        stringBuilder.append("波动情况：（数据波动过大，有异常）/（波动小,健康情况很稳定）");
         return stringBuilder;
     }
 }
